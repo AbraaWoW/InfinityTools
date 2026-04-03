@@ -1,0 +1,13 @@
+## Interface: 120000, 120001
+## Title: InfinityMythicPlus
+## Author: Infinity
+## Version: 2.1.8
+## Notes: InfinityMythicPlus modules
+
+## LoadSavedVariablesFirst: 1
+## RequiredDeps: InfinityCore
+## OptionalDeps: SharedMedia, LibSharedMedia-3.0,MythicDungeonTools
+## IconTexture: Interface\AddOns\InfinityCore\Textures\LOGO\RV_LOGO.png
+
+# Modules
+Modules\load_modules.xml

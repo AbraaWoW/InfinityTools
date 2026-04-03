@@ -1,0 +1,40 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/">
+
+
+    <Script file="RevMplusInfo.MDTIconHook.lua"/>
+    <Script file="RevMplusInfo.MythicIcon.lua"/>
+    <Script file="RevMplusInfo.RunHistory.lua"/>
+    <Script file="RevMplus.MythicDamage.lua"/>
+    <Script file="RevMplusInfo.SpellInfo.lua"/>
+    <Script file="RevMplusInfo.TeleMsg.lua"/>
+    <Script file="RevMplusInfo.Tooltip.lua"/>
+    <Script file="RevMplusInfoMythicFrame.lua"/>
+    <Script file="RevMplusInfoSpellData.lua"/>
+    <Script file="RevPTR.MiniTools.lua"/>
+    <Script file="RevPTR.SetKey.lua"/>
+    <Script file="RevMplus.MythicCast.lua"/>
+    <Script file="RevMplus.InterruptTracker.lua"/>
+
+    <!-- RevTools (Mini Tools) -->
+    <Script file="RevTools.MiniTools.lua"/>
+    <Script file="RevTools.AutoBuy.lua"/>
+    <Script file="RevTools.MicroMenu.lua"/>
+    <Script file="RevTools.SpellAlert.lua"/>
+    <Script file="RevTools.SpellAlert.Panel.lua"/>
+    <Script file="RevTools.RaidMarkerPanel.lua"/>
+    <Script file="RevTools.PlayerStats.lua"/>
+    <Script file="RevTools.CastSequence.lua"/>
+    <Script file="RevTools.PveInfoPanel.lua"/>
+    <Script file="RevTools.PveKeystoneInfo.lua"/>
+    <Script file="RevTools.ChatChannelBar.lua"/>
+    <Script file="RevClass.SpellQueue.lua"/>
+    <Script file="RevClass.SpellEffectAlpha.lua"/>
+    <Script file="RevTools.YYSound.lua"/>
+    <Script file="RevTools.PlayerPosition.lua"/>
+    <Script file="RevTools.StreamerTools.lua"/>
+    <Script file="RevClass.NoMoveSkillAlert.lua"/>
+    <Script file="RevClass.RangeCheck.lua"/>
+    <Script file="RevClass.FocusCast.lua"/>
+    <Script file="RevClass.BrewmasterStagger.lua"/>
+
+</Ui>

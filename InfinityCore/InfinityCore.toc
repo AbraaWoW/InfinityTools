@@ -1,0 +1,43 @@
+## Interface: 120000,120001
+## Title: |cffff0000Infinity|r |cff00ffffCore|r
+## Notes: InfinityTools core engine
+## Version: 2.1.8
+## Author: Infinity
+## LoadSavedVariablesFirst: 1
+## OptionalDeps: SharedMedia, LibSharedMedia-3.0, MythicDungeonTools, InfinityMedia
+## DefaultState: Enabled
+## SavedVariables: InfinityToolsDB
+## IconTexture: Interface\AddOns\InfinityCore\Textures\LOGO\RV_LOGO.png
+
+# Core libraries
+libs\load_libs.xml
+
+# Localization
+Locale\Init.lua
+Locale\enUS.lua
+
+# 1. Main engine
+Core\InfinityTools_Metadata.lua
+Core\InfinityTools.lua
+Core\InfinityTools_Changelog.lua
+
+
+# 2. Database and state engine
+Core\InfinityDB.lua
+Core\InfinityCDDB.lua
+Core\InfinityState.lua
+
+# 3. GRID engine
+Core\InfinityFramePool.lua
+Core\InfinityGUI.lua
+Core\InfinityGrid.lua
+Core\InfinityToolsUI.lua
+
+# 4. Config / party specialization
+Core\InfinityExport.lua
+Core\PartySync.lua
+Core\PartySpec.lua
+
+# 5. UI skin integrations (optional, auto-enabled when detected)
+Core\InfinityElvUISkin.lua
+Core\InfinityNDuiSkin.lua

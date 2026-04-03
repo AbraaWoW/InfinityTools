@@ -1,0 +1,267 @@
+## Interface: 120000, 120001
+## Title: |cFFBB66FFInfinity Tools|r
+## Version: 2.1.8
+## IconTexture: Interface\AddOns\InfinityTools\Media\logo.png
+## Author: Abraa
+## DefaultState: Enable
+## LoadSavedVariablesFirst: 1
+## SavedVariables: RRT, InfinityToolsDB, InfinityBossDB, InfinityBossDataDB
+## OptionalDeps: SharedMedia, LibSharedMedia-3.0, MythicDungeonTools
+## Category: Infinity
+
+# ── Libraries
+Libs\libs.xml
+
+# ── InfinityCore
+InfinityCore\Locale\Init.lua
+InfinityCore\Locale\enUS.lua
+InfinityCore\Core\InfinityTools_Metadata.lua
+InfinityCore\Core\InfinityTools.lua
+InfinityCore\Core\InfinityTools_Changelog.lua
+InfinityCore\Core\InfinityDB.lua
+InfinityCore\Core\InfinityCDDB.lua
+InfinityCore\Core\InfinityState.lua
+InfinityCore\Core\InfinityFramePool.lua
+InfinityCore\Core\InfinityGUI.lua
+InfinityCore\Core\InfinityGrid.lua
+InfinityCore\Core\InfinityToolsUI.lua
+InfinityCore\Core\InfinityExport.lua
+InfinityCore\Core\PartySync.lua
+InfinityCore\Core\PartySpec.lua
+InfinityCore\Core\InfinityElvUISkin.lua
+InfinityCore\Core\InfinityNDuiSkin.lua
+
+# ── InfinityTools modules
+InfinityMythicPlus\Modules\load_modules.xml
+
+# ── InfinityMedia
+InfinityMedia\InfinityMedia.lua
+
+# ── InfinityBossData
+InfinityBossData\FixedTimelineBosses.lua
+InfinityBossData\EncounterData.lua
+InfinityBossData\PrivateAuraData.lua
+InfinityBossData\Modules\Boss\Presets\Loader.lua
+## BossPresetFilesStart
+InfinityBossData\Modules\Boss\Presets\MplusDps\A.lua
+InfinityBossData\Modules\Boss\Presets\MplusDps\B.lua
+InfinityBossData\Modules\Boss\Presets\MplusDps\C.lua
+InfinityBossData\Modules\Boss\Presets\MplusDps\PresetConfig.lua
+InfinityBossData\Modules\Boss\Presets\MplusHealer\A.lua
+InfinityBossData\Modules\Boss\Presets\MplusHealer\B.lua
+InfinityBossData\Modules\Boss\Presets\MplusHealer\C.lua
+InfinityBossData\Modules\Boss\Presets\MplusHealer\PresetConfig.lua
+InfinityBossData\Modules\Boss\Presets\MplusTank\A.lua
+InfinityBossData\Modules\Boss\Presets\MplusTank\B.lua
+InfinityBossData\Modules\Boss\Presets\MplusTank\C.lua
+InfinityBossData\Modules\Boss\Presets\MplusTank\PresetConfig.lua
+InfinityBossData\Modules\Boss\Presets\RaidDps\A.lua
+InfinityBossData\Modules\Boss\Presets\RaidDps\B.lua
+InfinityBossData\Modules\Boss\Presets\RaidDps\C.lua
+InfinityBossData\Modules\Boss\Presets\RaidDps\PresetConfig.lua
+InfinityBossData\Modules\Boss\Presets\RaidHealer\A.lua
+InfinityBossData\Modules\Boss\Presets\RaidHealer\B.lua
+InfinityBossData\Modules\Boss\Presets\RaidHealer\C.lua
+InfinityBossData\Modules\Boss\Presets\RaidHealer\PresetConfig.lua
+InfinityBossData\Modules\Boss\Presets\RaidTank\A.lua
+InfinityBossData\Modules\Boss\Presets\RaidTank\B.lua
+InfinityBossData\Modules\Boss\Presets\RaidTank\C.lua
+InfinityBossData\Modules\Boss\Presets\RaidTank\PresetConfig.lua
+## BossPresetFilesEnd
+InfinityBossData\Store.lua
+
+# ── InfinityBoss — namespace & data
+InfinityBoss\Core\InfinityBoss_Metadata.lua
+InfinityBoss\InfinityBoss.lua
+InfinityBoss\Locale\Init.lua
+InfinityBoss\Locale\enUS.lua
+InfinityBoss\Core\InfinityBoss_Changelog.lua
+InfinityBoss\Modules\Boss\Store.lua
+InfinityBoss\Modules\MDT\Core.lua
+InfinityBoss\Modules\MDT\Provider.lua
+InfinityBoss\Modules\MDT\Notes.lua
+InfinityBoss\Modules\MDT\Presets.lua
+InfinityBoss\RouteCollections\hardplay\Collection.lua
+InfinityBoss\RouteCollections\hardplay\Notes.lua
+InfinityBoss\RouteCollections\shun\Collection.lua
+InfinityBoss\RouteCollections\shun\Notes.lua
+InfinityBoss\Modules\MDT\Snapshot.lua
+InfinityBoss\Modules\MDT\Progress.lua
+InfinityBoss\Modules\MDT\Runtime.lua
+InfinityBoss\Modules\MDT\ImportPreset.lua
+InfinityBoss\Modules\MDT\Overlay.lua
+InfinityBoss\Modules\PrivateAura\Data.lua
+InfinityBoss\Modules\PrivateAura\Registry.lua
+
+# ── InfinityBoss — timer engine
+InfinityBoss\InfinityBossEngine\Scheduler.lua
+InfinityBoss\InfinityBossEngine\SpellInference.lua
+InfinityBoss\InfinityBossEngine\Dispatcher.lua
+
+# ── InfinityBoss — display layer
+InfinityBoss\InfinityBossDisplay\BunBar\View.lua
+InfinityBoss\InfinityBossDisplay\TimerBar\View.lua
+InfinityBoss\InfinityBossDisplay\RingProgress.lua
+InfinityBoss\InfinityBossDisplay\Countdown.lua
+InfinityBoss\InfinityBossDisplay\FlashText.lua
+
+# ── InfinityBoss — voice layer
+InfinityBoss\InfinityBossVoice\ColorSchemes.lua
+InfinityBoss\InfinityBossVoice\Profiles.lua
+InfinityBoss\InfinityBossVoice\ImportExport.lua
+InfinityBoss\InfinityBossVoice\LabelCatalog.lua
+InfinityBoss\InfinityBossVoice\Engine.lua
+InfinityBoss\InfinityBossVoice\OtherSounds.lua
+InfinityBoss\Modules\PrivateAura\Runtime.lua
+
+# ── InfinityBoss — GUI layer
+InfinityBoss\InfinityBossGUI\PanelFrame.lua
+InfinityBoss\InfinityBossGUI\SettingsPage\BossPage.lua
+InfinityBoss\InfinityBossGUI\SettingsPage\GlobalSettingsPage.lua
+InfinityBoss\InfinityBossGUI\SettingsPage\GeneralOverviewPage.lua
+InfinityBoss\InfinityBossGUI\SettingsPage\BunBarPage.lua
+InfinityBoss\InfinityBossGUI\SettingsPage\TimerBarPage.lua
+InfinityBoss\InfinityBossGUI\SettingsPage\CountdownPage.lua
+InfinityBoss\InfinityBossGUI\SettingsPage\FlashTextPage.lua
+InfinityBoss\InfinityBossGUI\SettingsPage\RingProgressPage.lua
+InfinityBoss\InfinityBossGUI\SettingsPage\PrivateAuraMonitorPage.lua
+InfinityBoss\InfinityBossGUI\SettingsPage\ImportExportPage.lua
+InfinityBoss\InfinityBossGUI\SettingsPage\VoicePackPage.lua
+InfinityBoss\InfinityBossGUI\SettingsPage\OtherVoicePage.lua
+InfinityBoss\InfinityBossGUI\SettingsPage\FixedTimelinePage.lua
+InfinityBoss\InfinityBossGUI\SettingsPage\MDTPage.lua
+
+# ── InfinityBoss — init (last)
+InfinityBoss\Init.lua
+
+# ── InfinityBossVoice pack
+InfinityBossVoice\Labels.lua
+InfinityBossVoice\Sounds.lua
+
+# ── RRT Core - Infrastructure
+Core\InfinityRaidTools.lua
+Core\Locale.lua
+Core\RaidData.lua
+Core\Functions.lua
+Core\Media.lua
+Core\Comms.lua
+Core\EventHandler.lua
+Core\VersionCheck.lua
+Core\Mythic\Core.lua
+Core\Mythic\DB.lua
+Core\Mythic\CDDB.lua
+Core\Mythic\State.lua
+Core\Mythic\FramePool.lua
+Core\Mythic\Export.lua
+Core\Mythic\PartySync.lua
+Core\Mythic\PartySpec.lua
+Core\Mythic\LegacyCompat.lua
+
+# ── RRT Modules - Reminders
+Modules\Reminders\Reminders.lua
+
+# ── RRT Modules - Timeline
+Modules\Timeline\BossData\BossTimelines.xml
+Modules\Timeline\Timeline.lua
+
+# ── RRT Modules - Encounter Alerts
+Modules\EncounterAlerts\MidnightS1\ImperatorAverzian.lua
+Modules\EncounterAlerts\MidnightS1\Vorasius.lua
+Modules\EncounterAlerts\MidnightS1\FallenKingSalhadaar.lua
+Modules\EncounterAlerts\MidnightS1\VaelgorEzzorak.lua
+Modules\EncounterAlerts\MidnightS1\LightblindedVanguard.lua
+Modules\EncounterAlerts\MidnightS1\CrownOfThecosmos.lua
+Modules\EncounterAlerts\MidnightS1\Chimaerus.lua
+Modules\EncounterAlerts\MidnightS1\Beloren.lua
+Modules\EncounterAlerts\MidnightS1\MidnightFalls.lua
+Modules\EncounterAlerts\MidnightS1\MotherlodeDebug.lua
+Modules\EncounterAlerts\CustomAlerts.lua
+Modules\EncounterAlerts\WAImports.lua
+
+# ── RRT Modules - CDNote
+Modules\CDNote\CDNote.lua
+Modules\CDNote\MRTMemo.lua
+
+# ── RRT Modules - Nicknames
+Modules\Nicknames\Nicknames.lua
+
+
+# ── RRT Modules - Other
+Modules\SetupManager\SetupManager.lua
+Modules\RRTTools\Tools.lua
+Modules\RRTTools\NativeExtras.lua
+Modules\CooldownCheck\CooldownCheck.lua
+Modules\RaidFrame\RaidFrame.lua
+Modules\RaidFrame\Comm.lua
+Modules\ReadyCheck\ReadyCheck.lua
+Modules\PrivateAura\PrivateAura.lua
+Modules\QoL\QoL.lua
+Modules\QoL\MouseRing\MouseRing.lua
+Modules\QoL\MouseRing\Trail.lua
+Modules\QoL\Crosshair\Crosshair.lua
+Modules\QoL\Dragonriding\Dragonriding.lua
+Modules\QoL\Durability\Durability.lua
+Modules\QoL\CombatLogger\CombatLogger.lua
+Modules\QoL\PetTracker\PetTracker.lua
+Modules\QoL\DontRelease\DontRelease.lua
+Modules\QoL\TalentReminder\TalentReminder.lua
+Modules\QoL\Tooltip\Tooltip.lua
+Modules\QoL\Questing\Questing.lua
+Modules\QoL\EquipmentReminder\EquipmentReminder.lua
+Modules\QoL\AutoQueue\AutoQueue.lua
+Modules\QoL\AutoPlaystyle\AutoPlaystyle.lua
+Modules\QoL\GroupJoined.lua
+
+# ── RRT UI - Core (must load first)
+UI\Core.lua
+
+# ── RRT UI - Module Panels
+UI\VersionCheck.lua
+Modules\RaidInspect\RaidInspect.lua
+Modules\RaidGroups\RaidGroups.lua
+Modules\Raid\UI.lua
+Modules\CDNote\NotePanel.lua
+Modules\Reminders\UI.lua
+Modules\CooldownCheck\UI.lua
+Modules\PrivateAura\UI.lua
+Modules\Timeline\UI.lua
+UI\General.lua
+Modules\QoL\UI.lua
+Modules\RaidFrame\UI.lua
+Modules\Assignments\UI.lua
+Modules\EncounterAlerts\UI.lua
+Modules\Note\CreateNote.lua
+Modules\Note\SaveNote.lua
+Modules\Note\UI.lua
+Modules\Nicknames\UI.lua
+
+# ── RRT UI - Module Options
+UI\Options\General.lua
+Modules\SetupManager\Options.lua
+Modules\Reminders\Options.lua
+UI\Options\Assignments.lua
+Modules\EncounterAlerts\Options.lua
+Modules\ReadyCheck\Options.lua
+Modules\PrivateAura\Options.lua
+Modules\QoL\Options.lua
+Modules\QoL\MouseRing\Options.lua
+Modules\QoL\Crosshair\Options.lua
+Modules\QoL\Dragonriding\Options.lua
+Modules\QoL\Durability\Options.lua
+Modules\QoL\CombatLogger\Options.lua
+Modules\QoL\PetTracker\Options.lua
+Modules\QoL\DontRelease\Options.lua
+Modules\QoL\TalentReminder\Options.lua
+Modules\QoL\EquipmentReminder\Options.lua
+Modules\QoL\Tooltip\Options.lua
+Modules\QoL\Questing\Options.lua
+Modules\QoL\AutoQueue\Options.lua
+Modules\QoL\AutoPlaystyle\Options.lua
+Modules\RaidFrame\Options.lua
+Modules\RRTTools\Options.lua
+Modules\MythicPlus\Options.lua
+UI\Options\Nicknames.lua
+
+# ── RRT UI - Entry Point
+UI\RRTUI.lua
+Core\SlashCommands.lua

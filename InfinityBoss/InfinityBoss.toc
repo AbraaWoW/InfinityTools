@@ -1,0 +1,78 @@
+## Interface: 120000,120001
+## Title: |cffff0000Infinity|r|cff00ccffBoss|r
+## Notes: Boss ability timing + voice alerts
+## Author: Infinity
+## Version: 2.1.8
+## RequiredDeps: InfinityCore, InfinityBossData
+## OptionalDeps: LibSharedMedia-3.0
+## SavedVariables: InfinityBossDB
+## LoadSavedVariablesFirst: 1
+## IconTexture: Interface\AddOns\InfinityCore\Textures\LOGO\RV_LOGO.png
+
+# ── 1. Global namespace (first)
+Core\InfinityBoss_Metadata.lua
+InfinityBoss.lua
+Locale\Init.lua
+Locale\enUS.lua
+Core\InfinityBoss_Changelog.lua
+Modules\Boss\Store.lua
+Modules\MDT\Core.lua
+Modules\MDT\Provider.lua
+Modules\MDT\Notes.lua
+Modules\MDT\Presets.lua
+RouteCollections\hardplay\Collection.lua
+RouteCollections\hardplay\Notes.lua
+RouteCollections\shun\Collection.lua
+RouteCollections\shun\Notes.lua
+Modules\MDT\Snapshot.lua
+Modules\MDT\Progress.lua
+Modules\MDT\Runtime.lua
+Modules\MDT\ImportPreset.lua
+Modules\MDT\Overlay.lua
+Modules\PrivateAura\Data.lua
+Modules\PrivateAura\Registry.lua
+
+
+# ── 3. Timer engine
+InfinityBossEngine\Scheduler.lua
+InfinityBossEngine\SpellInference.lua
+InfinityBossEngine\Dispatcher.lua
+
+# ── 4. Display layer
+InfinityBossDisplay\BunBar\View.lua
+InfinityBossDisplay\TimerBar\View.lua
+InfinityBossDisplay\RingProgress.lua
+InfinityBossDisplay\Countdown.lua
+InfinityBossDisplay\FlashText.lua
+
+# ── 5. Voice layer
+InfinityBossVoice\ColorSchemes.lua
+InfinityBossVoice\Profiles.lua
+InfinityBossVoice\ImportExport.lua
+InfinityBossVoice\LabelCatalog.lua
+InfinityBossVoice\Engine.lua
+InfinityBossVoice\OtherSounds.lua
+Modules\PrivateAura\Runtime.lua
+
+# ── 6. GUI layer
+# Trash\Bootstrap.lua
+# Trash\Runtime\ObservationTest.lua
+InfinityBossGUI\PanelFrame.lua
+InfinityBossGUI\SettingsPage\BossPage.lua
+InfinityBossGUI\SettingsPage\GlobalSettingsPage.lua
+InfinityBossGUI\SettingsPage\GeneralOverviewPage.lua
+InfinityBossGUI\SettingsPage\BunBarPage.lua
+InfinityBossGUI\SettingsPage\TimerBarPage.lua
+InfinityBossGUI\SettingsPage\CountdownPage.lua
+InfinityBossGUI\SettingsPage\FlashTextPage.lua
+InfinityBossGUI\SettingsPage\RingProgressPage.lua
+InfinityBossGUI\SettingsPage\PrivateAuraMonitorPage.lua
+InfinityBossGUI\SettingsPage\ImportExportPage.lua
+InfinityBossGUI\SettingsPage\VoicePackPage.lua
+InfinityBossGUI\SettingsPage\OtherVoicePage.lua
+InfinityBossGUI\SettingsPage\FixedTimelinePage.lua
+InfinityBossGUI\SettingsPage\MDTPage.lua
+# Trash\GUI\TrashCDPage.lua
+
+# ── 7. Init (last)
+Init.lua

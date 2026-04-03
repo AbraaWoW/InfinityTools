@@ -1,0 +1,39 @@
+## Interface: 120000,120001
+## Title: |cffff0000Infinity|r|cff00ccffBoss|r |cffffffffData|r
+## Notes: InfinityBoss static encounter data module
+## Author: Infinity
+## Version: 2.1.8
+## IconTexture: Interface\AddOns\InfinityCore\Textures\LOGO\RV_LOGO.png
+## SavedVariables: InfinityBossDataDB
+
+FixedTimelineBosses.lua
+EncounterData.lua
+PrivateAuraData.lua
+Modules\Boss\Presets\Loader.lua
+## BossPresetFilesStart
+Modules\Boss\Presets\MplusDps\A.lua
+Modules\Boss\Presets\MplusDps\B.lua
+Modules\Boss\Presets\MplusDps\C.lua
+Modules\Boss\Presets\MplusDps\PresetConfig.lua
+Modules\Boss\Presets\MplusHealer\A.lua
+Modules\Boss\Presets\MplusHealer\B.lua
+Modules\Boss\Presets\MplusHealer\C.lua
+Modules\Boss\Presets\MplusHealer\PresetConfig.lua
+Modules\Boss\Presets\MplusTank\A.lua
+Modules\Boss\Presets\MplusTank\B.lua
+Modules\Boss\Presets\MplusTank\C.lua
+Modules\Boss\Presets\MplusTank\PresetConfig.lua
+Modules\Boss\Presets\RaidDps\A.lua
+Modules\Boss\Presets\RaidDps\B.lua
+Modules\Boss\Presets\RaidDps\C.lua
+Modules\Boss\Presets\RaidDps\PresetConfig.lua
+Modules\Boss\Presets\RaidHealer\A.lua
+Modules\Boss\Presets\RaidHealer\B.lua
+Modules\Boss\Presets\RaidHealer\C.lua
+Modules\Boss\Presets\RaidHealer\PresetConfig.lua
+Modules\Boss\Presets\RaidTank\A.lua
+Modules\Boss\Presets\RaidTank\B.lua
+Modules\Boss\Presets\RaidTank\C.lua
+Modules\Boss\Presets\RaidTank\PresetConfig.lua
+## BossPresetFilesEnd
+Store.lua
