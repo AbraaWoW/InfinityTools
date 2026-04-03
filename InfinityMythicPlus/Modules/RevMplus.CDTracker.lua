@@ -403,31 +403,60 @@ local function GetGUIDByName(name)
 end
 
 -- =============================================================
--- AceComm — broadcast own CD cast to group, receive from others
+-- AceComm — broadcast own CD cast + spec to group, receive from others
+-- MSG formats:
+--   "CD:<spellID>"   — player just used a tracked cooldown
+--   "SPEC:<specID>"  — player announces their spec (on join / spec change)
+--                      Lets addon peers skip NotifyInspect entirely.
 -- =============================================================
-local function BroadcastCD(spellID)
+local function CommSend(msg)
     if not AceComm then return end
-    local msg = "CD:" .. spellID
-    local ok, err = pcall(function()
+    pcall(function()
         if IsInRaid() then
             AceComm:SendCommMessage(COMM_PREFIX, msg, "RAID")
         elseif IsInGroup() then
             AceComm:SendCommMessage(COMM_PREFIX, msg, "PARTY")
         end
     end)
-    -- silently ignore errors (not in group, throttled, etc.)
 end
 
--- Called when we receive a COMM from a teammate
+local function BroadcastCD(spellID)
+    CommSend("CD:" .. spellID)
+end
+
+-- Announce own spec to the group so peers skip the inspect queue.
+local function BroadcastSpec()
+    local specIndex = GetSpecialization and GetSpecialization()
+    if not specIndex then return end
+    local specID = GetSpecializationInfo(specIndex)
+    if specID and specID > 0 then
+        CommSend("SPEC:" .. specID)
+    end
+end
+
+-- Called when a SPEC COMM arrives: store spec and build bars immediately.
+local function OnSpecCommReceived(guid, unit, specID)
+    -- Store in raid cache so GetUnitSpecID picks it up
+    RaidSpecCache[guid] = specID
+    -- Remove from inspect queue if still pending
+    RaidQueued[guid] = nil
+    for i = 1, MAX_GROUPS do
+        local g = GROUPS[i]
+        if g and g.db.enabled and not g.isPreviewing then
+            UpdateGroupUnitBars(g, guid, unit, specID)
+            GroupReLayout(g)
+        end
+    end
+end
+
+-- Called when a CD COMM arrives from a teammate.
 local function OnCDCommReceived(guid, spellID)
     for i = 1, MAX_GROUPS do
         local g = GROUPS[i]
         if g and g.db.enabled and not g.isPreviewing then
             if g.activeBars[guid] and g.activeBars[guid][spellID] then
-                -- Only trigger if not already on cooldown (avoids UNIT_AURA double-trigger)
                 local data = g.activeBars[guid][spellID]
                 if not data.startTime then
-                    -- forward-declared; defined below
                     TriggerCooldown(g, guid, spellID)
                 end
             end
@@ -436,26 +465,53 @@ local function OnCDCommReceived(guid, spellID)
 end
 
 -- Register COMM receiver once (after GROUPS are built below).
--- We use a closure-style forward call so TriggerCooldown is defined by then.
 local commRegistered = false
 local function EnsureCommRegistered()
     if commRegistered or not AceComm then return end
     commRegistered = true
     pcall(function()
         AceComm:RegisterComm(COMM_PREFIX, function(_, msg, _, sender)
-            -- WoW addon messages are NOT delivered to self on PARTY/RAID channels,
-            -- so no need to filter sender == player.
-            local spellIDStr = msg and msg:match("^CD:(%d+)$")
+            if not msg then return end
+
+            -- SPEC announcement from an addon peer
+            local specIDStr = msg:match("^SPEC:(%d+)$")
+            if specIDStr then
+                local specID = tonumber(specIDStr)
+                if specID and specID > 0 then
+                    local guid = GetGUIDByName(sender)
+                    if guid then
+                        -- Resolve unit token from guid
+                        local unit
+                        if IsInRaid() then
+                            for j = 1, GetNumGroupMembers() do
+                                local u = "raid" .. j
+                                if UnitExists(u) and UnitGUID(u) == guid then
+                                    unit = u; break
+                                end
+                            end
+                        else
+                            for j = 1, 4 do
+                                local u = "party" .. j
+                                if UnitExists(u) and UnitGUID(u) == guid then
+                                    unit = u; break
+                                end
+                            end
+                        end
+                        if unit then
+                            OnSpecCommReceived(guid, unit, specID)
+                        end
+                    end
+                end
+                return
+            end
+
+            -- CD usage from a teammate
+            local spellIDStr = msg:match("^CD:(%d+)$")
             if not spellIDStr then return end
             local spellID = tonumber(spellIDStr)
-            if not spellID then return end
-
-            -- Only track spells we know about
-            if not SPELL_BY_ID[spellID] then return end
-
+            if not spellID or not SPELL_BY_ID[spellID] then return end
             local guid = GetGUIDByName(sender)
             if not guid then return end
-
             OnCDCommReceived(guid, spellID)
         end)
     end)
@@ -1194,6 +1250,8 @@ InfinityTools:RegisterEvent("PLAYER_ENTERING_WORLD", INFINITY_MODULE_KEY, functi
     end
     C_Timer.After(1, function()
         if IsInRaid() then RaidRebuildRoster() end
+        -- Announce own spec so addon peers skip our inspect immediately
+        BroadcastSpec()
         for i = 1, MAX_GROUPS do
             local g = GROUPS[i]
             if g and g.db.enabled then
@@ -1202,6 +1260,13 @@ InfinityTools:RegisterEvent("PLAYER_ENTERING_WORLD", INFINITY_MODULE_KEY, functi
             end
         end
     end)
+end)
+
+-- Broadcast spec when player changes specialization
+InfinityTools:RegisterEvent("PLAYER_SPECIALIZATION_CHANGED", INFINITY_MODULE_KEY, function(_, unit)
+    if unit == "player" then
+        BroadcastSpec()
+    end
 end)
 
 -- Raid: lit la spec dès que l'inspect est prêt, met à jour les barres
