@@ -109,6 +109,10 @@ InfinityTools.ModuleList = {
     ----------------------------------------------------------------------------------------------------------
     { Key = "RevMplus.InterruptTracker", Name = L["Interrupt Tracker"], Desc = L["Infer and track teammate interrupt cooldowns (supports 12.0)."], Category = 3 },
     { Key = "RevMplus.MythicCast", Name = L["Nearby Cast Monitor"], Desc = L["Shows nearby mob cast bars with separate colors for interruptible and unbreakable casts."], Category = 3 },
+    { Key = "RevMplusInfo.ImportantSpellTracker",        Name = "Party CD Tracker",          Desc = "Tracks teammate cooldowns (Heal / Def / CC / Mobility) as timer bars. Uses aura detection + AceComm sync.", Category = 3 },
+    { Key = "RevMplusInfo.ImportantSpellTracker.Group2", Name = "Party CD Tracker — Group 2", Desc = "Independent second CD tracker frame with its own categories and position.", Category = 3, DefaultEnabled = false },
+    { Key = "RevMplusInfo.ImportantSpellTracker.Group3", Name = "Party CD Tracker — Group 3", Desc = "Independent third CD tracker frame with its own categories and position.", Category = 3, DefaultEnabled = false },
+    { Key = "RevMplusInfo.ImportantSpellTracker.Group4", Name = "Party CD Tracker — Group 4", Desc = "Independent fourth CD tracker frame with its own categories and position.", Category = 3, DefaultEnabled = false },
     ----------------------------------------------------------------------------------------------------------
     --------------------------------------------- Class (General) (4) -----------------------------------------
     ----------------------------------------------------------------------------------------------------------
