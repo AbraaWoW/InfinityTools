@@ -1,50 +1,48 @@
 # Infinity Tools
-Suite d’addons modulaire pour WoW qui regroupe une UI centrale, des outils Mythic+, un tracker de combats (InfinityBoss) et un moteur JSON/LibreSprites adaptable aux besoins de raid et de donjon.
+Modular addon suite for WoW combining the InfinityTools core UI, Mythic+ utilities, InfinityBoss fight tracker, and shared helper systems.
 
-## Organisation
-- **InfinityCore** : moteur principal `InfinityTools` + `InfinityGrid`, système de modules, gestion des profils, skins ElvUI/NDui et helpers communs.  
-- **UI/** : panneau de configuration (`RRTUI`) avec onglets General, Raid, Note, QoL, Tools, Boss, etc., barre de statut personnalisée et état dynamique.  
-- **InfinityMythicPlus** : modules et extensions ciblant Mythic+ et utilities M+.  
-- **InfinityBoss** (+ `InfinityBossData`, `InfinityBossVoice`) : UI personnalisée pour les boss, base de données d’évènements/déclencheurs et packs vocaux.  
-- **Libs**, **InfinityMedia**, **Media**, **Scripts** : dépendances tierces, textures, sons, macros utilitaires utilisés par les extensions.  
-- **Modules/** : composants partagés, par exemple `PrivateAura`, `Modules` de testing, etc.
+## Overview
+- **InfinityCore** drives the InfinityTools engine (`InfinityGrid`, module registry, profile handling, ElvUI/NDui skins, shared helpers).  
+- **UI/** hosts the central configuration frame (`RRTUI`) with tabs for General, Raid, Notes, PrivateAura, EncounterAlerts, QoL, Tools, Boss, plus a custom status bar linked to Twitch.  
+- **InfinityMythicPlus** adds Mythic+ information and combat modules.  
+- **InfinityBoss** (with InfinityBossData/InfinityBossVoice) provides the boss UI, encounter database, and voice packs.  
+- **Libs**, **InfinityMedia**, **Media**, **Scripts** supply third-party libraries, assets, and macros shared across the addon.
 
-## Modules InfinityMythicPlus
-### Utilitaires généraux (`RevTools.*`)
-- `MiniTools`, `StreamerTools`, `AutoBuy`, `CastSequence`, `ChatChannelBar`, `MicroMenu`, `PlayerPosition`, `PlayerStats`, `RaidMarkerPanel`, `SpellAlert` (+ panneau complet) : raccourcis, auto-achats, barres de minuterie, marqueurs, alertes visuelles et audit de stats.  
-- `PveInfoPanel`, `PveKeystoneInfo`, `CDTracker`, `SpellAlert`, `YYSound`: affichages complémentaires autour du PVE/Mythic+.  
+## InfinityMythicPlus modules
+### Mythic+ utilities (`RevTools.*`)
+- `MiniTools`, `StreamerTools`, `AutoBuy`, `SpellQueue`, `PlayerPosition`, `PlayerStats`, `RaidMarkerPanel`, `SpellAlert` (full panel) plus `MicroMenu`, `ChatChannelBar`, `CastSequence`, `YYSound`, `PlayerPosition`, `StreamerTools`: quick actions, auto-purchase, marker/alert panels, and other helpers.
+- `PveInfoPanel`, `PveKeystoneInfo`, `CDTracker`, `SpellAlert` companion, and `YYSound` provide additional Mythic+-centric displays.
 
-### Informations Mythic+ (`RevMplusInfo.*`)
-- `MDTIconHook`, `MythicIcon`, `RunHistory`, `SpellInfo`, `Tooltip`, `TeleMsg`, `MythicFrame`, `SpellData` : réécritures de l’UI MDT, historique des runs, lookup d’informations sur les sorts, tooltips enrichis, affichage “Mythic+ Info”.  
-- `MythicDamage`, `MythicCast`, `InterruptTracker` : calculs de dégâts, suivi des sorts, moniteur de casts et interruptions.  
+### Mythic+ info (`RevMplusInfo.*`)
+- `MDTIconHook`, `MythicIcon`, `RunHistory`, `SpellInfo`, `Tooltip`, `TeleMsg`, `MythicFrame`, `SpellData` rebuild MDT UIs, show spell context, history, and enhanced tooltips.
+- `MythicDamage`, `MythicCast`, `InterruptTracker`, `FriendlyCD` track damage, casts, interrupts, and friendly cooldowns.
 
-### Fonctionnalités spécifique aux classes (`RevClass.*`)
-- `BrewmasterStagger`, `FocusCast`, `NoMoveSkillAlert`, `RangeCheck`, `SpellEffectAlpha`, `SpellQueue`, `PlayerStats` : aides de classe (scaling, alertes de déplacement, queue) partagées entre modules.  
+### Class helpers (`RevClass.*`)
+- `BrewmasterStagger`, `FocusCast`, `SpellEffectAlpha`, `SpellQueue`, `PlayerStats`, `RangeCheck`, `NoMoveSkillAlert`, `SpellEffectAlpha` assist classes with alerts, proc transparency, queue tuning, and range visuals.
 
-### Minis et PTR
-- `RevPTR.MiniTools`, `RevPTR.SetKey` : utilitaires de PTR pour tests et manipulations rapides.
+### PTR/Beta (`RevPTR.*`)
+- `RevPTR.MiniTools`, `RevPTR.SetKey` remain as PTR-specific utilities.
 
 ## InfinityBoss
-- Interface dédiée pour bosses avec onglets, timelines fixes, import/export, gestionnaire d’alerte et d’assignations.  
-- Base de données `InfinityBossData` garde les scripts d’évènements ; `InfinityBossVoice` fournit la lecture vocale.  
-- Changelog accessible manuellement (popup supprimé sauf clic sur le bouton) et panneaux d’options on-the-fly.  
+- Dedicated boss UI with tabs, fixed timelines, import/export, and assignation management.  
+- InfinityBossData stores encounter scripts; InfinityBossVoice delivers vocal cues and shares label catalogs.  
+- Changelog access is manual (button on the panel) rather than automatic.
 
-## Infinity Raid Tools UI
-- Le panel principal (`RRTUI`) regroupe onglets `General`, `Raid`, `Note`, `PrivateAura`, `EncounterAlerts`, `QoL`, `Tools`, `Boss`.  
-- Barre de statut personnalisée avec lien Twitch (`https://www.twitch.tv/abraa_`) et thème dynamique synchronisé sur RRT.  
-- Section Tools ouvre la configuration Infinity Tools/MythicPlus ; onglet Boss garde un bouton “Changelog”.
+## InfinityTools UI
+- `RRTUI` central panel hosts tabs for General, Raid, Note, PrivateAura, EncounterAlerts, QoL, Tools, Boss.  
+- Status bar links to Twitch/Twitter and syncs theme colors with the rest of the suite.  
+- The Tools tab opens InfinityTools/MythicPlus settings; Boss tab exposes InfinityBoss controls.
 
-## Installation & configuration
-1. Copier l’ensemble du dossier dans `World of Warcraft/_retail_/Interface/AddOns`.  
-2. Activer `InfinityTools` (et `InfinityBoss`/`InfinityMythicPlus` si besoin) via l’écran d’addons ou `/iboss`.  
-3. Utiliser `/it` ou `Infinity Tools → Tools` pour ouvrir la fenêtre `RRTUI`, activer les modules, basculer les onglets et modifier les options.  
-4. Chaque module expose son propre layout : `InfinityTools:RegisterModuleLayout`. Les settings sont persistés via `InfinityToolsDB`.
+## Installation & Quick start
+1. Copy the entire repository into `World of Warcraft/_retail_/Interface/AddOns`.  
+2. Enable `InfinityTools` (and `InfinityBoss`/`InfinityMythicPlus` if needed) via the addon screen or `/iboss`.  
+3. Use `/it` or click **Infinity Tools → Tools** from the RRT status bar to open the configuration UI, toggle modules, switch tabs, and change options.  
+4. Each module exposes settings through `InfinityTools:RegisterModuleLayout`; module data is persisted in `InfinityToolsDB`.
 
-## Ressources externes
-- **Twitch** : https://www.twitch.tv/abraa_  
-- **CurseForge** : https://www.curseforge.com/wow/addons/infinitytools  
+## Resources
+- Twitch: https://www.twitch.tv/abraa_  
+- CurseForge: https://www.curseforge.com/wow/addons/infinitytools
 
-## Contribution
-- Ajouter des modules dans `InfinityMythicPlus/Modules` ou `InfinityBoss`.  
-- Respecter le système `REGISTER_LAYOUT()` pour que l’UI les expose dans `InfinityTools`.  
-- Garder `InfinityTools` comme alias global tant que les modules tiers y accèdent.
+## Contributing
+- Add new modules under `InfinityMythicPlus/Modules` or `InfinityBoss`.  Respect the `REGISTER_LAYOUT()` pattern so InfinityTools registers the UI automatically.  
+- Keep the InfinityTools alias (`_G.InfinityTools`) around as long as legacy modules expect it.
