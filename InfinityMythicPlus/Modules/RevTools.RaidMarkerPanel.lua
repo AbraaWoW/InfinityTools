@@ -19,7 +19,7 @@ local INFINITY_MODULE_KEY = "RevTools.RaidMarkerPanel"
 local function REGISTER_LAYOUT()
     local layout = {
         { key = "header", type = "header", x = 2, y = 1, w = 50, h = 2, label = "Raid Marker Panel", labelSize = 24 },
-        { key = "desc", type = "description", x = 2, y = 4, w = 50, h = 2, label = "Left-click to place or toggle, right-click to clear one marker. Supports target markers and world markers. Command: /exmarker" },
+        { key = "desc", type = "description", x = 2, y = 4, w = 50, h = 2, label = "Left-click to place or toggle, right-click to clear one marker. Supports target markers and world markers. Command: /itmarker" },
         { key = "showPanel", type = "checkbox", x = 2, y = 7, w = 14, h = 2, label = "Show Panel" },
         { key = "lockPanel", type = "checkbox", x = 17, y = 7, w = 14, h = 2, label = "Lock Position" },
         { key = "scale", type = "slider", x = 2, y = 10, w = 18, h = 2, label = "Panel Scale", min = 0.6, max = 1.8, step = 0.05 },
@@ -515,7 +515,7 @@ InfinityTools:WatchState(INFINITY_MODULE_KEY .. ".DatabaseChanged", INFINITY_MOD
     end
 end)
 
-InfinityTools:RegisterChatCommand("exmarker", function()
+InfinityTools:RegisterChatCommand("itmarker", function()
     CreateMainPanel()
     TogglePanelVisibility()
 end)

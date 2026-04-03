@@ -1,8 +1,8 @@
 local _, RRT_NS = ...
 
 local Core = RRT_NS.Mythic or _G.RRTMythicTools
-local EXDB = _G.EXDB
-if not Core or not EXDB then
+local InfinityExtrasDB = _G.InfinityExtrasDB
+if not Core or not InfinityExtrasDB then
     return
 end
 
@@ -18,7 +18,7 @@ local frame
 local floor = math.floor
 
 local function GetMultiplier(level)
-    local multipliers = EXDB.MythicDamageData and EXDB.MythicDamageData.LevelMultipliers or {}
+    local multipliers = InfinityExtrasDB.MythicDamageData and InfinityExtrasDB.MythicDamageData.LevelMultipliers or {}
     return multipliers[tonumber(level) or 0] or 1
 end
 

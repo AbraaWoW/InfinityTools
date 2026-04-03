@@ -2,7 +2,7 @@
 -- { Key = "RRTTools.AutoBuy", Name = "????", Desc = "?????????????????(??????????)?", Category = 4 },
 
 local RRTToolsCore = _G.RRTToolsCore
-local EXDB = _G.EXDB
+local InfinityExtrasDB = _G.InfinityExtrasDB
 if not RRTToolsCore then return end
 local RRTState = RRTToolsCore.State
 local L = (RRTToolsCore and RRTToolsCore.L) or setmetatable({}, { __index = function(_, key) return key end })

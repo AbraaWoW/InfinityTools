@@ -1,11 +1,11 @@
 License: CC BY-NC-ND 4.0
-Product: ExwindTools
-Author: EXWIND
+Product: InfinityTools
+Author: Infinity
 
-Copyright (c) 2025-2026 EXWIND. All rights reserved.
+Copyright (c) 2025-2026 Infinity. All rights reserved.
 
 English Version
-Project: ExwindTools Author: EXWIND License: Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)
+Project: InfinityTools Author: Infinity License: Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)
 
 You are free to:
 Share - copy and redistribute the material in any medium or format.

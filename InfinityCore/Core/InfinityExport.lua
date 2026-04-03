@@ -14,7 +14,7 @@ InfinityTools.Export = Export
 
 -- Constants
 local FORMAT_VERSION = 1
-local MAGIC_PREFIX = "!EX1!" -- Export string prefix marker
+local MAGIC_PREFIX = "!IT1!" -- Export string prefix marker
 
 -- =============================================================
 -- Export
@@ -139,7 +139,7 @@ function Export:ParseImportString(importString)
 
     -- Validate prefix.
     if not importString:find("^" .. MAGIC_PREFIX:gsub("!", "%%!")) then
-        return nil, "Invalid import string format (missing !EX1! prefix)"
+        return nil, "Invalid import string format (missing !IT1! prefix)"
     end
 
     local encoded = importString:sub(#MAGIC_PREFIX + 1)

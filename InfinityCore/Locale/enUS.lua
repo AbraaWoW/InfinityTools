@@ -117,7 +117,8 @@ L["Hide Minimap Button"] = true
 L["Tips"] = true
 L["Use the Modules page to enable/disable modules. Changes take effect after /reload."] = true
 L["Inside a module settings page, use the Grid panel to adjust styles, position, and toggles."] = true
-L["Global edit mode: /ex edmode (drag HUD elements to reposition)."] = true
+L["Global edit mode: /it edmode (drag HUD elements to reposition)."] = true
+L["Type /it help to print InfinityTools slash commands in chat."] = true
 L["Author: Abraa"] = true
 L["Twitch"] = true
 

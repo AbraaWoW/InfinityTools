@@ -28,8 +28,8 @@ local MODULE_DB = InfinityTools:GetModuleDB(INFINITY_MODULE_KEY, INFINITY_DEFAUL
 -- =========================================================
 -- Core logic, defined before layout registration
 -- =========================================================
-local EXMD = { MODULE_DB = MODULE_DB }
-_G.EXMD = EXMD
+local InfinityMythicDamage = { MODULE_DB = MODULE_DB }
+_G.InfinityMythicDamage = InfinityMythicDamage
 
 local SEASON_BASE_FACTORS = { [34] = 1.7660680614 }
 local function GetBaseFactor() return SEASON_BASE_FACTORS[C_SeasonInfo.GetCurrentDisplaySeasonID()] or 1 end
@@ -46,7 +46,7 @@ local function FormatLargeNumber(v)
     end
 end
 
-function EXMD.GetCurrentMultiplier()
+function InfinityMythicDamage.GetCurrentMultiplier()
     local level = MODULE_DB.mythicLevel or 0
     local data = _G.InfinityDB and _G.InfinityDB.MythicDamageData
     if not data then return 1 end
@@ -64,7 +64,7 @@ function EXMD.GetCurrentMultiplier()
     return finalMulti > 1 and finalMulti or 1
 end
 
-function EXMD.ProcessDamageText(text, multiplier)
+function InfinityMythicDamage.ProcessDamageText(text, multiplier)
     if not text or not multiplier or multiplier <= 1 then return text end
 
     local db = _G.InfinityToolsDB and _G.InfinityToolsDB.ModuleDB and _G.InfinityToolsDB.ModuleDB["RevMplus.MythicDamage"] or MODULE_DB
@@ -109,7 +109,7 @@ end
 -- 1. Grid layout
 local function REGISTER_LAYOUT()
     local level = MODULE_DB.mythicLevel or 10
-    local multi = EXMD and EXMD.GetCurrentMultiplier and EXMD.GetCurrentMultiplier() or 1
+    local multi = InfinityMythicDamage and InfinityMythicDamage.GetCurrentMultiplier and InfinityMythicDamage.GetCurrentMultiplier() or 1
     local seasonID = C_SeasonInfo.GetCurrentDisplaySeasonID()
     local descLabel = string.format(L["Current Level: |cffffd100%d|r\nSeason Coefficient (ID:%d): |cffffd100%.2f|r\nFinal Multiplier: |cff00ff00%.2f|r\n\nWhen enabled, spell description numbers are adjusted in real time by this multiplier."],
         level, seasonID, 1.76, multi
@@ -153,13 +153,13 @@ InfinityTools:WatchState(INFINITY_MODULE_KEY .. ".DatabaseChanged", INFINITY_MOD
     --     InfinityTools.UI:RefreshContent()
     -- end
     -- Refresh external consumers
-    if _G.EXSP and _G.EXSP.RefreshRightPanel then _G.EXSP:RefreshRightPanel() end
+    if _G.InfinitySpellInfo and _G.InfinitySpellInfo.RefreshRightPanel then _G.InfinitySpellInfo:RefreshRightPanel() end
 end)
 
 -- Button click handler
 InfinityTools:WatchState(INFINITY_MODULE_KEY .. ".ButtonClicked", INFINITY_MODULE_KEY, function(data)
     if data.key == "openSpellInfo" then
-        if SlashCmdList["EXSP"] then SlashCmdList["EXSP"]() end
+        if _G.InfinitySpellInfo and _G.InfinitySpellInfo.ToggleFrame then _G.InfinitySpellInfo:ToggleFrame() end
     end
 end)
 

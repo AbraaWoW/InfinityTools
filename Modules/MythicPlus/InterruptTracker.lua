@@ -1,16 +1,16 @@
 local _, RRT_NS = ...
 
 local Core = RRT_NS.Mythic or _G.RRTMythicTools
-local EXDB = _G.EXDB
-if not Core or not EXDB then
+local InfinityExtrasDB = _G.InfinityExtrasDB
+if not Core or not InfinityExtrasDB then
     return
 end
 
 local MODULE_KEY = "RRTTools.InterruptTracker"
 local PARTY_SPEC = Core.PartySpec
 local FACTORY = Core.Factory or _G.RRTMythicFactory
-local SPEC_INTERRUPT_DB = EXDB.InterruptData or {}
-local APPLY_FONT = EXDB.ApplyFont and function(fs, cfg) EXDB:ApplyFont(fs, cfg) end or nil
+local SPEC_INTERRUPT_DB = InfinityExtrasDB.InterruptData or {}
+local APPLY_FONT = InfinityExtrasDB.ApplyFont and function(fs, cfg) InfinityExtrasDB:ApplyFont(fs, cfg) end or nil
 
 local C_Spell = _G.C_Spell
 local C_Timer = _G.C_Timer
@@ -217,7 +217,7 @@ end
 
 local function GetSpecPriority(unit)
     local specID = GetUnitSpecID(unit)
-    local role = EXDB.SpecByID and EXDB.SpecByID[specID] and EXDB.SpecByID[specID].role or "DAMAGER"
+    local role = InfinityExtrasDB.SpecByID and InfinityExtrasDB.SpecByID[specID] and InfinityExtrasDB.SpecByID[specID].role or "DAMAGER"
     local p = role == "TANK" and (DB.sortPriorityTank or 1) or role == "HEALER" and (DB.sortPriorityHealer or 2) or (DB.sortPriorityDPS or 3)
     if role == "DAMAGER" and DB.sortMeleeDPSFirst and meleeSpecs[specID] then
         p = p - 0.5

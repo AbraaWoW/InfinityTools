@@ -958,9 +958,10 @@ function RevUI:ShowHomePage()
     tipHeader:SetText("|cffffd88a" .. L["Tips"] .. "|r")
 
     local tips = {
-        L["Use the Modules page to enable/disable modules. Changes take effect after /reload."],
+        L["Use the Modules page to enable/disable modules. Changes take effect after /rl."],
         L["Inside a module settings page, use the Grid panel to adjust styles, position, and toggles."],
-        L["Global edit mode: /ex edmode (drag HUD elements to reposition)."],
+        L["Global edit mode: /it edmode (drag HUD elements to reposition)."],
+        L["Type /it help to print InfinityTools slash commands in chat."],
     }
     local lastTip = tipHeader
     for _, tip in ipairs(tips) do
@@ -969,7 +970,7 @@ function RevUI:ShowHomePage()
         fs:SetPoint("TOPLEFT", lastTip, "BOTTOMLEFT", 0, -8)
         fs:SetWidth(INNER_W)
         fs:SetJustifyH("LEFT")
-        fs:SetText("|cff9fb0c0•|r " .. tip)
+        fs:SetText("|cff9fb0c0-|r " .. tip)
         fs:SetTextColor(0.8, 0.82, 0.88, 1)
         lastTip = fs
     end

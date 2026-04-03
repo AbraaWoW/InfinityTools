@@ -31,7 +31,7 @@ local LibSerialize = LibStub and LibStub("LibSerialize")
 local LibDeflate = LibStub and LibStub("LibDeflate")
 
 local INFINITY_MODULE_KEY = "RevTools.SpellAlert"
-local ALERT_EXPORT_PREFIX = "!EXSA1!"
+local ALERT_EXPORT_PREFIX = "!INFSA1!"
 print("|cff00ff00[SpellAlert] Module loading...|r")
 -- =========================================================
 -- 0. LibCustomGlow wrapper
@@ -624,7 +624,7 @@ local function ImportAlert(str)
     end
     str = str:match("^%s*(.-)%s*$")
     if not str:find("^" .. ALERT_EXPORT_PREFIX:gsub("!", "%%!")) then
-        return nil, "Invalid format (requires !EXSA1! prefix)"
+        return nil, "Invalid format (requires " .. ALERT_EXPORT_PREFIX .. " prefix)"
     end
     local encoded = str:sub(#ALERT_EXPORT_PREFIX + 1)
     local decoded = LibDeflate:DecodeForPrint(encoded)
@@ -675,7 +675,7 @@ local function NormalizePopupEditBox(popup)
     return eb
 end
 
-StaticPopupDialogs["EXSA_TEXT_DIALOG"] = {
+StaticPopupDialogs["InfinitySpellAlert_TEXT_DIALOG"] = {
     text = "%s",
     hasEditBox = true,
     editBoxWidth = 360,
@@ -722,14 +722,14 @@ StaticPopupDialogs["EXSA_TEXT_DIALOG"] = {
 
 local function ShowTextDialog(title, defaultText, isExport, onImport)
     TextDialog_OnImport = onImport
-    local d = StaticPopupDialogs["EXSA_TEXT_DIALOG"]
+    local d = StaticPopupDialogs["InfinitySpellAlert_TEXT_DIALOG"]
     d.button1 = isExport and "Close" or "Confirm Import"
     local payload = {
         text = defaultText or "",
         readOnly = isExport == true,
         onImport = onImport,
     }
-    local popup = StaticPopup_Show("EXSA_TEXT_DIALOG", title, nil, payload)
+        local popup = StaticPopup_Show("InfinitySpellAlert_TEXT_DIALOG", title, nil, payload)
     if popup then
         popup._saText = payload.text
         popup._saReadOnly = payload.readOnly
@@ -1288,7 +1288,7 @@ RegisterStateTriggers = function()
                     local maxVal               = tonumber(trigger.max) or 100
                     local margin               = tonumber(trigger.margin) or 0.1
                     local cond                 = trigger.condition or "increase"
-                    local owner                = string.format("EXSA.delta.%d", i)
+                    local owner                = string.format("InfinitySpellAlert.delta.%d", i)
                     local ruleIdx              = i
 
                     Runtime.ActiveDelta[owner] = sk

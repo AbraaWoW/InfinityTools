@@ -44,27 +44,27 @@ local function SetPartyKeystonePreview(enabled)
 end
 
 local function OpenRunHistory()
-    if _G.EXMYRUN and _G.EXMYRUN.ToggleWindow then
-        _G.EXMYRUN:ToggleWindow()
+    if _G.InfinityRunHistory and _G.InfinityRunHistory.ToggleWindow then
+        _G.InfinityRunHistory:ToggleWindow()
         return
     end
     ClickState("ExM+Info.RunHistory", "open")
 end
 
 local function OpenDashboard()
-    if SlashCmdList and SlashCmdList["EXMPLUS"] then
-        SlashCmdList["EXMPLUS"]()
+    if _G.InfinitySpellInfo and _G.InfinitySpellInfo.ToggleFrame then
+        _G.InfinitySpellInfo:ToggleFrame()
         return
     end
     ClickState("ExM+InfoMythicFrame", "open")
 end
 
 local function OpenSpellGuide()
-    if _G.EXSP and not _G.EXSP.MainFrame and _G.EXSP.CreateMainFrame then
-        _G.EXSP.CreateMainFrame()
+    if _G.InfinitySpellInfo and not _G.InfinitySpellInfo.MainFrame and _G.InfinitySpellInfo.CreateMainFrame then
+        _G.InfinitySpellInfo.CreateMainFrame()
     end
-    if SlashCmdList and SlashCmdList["EXSP"] then
-        SlashCmdList["EXSP"]()
+    if SlashCmdList and SlashCmdList["InfinitySpellInfo"] then
+        SlashCmdList["InfinitySpellInfo"]()
     end
 end
 

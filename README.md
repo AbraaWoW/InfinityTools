@@ -36,8 +36,8 @@ Suite d’addons modulaire pour WoW qui regroupe une UI centrale, des outils Myt
 
 ## Installation & configuration
 1. Copier l’ensemble du dossier dans `World of Warcraft/_retail_/Interface/AddOns`.  
-2. Activer `InfinityTools` (et `InfinityBoss`/`InfinityMythicPlus` si besoin) via l’écran d’addons ou `/exb`.  
-3. Utiliser `/ex` ou `Infinity Tools → Tools` pour ouvrir la fenêtre `RRTUI`, activer les modules, basculer les onglets et modifier les options.  
+2. Activer `InfinityTools` (et `InfinityBoss`/`InfinityMythicPlus` si besoin) via l’écran d’addons ou `/iboss`.  
+3. Utiliser `/it` ou `Infinity Tools → Tools` pour ouvrir la fenêtre `RRTUI`, activer les modules, basculer les onglets et modifier les options.  
 4. Chaque module expose son propre layout : `InfinityTools:RegisterModuleLayout`. Les settings sont persistés via `InfinityToolsDB`.
 
 ## Ressources externes

@@ -16,7 +16,7 @@ if not InfinityTools:IsModuleEnabled(INFINITY_MODULE_KEY) then return end
 local InfinityDB = _G.InfinityDB
 
 -- 3. Data initialization
-local EXMYRUN_DEFAULTS = {
+local InfinityRunHistory_DEFAULTS = {
     size = 16,
     outline = "OUTLINE",
     font = nil,
@@ -27,7 +27,7 @@ local EXMYRUN_DEFAULTS = {
     xOfs = 0,
     yOfs = 0,
 }
-local MODULE_DB = InfinityTools:GetModuleDB(INFINITY_MODULE_KEY, EXMYRUN_DEFAULTS)
+local MODULE_DB = InfinityTools:GetModuleDB(INFINITY_MODULE_KEY, InfinityRunHistory_DEFAULTS)
 
 -- =========================================================
 -- [v4.2] Registration and configuration
@@ -57,53 +57,53 @@ REGISTER_LAYOUT()
 -- Button event handling
 InfinityTools:WatchState(INFINITY_MODULE_KEY .. ".ButtonClicked", INFINITY_MODULE_KEY, function(data)
     if data.key == "open" then
-        if _G.EXMYRUN and _G.EXMYRUN.ToggleWindow then _G.EXMYRUN:ToggleWindow() end
+        if _G.InfinityRunHistory and _G.InfinityRunHistory.ToggleWindow then _G.InfinityRunHistory:ToggleWindow() end
     end
 end)
 
 -- Database change listener (live UI refresh)
 InfinityTools:WatchState(INFINITY_MODULE_KEY .. ".DatabaseChanged", INFINITY_MODULE_KEY, function()
     -- [Fix] Refresh the DB reference after settings changes.
-    MODULE_DB = InfinityTools:GetModuleDB(INFINITY_MODULE_KEY, EXMYRUN_DEFAULTS)
+    MODULE_DB = InfinityTools:GetModuleDB(INFINITY_MODULE_KEY, InfinityRunHistory_DEFAULTS)
 
     -- Refresh only while the window exists and is visible.
-    if EXMYRUN.MainFrame and EXMYRUN.MainFrame:IsShown() then
-        EXMYRUN:UpdateList()
+    if InfinityRunHistory.MainFrame and InfinityRunHistory.MainFrame:IsShown() then
+        InfinityRunHistory:UpdateList()
     end
 end)
 
 -- =========================================================
 -- Core logic
 -- =========================================================
-local EXMYRUN = {}
-_G.EXMYRUN = EXMYRUN
+local InfinityRunHistory = {}
+_G.InfinityRunHistory = InfinityRunHistory
 -- Do not redefine MODULE_DB.WatchState here; use the global watcher only.
 
 -- 5. Business logic
--- local EXMYRUN = {} -- [Fix] Removed duplicate definition
+-- local InfinityRunHistory = {} -- [Fix] Removed duplicate definition
 
 local LSM = LibStub("LibSharedMedia-3.0", true)
-EXMYRUN.TimeOffset = 8
-EXMYRUN.RowHeight = 25
-EXMYRUN.FrameWidth = 700
-EXMYRUN.FrameHeight = 600
+InfinityRunHistory.TimeOffset = 8
+InfinityRunHistory.RowHeight = 25
+InfinityRunHistory.FrameWidth = 700
+InfinityRunHistory.FrameHeight = 600
 
-EXMYRUN.MainFrame = nil
-EXMYRUN.SortState = { key = "date", asc = false }
+InfinityRunHistory.MainFrame = nil
+InfinityRunHistory.SortState = { key = "date", asc = false }
 
 -- Helper functions
-local function EXMYRUN_FormatTime(seconds)
+local function InfinityRunHistory_FormatTime(seconds)
     if not seconds then return "00:00" end
     return string.format("%02d:%02d", math.floor(seconds / 60), seconds % 60)
 end
 
-local function EXMYRUN_GetFormattedDate(completionDate)
+local function InfinityRunHistory_GetFormattedDate(completionDate)
     if not completionDate then return L["Unknown"], 0 end
 
     local adjustedYear = completionDate.year + 2000
     local adjustedMonth = completionDate.month + 1
     local adjustedDay = completionDate.day + 1
-    local adjustedHour = completionDate.hour + EXMYRUN.TimeOffset
+    local adjustedHour = completionDate.hour + InfinityRunHistory.TimeOffset
     local adjustedMinute = completionDate.minute
 
     if adjustedHour >= 24 then
@@ -118,14 +118,14 @@ local function EXMYRUN_GetFormattedDate(completionDate)
     return str, sortVal
 end
 
-local function EXMYRUN_GetLevelColorHex(level)
+local function InfinityRunHistory_GetLevelColorHex(level)
     local colorMixin = C_ChallengeMode.GetKeystoneLevelRarityColor(level)
     return colorMixin and colorMixin:GenerateHexColor() or "ffffffff"
 end
 
 -- UI construction
-function EXMYRUN:CreateMainFrame()
-    local f = CreateFrame("Frame", "EXMYRUNMainFrame", UIParent, "BackdropTemplate")
+function InfinityRunHistory:CreateMainFrame()
+    local f = CreateFrame("Frame", "InfinityRunHistoryMainFrame", UIParent, "BackdropTemplate")
     f:SetSize(self.FrameWidth, self.FrameHeight)
 
     if MODULE_DB.point then
@@ -209,20 +209,20 @@ function EXMYRUN:CreateMainFrame()
 
         btn:SetScript("OnClick", function(self)
             if self.key == "result" then return end
-            if EXMYRUN.SortState.key == self.key then
-                EXMYRUN.SortState.asc = not EXMYRUN.SortState.asc
+            if InfinityRunHistory.SortState.key == self.key then
+                InfinityRunHistory.SortState.asc = not InfinityRunHistory.SortState.asc
             else
-                EXMYRUN.SortState.key = self.key
-                EXMYRUN.SortState.asc = (self.key ~= "date")
+                InfinityRunHistory.SortState.key = self.key
+                InfinityRunHistory.SortState.asc = (self.key ~= "date")
             end
-            EXMYRUN:UpdateList()
+            InfinityRunHistory:UpdateList()
         end)
 
         table.insert(f.headerBtns, btn)
         currentX = currentX + col.width
     end
 
-    f.Scroll = CreateFrame("ScrollFrame", "EXMYRUNHistoryScroll", f, "UIPanelScrollFrameTemplate")
+    f.Scroll = CreateFrame("ScrollFrame", "InfinityRunHistoryHistoryScroll", f, "UIPanelScrollFrameTemplate")
     f.Scroll:SetPoint("TOPLEFT", 10, headerY - 25)
     f.Scroll:SetPoint("BOTTOMRIGHT", -30, 10)
 
@@ -234,7 +234,7 @@ function EXMYRUN:CreateMainFrame()
     f:Hide()
 end
 
-function EXMYRUN:UpdateList()
+function InfinityRunHistory:UpdateList()
     if not self.MainFrame then return end
 
     local rawData = C_MythicPlus.GetRunHistory(true, true, false)
@@ -261,7 +261,7 @@ function EXMYRUN:UpdateList()
             run.originalIndex = i
             local mapName = C_ChallengeMode.GetMapUIInfo(run.mapChallengeModeID)
             run.mapNameSort = mapName or ""
-            local str, sortVal = EXMYRUN_GetFormattedDate(run.completionDate)
+            local str, sortVal = InfinityRunHistory_GetFormattedDate(run.completionDate)
             run.dateStr = str
             run.dateSort = sortVal
             run.isTimed = isTimed
@@ -353,14 +353,14 @@ function EXMYRUN:UpdateList()
         -- Apply the standard 0.08-0.92 crop for inline icons (5:59 in 64px space).
         local icon = texture and ("|T" .. texture .. ":" .. MODULE_DB.size .. ":" .. MODULE_DB.size .. ":0:0:64:64:5:59:5:59|t ") or
             ""
-        local color = EXMYRUN_GetLevelColorHex(run.level)
+        local color = InfinityRunHistory_GetLevelColorHex(run.level)
         row.cells[2]:SetText(icon .. "|c" .. color .. (mapName or L["Unknown Dungeon"]) .. " (+" .. run.level .. ")|r")
         row.cells[3]:SetText(run.dateStr)
 
         local res = "|cff999999" .. L["No Time Data"] .. "|r"
         if run.hasData then
             local diff = math.abs(run.durationSec - run.timeLimit)
-            local diffStr = EXMYRUN_FormatTime(diff)
+            local diffStr = InfinityRunHistory_FormatTime(diff)
             if run.isTimed then
                 res = string.format("|cff00ff00" .. L["Timed (%s left)"] .. "|r", diffStr)
             elseif run.isOverTime then
@@ -374,7 +374,7 @@ function EXMYRUN:UpdateList()
     self.MainFrame.ScrollChild:SetHeight(totalHeight)
 end
 
-function EXMYRUN:ToggleWindow()
+function InfinityRunHistory:ToggleWindow()
     if not self.MainFrame then
         self:CreateMainFrame()
     end
@@ -387,11 +387,6 @@ function EXMYRUN:ToggleWindow()
 end
 
 -- Register slash command
-SLASH_EXMYRUN1 = "/emr"
-SLASH_EXMYRUN2 = "/exmythicrun"
-SlashCmdList["EXMYRUN"] = function()
-    EXMYRUN:ToggleWindow()
-end
 
 -- Report module ready
 InfinityTools:ReportReady(INFINITY_MODULE_KEY)

@@ -70,14 +70,14 @@ local function GetGeneratedDefaultLabels()
     local built = BuildFactoryDefaultLabels()
     if type(built) == "table" and #built > 0 then
         _G.InfinityBossVoiceLabels = built
-        _G.EXBV_LABELS = built
+        _G.InfinityBossVoiceLegacyLabels = built
         return built
     end
     if type(_G.InfinityBossVoiceLabels) == "table" and #_G.InfinityBossVoiceLabels > 0 then
         return _G.InfinityBossVoiceLabels
     end
-    if type(_G.EXBV_LABELS) == "table" and #_G.EXBV_LABELS > 0 then
-        return _G.EXBV_LABELS
+    if type(_G.InfinityBossVoiceLegacyLabels) == "table" and #_G.InfinityBossVoiceLegacyLabels > 0 then
+        return _G.InfinityBossVoiceLegacyLabels
     end
     return nil
 end
@@ -86,7 +86,7 @@ do
     local generated = BuildFactoryDefaultLabels()
     if type(generated) == "table" and #generated > 0 then
         _G.InfinityBossVoiceLabels = generated
-        _G.EXBV_LABELS = generated
+        _G.InfinityBossVoiceLegacyLabels = generated
     end
 end
 

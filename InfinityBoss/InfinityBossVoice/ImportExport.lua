@@ -4,7 +4,7 @@ InfinityBoss.Voice = InfinityBoss.Voice or {}
 InfinityBoss.Voice.ImportExport = InfinityBoss.Voice.ImportExport or {}
 local IE = InfinityBoss.Voice.ImportExport
 
-local PREFIX          = "EXBXC:"
+local PREFIX          = "INFBXC:" -- renamed from EXBXC for Infinity branding
 local RAW_SENTINEL    = "RAW:"
 local PAYLOAD_TYPE    = "rboss_bundle"
 local PAYLOAD_VERSION = 5
@@ -96,7 +96,7 @@ local function DecodePayload(rawText)
     local str = Trim(rawText)
     if str == "" then return nil, "empty string" end
     if str:sub(1, #PREFIX) ~= PREFIX then
-        return nil, "unsupported prefix (expected EXBXC:)"
+        return nil, "unsupported prefix (expected INFBXC:)"
     end
     local body = str:sub(#PREFIX + 1)
     if body:sub(1, #RAW_SENTINEL) == RAW_SENTINEL then

@@ -29,7 +29,7 @@ L["Other voice page is not ready."] = "Other voice page is not ready."
 L["Import / Export page is not ready."] = "Import / Export page is not ready."
 L["Settings page [%s] - pending."] = "Settings page [%s] - pending."
 L["Dungeon / Boss Navigation\n(Pending)"] = "Dungeon / Boss Navigation\n(Pending)"
-L["/exb  open/close    |    /exb edit  edit mode    |    /exb debug  debug"] = "/exb  open/close    |    /exb edit  edit mode    |    /exb debug  debug"
+L["/iboss  open/close    |    /iboss edit  edit mode    |    /iboss debug  debug"] = "/iboss  open/close    |    /iboss edit  edit mode    |    /iboss debug  debug"
 
 L["Male"] = "Male"
 L["Female"] = "Female"

@@ -60,9 +60,9 @@ end)
 
 local function GetMythicMultiplier()
     -- Integrate with MythicDamage module if available
-    local EXMD = _G.EXMD
-    if EXMD and EXMD.GetCurrentMultiplier then
-        return EXMD.GetCurrentMultiplier()
+    local InfinityMythicDamage = _G.InfinityMythicDamage
+    if InfinityMythicDamage and InfinityMythicDamage.GetCurrentMultiplier then
+        return InfinityMythicDamage.GetCurrentMultiplier()
     end
     return 1
 end
@@ -195,8 +195,8 @@ local function BuildSpellCard(parent, spellID)
         local text = line.leftText or ""
 
         -- Apply mythic damage multiplier if relevant
-        if _G.EXMD and _G.EXMD.ProcessDamageText then
-            text = _G.EXMD.ProcessDamageText(text, GetMythicMultiplier())
+        if _G.InfinityMythicDamage and _G.InfinityMythicDamage.ProcessDamageText then
+            text = _G.InfinityMythicDamage.ProcessDamageText(text, GetMythicMultiplier())
         end
 
         local fs = AcquireSubWidget(card, "FontString")
@@ -570,14 +570,14 @@ local function CreateMainFrame()
     f.npcInfo = infoStrip
 
     -- Mythic level slider (if MythicDamage module is loaded)
-    if _G.EXMD and _G.EXMD.EX_DB then
+    if _G.InfinityMythicDamage and _G.InfinityMythicDamage.EX_DB then
         local sliderFrame = CreateFrame("Frame", nil, infoStrip)
         sliderFrame:SetSize(160, 40)
         sliderFrame:SetPoint("TOPRIGHT", -8, -10)
 
         local sliderLbl = sliderFrame:CreateFontString(nil, "OVERLAY", "GameFontHighlightSmall")
         sliderLbl:SetPoint("TOP", 0, 0)
-        sliderLbl:SetText(string.format("|cffffff00Level %d|r", _G.EXMD.EX_DB.mythicLevel or 10))
+        sliderLbl:SetText(string.format("|cffffff00Level %d|r", _G.InfinityMythicDamage.EX_DB.mythicLevel or 10))
 
         local slider = CreateFrame("Slider", "RRTSpellGuideSlider", sliderFrame, "OptionsSliderTemplate")
         slider:SetPoint("TOP", 0, -14)
@@ -585,14 +585,14 @@ local function CreateMainFrame()
         slider:SetMinMaxValues(0, 30)
         slider:SetValueStep(1)
         slider:SetObeyStepOnDrag(true)
-        slider:SetValue(_G.EXMD.EX_DB.mythicLevel or 10)
+        slider:SetValue(_G.InfinityMythicDamage.EX_DB.mythicLevel or 10)
         _G["RRTSpellGuideSliderLow"]:SetText("0")
         _G["RRTSpellGuideSliderHigh"]:SetText("30")
         _G["RRTSpellGuideSliderText"]:SetText("")
 
         slider:SetScript("OnValueChanged", function(self, val)
             val = math.floor(val + 0.5)
-            _G.EXMD.EX_DB.mythicLevel = val
+            _G.InfinityMythicDamage.EX_DB.mythicLevel = val
             sliderLbl:SetText(string.format("|cffffff00Level %d|r", val))
             if currentDungeon and currentNPC then RefreshSpellPanel() end
         end)

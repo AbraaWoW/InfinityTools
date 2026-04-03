@@ -623,7 +623,7 @@ local function CreatePanel()
     local statusText = mainFrame:CreateFontString(nil, "OVERLAY", "GameFontHighlightSmall")
     statusText:SetPoint("BOTTOMLEFT", mainFrame, "BOTTOMLEFT", 12, 8)
     statusText:SetTextColor(0.5, 0.5, 0.5, 1)
-    statusText:SetText("/exb  open/close    |    /exb edit  edit mode    |    /exb debug  debug")
+    statusText:SetText("/iboss  open/close    |    /iboss edit  edit mode    |    /iboss debug  debug")
     Panel.statusText = statusText
 
     local changelogBtn = CreateFrame("Button", nil, mainFrame, "UIPanelButtonTemplate")

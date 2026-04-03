@@ -1,7 +1,7 @@
 -- Comment translated to English
 -- Comment translated to English
 local RRTToolsCore = _G.RRTToolsCore
-local EXDB = _G.EXDB
+local InfinityExtrasDB = _G.InfinityExtrasDB
 local RRT_NS = _G.RRT_NS or {}
 _G.RRT_NS = RRT_NS
 if not RRTToolsCore then return end
@@ -14,7 +14,7 @@ local RRT_MODULE_KEY = "RRTTools.RaidMarkerPanel"
 local function RRT_RegisterLayout()
     local layout = {
         { key = "header", type = "header", x = 2, y = 1, w = 50, h = 2, label = "Raid Marker Panel", labelSize = 24 },
-        { key = "desc", type = "description", x = 2, y = 4, w = 50, h = 2, label = "Left click places/toggles, right click clears a single marker. Supports target and world markers. Command: /exmarker" },
+        { key = "desc", type = "description", x = 2, y = 4, w = 50, h = 2, label = "Left click places/toggles, right click clears a single marker. Supports target and world markers. Command: /itmarker" },
         { key = "showPanel", type = "checkbox", x = 2, y = 7, w = 14, h = 2, label = "Show Panel" },
         { key = "lockPanel", type = "checkbox", x = 17, y = 7, w = 14, h = 2, label = "Lock Position" },
         { key = "scale", type = "slider", x = 2, y = 10, w = 18, h = 2, label = "Panel Scale", min = 0.6, max = 1.8, step = 0.05 },
@@ -560,7 +560,7 @@ RRTToolsCore:WatchState(RRT_MODULE_KEY .. ".DatabaseChanged", RRT_MODULE_KEY, fu
     end
 end)
 
-RRTToolsCore:RegisterChatCommand("exmarker", function()
+RRTToolsCore:RegisterChatCommand("itmarker", function()
     CreateMainPanel()
     TogglePanelVisibility()
 end)

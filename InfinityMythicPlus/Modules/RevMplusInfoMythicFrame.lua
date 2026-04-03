@@ -32,7 +32,7 @@ REGISTER_LAYOUT()
 -- Comment translated to English
 InfinityTools:WatchState(INFINITY_MODULE_KEY .. ".ButtonClicked", INFINITY_MODULE_KEY, function(data)
     if data.key == "open" then
-        if SlashCmdList and SlashCmdList["EXMPLUS"] then SlashCmdList["EXMPLUS"]() end
+        RevMRH.ToggleWindow()
     end
 end)
 
@@ -75,6 +75,7 @@ local RevMRH_KeystoneAchievementList = {
 -- Comment translated to English
 -- =========================================================
 local RevMRH                         = {}
+_G.RevMRH = RevMRH
 local LSM                           = LibStub and LibStub("LibSharedMedia-3.0", true)
 local SAFE_TEXT_FONT                = STANDARD_TEXT_FONT or InfinityTools.MAIN_FONT or MAIN_FONT
 
@@ -300,10 +301,8 @@ function RevMRH.CreateStandaloneFrame()
 -- Comment translated to English
     RevMRH.BtnHistory = CreateFootBtn(L["Season Run History"], -185)
     RevMRH.BtnHistory:SetScript("OnClick", function()
-        if _G.EXMYRUN and _G.EXMYRUN.ToggleWindow then
-            _G.EXMYRUN:ToggleWindow()
-        elseif SlashCmdList and SlashCmdList["EXMYRUN"] then
-            SlashCmdList["EXMYRUN"]()
+        if _G.InfinityRunHistory and _G.InfinityRunHistory.ToggleWindow then
+            _G.InfinityRunHistory:ToggleWindow()
         end
     end)
 
@@ -324,14 +323,20 @@ function RevMRH.CreateStandaloneFrame()
 
     RevMRH.InitSubPanels()
     f:Hide()
-    SlashCmdList["EXMPLUS"] = function()
-        if f:IsShown() then
-            f:Hide()
-        else
-            f:Show(); RevMRH.UpdateAllData()
-        end
+end
+
+function RevMRH.ToggleWindow()
+    if not _G["RevMRH_MainFrame"] then
+        RevMRH.CreateStandaloneFrame()
     end
-    SLASH_EXMPLUS1 = "/exm"
+    local frame = _G["RevMRH_MainFrame"]
+    if not frame then return end
+    if frame:IsShown() then
+        frame:Hide()
+    else
+        frame:Show()
+        RevMRH.UpdateAllData()
+    end
 end
 
 -- =========================================================

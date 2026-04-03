@@ -611,28 +611,4 @@ InfinityTools:RegisterEditModeCallback(INFINITY_MODULE_KEY, function(enabled)
     end)
 end)
 
-_G.SLASH_EXCHATCHANNEL1 = "/cc"
-_G.SlashCmdList["EXCHATCHANNEL"] = function(msg)
-    msg = string.lower(msg or "")
-    if msg == "show" then
-        MODULE_DB.enabled = true
-        RefreshAll()
-    elseif msg == "hide" then
-        MODULE_DB.enabled = false
-        RefreshAll()
-    elseif msg == "toggle" then
-        MODULE_DB.enabled = not MODULE_DB.enabled
-        RefreshAll()
-    elseif msg == "reset" then
-        MODULE_DB.posX2 = nil
-        MODULE_DB.posY2 = nil
-        MODULE_DB.offsetX = 0
-        MODULE_DB.offsetY = 30
-        RefreshAll()
-    else
-        InfinityTools:OpenConfig(INFINITY_MODULE_KEY)
-    end
-end
-
 InfinityTools:ReportReady(INFINITY_MODULE_KEY)
-

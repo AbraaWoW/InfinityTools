@@ -4,7 +4,7 @@
 -- =============================================================
 
 local RRTToolsCore = _G.RRTToolsCore
-local EXDB = _G.EXDB
+local InfinityExtrasDB = _G.InfinityExtrasDB
 local RRT_NS = _G.RRT_NS or {}
 _G.RRT_NS = RRT_NS
 if not RRTToolsCore then return end
@@ -874,8 +874,8 @@ end)
 -- =============================================================
 -- Comment translated to English
 -- =============================================================
-_G.SLASH_EXCHATCHANNEL1 = "/cc"
-_G.SlashCmdList["EXCHATCHANNEL"] = function(msg)
+_G.SLASH_INFINITYCHATCHANNEL1 = "/cc"
+_G.SlashCmdList["INFINITYCHATCHANNEL"] = function(msg)
     msg = string.lower(msg or "")
     if msg == "show" then
         RRT_DB.enabled = true
@@ -900,6 +900,5 @@ end
 -- Comment translated to English
 -- =============================================================
 RRTToolsCore:ReportReady(RRT_MODULE_KEY)
-
 
 

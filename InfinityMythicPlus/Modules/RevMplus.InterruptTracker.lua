@@ -1940,10 +1940,5 @@ end)
 -- =============================================================
 
 -- Register /extest
-_G.SLASH_EXTEST1 = "/extest"
-_G.SlashCmdList["EXTEST"] = function()
-    PrintInterruptReport()
-end
-
 InfinityTools:ReportReady(INFINITY_MODULE_KEY)
 

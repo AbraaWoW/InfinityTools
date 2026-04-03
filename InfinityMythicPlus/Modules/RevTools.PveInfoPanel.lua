@@ -315,11 +315,15 @@ local function CreateMainFrame()
 
     -- Top buttons: fixed positions; only swap “Stats” and “Season”
     mainFrame.infoBtn = CreateHeaderIcon(mainFrame, "RevInfo.png", -75, L["Spells"],
-        function() if SlashCmdList["EXSP"] then SlashCmdList["EXSP"]() end end)
+        function()
+            if _G.InfinitySpellInfo and _G.InfinitySpellInfo.ToggleFrame then _G.InfinitySpellInfo:ToggleFrame() end
+        end)
     mainFrame.vaultBtn = CreateHeaderIcon(mainFrame, "RevVault.png", 0, L["Mythic+"],
-        function() if SlashCmdList["EXMPLUS"] then SlashCmdList["EXMPLUS"]() end end)
+        function()
+            if _G.RevMRH and _G.RevMRH.ToggleWindow then _G.RevMRH:ToggleWindow() end
+        end)
     mainFrame.statBtn = CreateHeaderIcon(mainFrame, "RevTotal.png", 75, L["History"],
-        function() if _G.EXMYRUN then _G.EXMYRUN:ToggleWindow() end end)
+        function() if _G.InfinityRunHistory then _G.InfinityRunHistory:ToggleWindow() end end)
 
     -- Section 1 (Great Vault summary): shifted down to clear the icons
     CreateSectionTitle(mainFrame, L["Great Vault Summary"], -75)

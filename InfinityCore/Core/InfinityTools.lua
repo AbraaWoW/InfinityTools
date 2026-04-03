@@ -109,6 +109,7 @@ InfinityTools.ModuleList = {
     ----------------------------------------------------------------------------------------------------------
     { Key = "RevMplus.InterruptTracker", Name = L["Interrupt Tracker"], Desc = L["Infer and track teammate interrupt cooldowns (supports 12.0)."], Category = 3 },
     { Key = "RevMplus.MythicCast", Name = L["Nearby Cast Monitor"], Desc = L["Shows nearby mob cast bars with separate colors for interruptible and unbreakable casts."], Category = 3 },
+    { Key = "RevMplus.FriendlyCD", Name = "Friendly CD Tracker", Desc = "Tracks friendly defensive and offensive cooldowns in M+ and Raid. Bars, icons, and attached-to-frame modes.", Category = 3, new = true },
     ----------------------------------------------------------------------------------------------------------
     --------------------------------------------- Class (General) (4) -----------------------------------------
     ----------------------------------------------------------------------------------------------------------
@@ -805,7 +806,7 @@ end
 --========================== Global Edit Mode System ============================
 --=======================================================================
 -- Global edit mode toggle
--- Allows /ex edmode to toggle drag mode for every supported module
+-- Allows /it edmode to toggle drag mode for every supported module
 InfinityTools.GlobalEditMode = false
 InfinityTools.EditModeCallbacks = {}
 
@@ -879,8 +880,21 @@ function InfinityTools:RegisterChatCommand(slash, func)
     SlashCmdList[cmd] = func
 end
 
+local function PrintSlashHelp()
+    InfinityTools:Print("Available commands:")
+    print("  |cffA330C9/it|r - Open InfinityTools settings")
+    print("  |cffA330C9/it help|r - Show this command list")
+    print("  |cffA330C9/it edmode|r - Toggle global HUD edit mode")
+    print("  |cffA330C9/it debug|r - Toggle debug mode")
+    print("  |cffA330C9/it dev|r or |cffA330C9/it edit|r - Toggle developer mode")
+    print("  |cffA330C9/it re|r or |cffA330C9/rl|r - Reload UI")
+    print("  |cffA330C9/itstate|r - Print InfinityTools runtime state")
+    print("  |cffA330C9/itreset|r - Reset InfinityTools saved variables and reload")
+    InfinityTools:Print("Use the Modules page inside InfinityTools settings to reach InfinityMythicPlus tools.")
+end
+
 -- Main commands
-InfinityTools:RegisterChatCommand("ex", function(input)
+local function HandleConfigCommand(input)
     local arg = (input or ""):trim():lower()
 
     if arg == "dev" or arg == "edit" then
@@ -906,14 +920,19 @@ InfinityTools:RegisterChatCommand("ex", function(input)
         C_UI.Reload(); return
     end
 
-    InfinityTools:OpenConfig()
-end)
+    if arg == "help" or arg == "?" then
+        PrintSlashHelp()
+        return
+    end
 
-InfinityTools:RegisterChatCommand("reversion", function()
     InfinityTools:OpenConfig()
-end)
+end
 
-InfinityTools:RegisterChatCommand("extre", function()
+InfinityTools:RegisterChatCommand("it", HandleConfigCommand)
+InfinityTools:RegisterChatCommand("infinitytools", HandleConfigCommand)
+InfinityTools:RegisterChatCommand("itconfig", HandleConfigCommand)
+
+InfinityTools:RegisterChatCommand("itreset", function()
     _G.InfinityToolsDB = nil
     C_UI.Reload()
 end)
@@ -923,7 +942,7 @@ InfinityTools:RegisterChatCommand("rl", function()
     C_UI.Reload()
 end)
 
-InfinityTools:RegisterChatCommand("exstate", function()
+InfinityTools:RegisterChatCommand("itstate", function()
     print("|cffA330C9[InfinityTools] Current States:|r")
     if not InfinityTools.State then
         print("  State not initialized"); return

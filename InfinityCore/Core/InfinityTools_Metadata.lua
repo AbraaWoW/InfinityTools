@@ -10,23 +10,9 @@ InfinityTools_MetaData = {
     gridEngineVersion = "2.0",
     changelog = {
         title = displayVersion .. " Changelog",
-        publishedAt = "2026-04-03",
+        publishedAt = "2026-04-04",
         fontSize = 14,
-        content = table.concat({
-"@H1@ " .. displayVersion,
-"",
-"@H2@ Party CD Tracker",
-"- Raid support: spec detection now works in raid via a local inspect queue (PartySync is intentionally disabled in raids)",
-"- Raid support: addon peers broadcast their spec via COMM on join — bars appear instantly without waiting for inspect",
-"- Raid support: reactive UNIT_AURA fallback creates bars on the fly when a known cooldown aura is detected (no spec required)",
-"- Fixed: removed CanInspect() gate that was silently dropping out-of-range raid members from the inspect queue",
-"",
-"@H1@ v1.0.0",
-"",
-"@H2@ General",
-"- Initial public release of InfinityTools v2.0.0",
-"- InfinityTools, InfinityBoss and InfinityTools are now unified under a single addon package",
-        }, "\n"),
+        content = "",
     },
 }
 

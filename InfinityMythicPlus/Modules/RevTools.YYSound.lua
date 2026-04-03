@@ -384,8 +384,8 @@ C_Timer.After(5, function() isReady = true end) -- Allow triggers only 5 seconds
 -- [Aura] Debuff verification (these 8 IDs are not secret values after Blizzard hotfixes)
 -- Confirms Bloodlust truly triggered by checking whether the debuff was "just applied"
 -- =========================================================
-local EXHAUSTION_IDS = { 57723, 57724, 80354, 95809, 160455, 207400, 264689, 390435, 1243972 }
-local EXHAUSTION_DURATION = 600 -- Exhaustion debuff lasts 10 minutes
+local InfinityExhaustion_IDS = { 57723, 57724, 80354, 95809, 160455, 207400, 264689, 390435, 1243972 }
+local InfinityExhaustion_DURATION = 600 -- Exhaustion debuff lasts 10 minutes
 local FRESH_WINDOW = 5          -- Tolerance window of 5 seconds (network/frame delay buffer)
 
 -- Check whether the player just received the Exhaustion debuff (remaining time close to full)
@@ -393,11 +393,11 @@ local FRESH_WINDOW = 5          -- Tolerance window of 5 seconds (network/frame 
 local function CheckExhaustionFresh()
     local UnitAuras = _G.C_UnitAuras
     local now = _G.GetTime()
-    for _, id in ipairs(EXHAUSTION_IDS) do
+    for _, id in ipairs(InfinityExhaustion_IDS) do
         local aura = UnitAuras.GetPlayerAuraBySpellID(id)
         if aura then
             local remaining = aura.expirationTime - now
-            if remaining >= (EXHAUSTION_DURATION - FRESH_WINDOW) then
+            if remaining >= (InfinityExhaustion_DURATION - FRESH_WINDOW) then
                 return true, aura.expirationTime
             end
         end

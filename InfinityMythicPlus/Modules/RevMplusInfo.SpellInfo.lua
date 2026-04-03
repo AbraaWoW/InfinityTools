@@ -38,7 +38,7 @@ REGISTER_LAYOUT()
 
 InfinityTools:WatchState(INFINITY_MODULE_KEY .. ".ButtonClicked", INFINITY_MODULE_KEY, function(data)
     if data.key == "open" then
-        if SlashCmdList and SlashCmdList["EXSP"] then SlashCmdList["EXSP"]() end
+        if InfinitySpellInfo.ToggleFrame then InfinitySpellInfo:ToggleFrame() end
     end
 end)
 
@@ -53,12 +53,12 @@ local INFINITY_MAIN_TITLE_TEXT = "Infinity Mythic Spell Details"
 -- Comment translated to English
 local INFINITY_DEBUG_MODE = false
 
-EXSP = EXSP or {}
-EXSP.Tabs = {}
-EXSP.DungeonDisplayNames = {
+InfinitySpellInfo = InfinitySpellInfo or {}
+InfinitySpellInfo.Tabs = {}
+InfinitySpellInfo.DungeonDisplayNames = {
 
 }
-EXSP.MobDisplayNamesByNpcID = {
+InfinitySpellInfo.MobDisplayNamesByNpcID = {
     [122056] = "Viceroy Nezhar",
     [122313] = "Zuraal the Ascended",
     [122316] = "Saprish",
@@ -237,17 +237,17 @@ EXSP.MobDisplayNamesByNpcID = {
     [259387] = "Netherweave Familiar",
 }
 
-local function EXSP_GetCreatureTypeDisplayName(name)
+local function InfinitySpellInfo_GetCreatureTypeDisplayName(name)
     return name or "Unknown"
 end
 
-local function EXSP_GetDungeonDisplayName(name)
-    return EXSP.DungeonDisplayNames[name] or name
+local function InfinitySpellInfo_GetDungeonDisplayName(name)
+    return InfinitySpellInfo.DungeonDisplayNames[name] or name
 end
 
-local function EXSP_GetMobDisplayName(name, data)
-    if data and data.npcID and EXSP.MobDisplayNamesByNpcID[data.npcID] then
-        return EXSP.MobDisplayNamesByNpcID[data.npcID]
+local function InfinitySpellInfo_GetMobDisplayName(name, data)
+    if data and data.npcID and InfinitySpellInfo.MobDisplayNamesByNpcID[data.npcID] then
+        return InfinitySpellInfo.MobDisplayNamesByNpcID[data.npcID]
     end
     if data and data.npcID then
         return string.format("NPC %d", data.npcID)
@@ -259,15 +259,15 @@ local LSM = LibStub and LibStub("LibSharedMedia-3.0", true)
 local SPELL_INFO_FACTORY = _G.InfinityFactory
 
 -- Comment translated to English
-local EXSP_DEFAULT_FONT = InfinityTools.MAIN_FONT or STANDARD_TEXT_FONT
-local EXSP_FALLBACK_FONT = InfinityTools.MAIN_FONT
+local InfinitySpellInfo_DEFAULT_FONT = InfinityTools.MAIN_FONT or STANDARD_TEXT_FONT
+local InfinitySpellInfo_FALLBACK_FONT = InfinityTools.MAIN_FONT
 
 -------------------------------------------------------------------
 -- Comment translated to English
 -------------------------------------------------------------------
 
 -- Comment translated to English
-function EXSP_GetTagsForSpell(spellID)
+function InfinitySpellInfo_GetTagsForSpell(spellID)
     if not spellID then return {} end
     local tags = {}
     local function ex_hasValue(tab, val)
@@ -276,43 +276,43 @@ function EXSP_GetTagsForSpell(spellID)
         return false
     end
     -- MISC
-    if ex_hasValue(EXSP.aoe_List, spellID) then table.insert(tags, "aoe") end
-    if ex_hasValue(EXSP.los_List, spellID) then table.insert(tags, "los") end
-    if ex_hasValue(EXSP.interrupt_List, spellID) then table.insert(tags, "interrupt") end
-    if ex_hasValue(EXSP.noReflect_List, spellID) then table.insert(tags, "noReflect") end
-    if ex_hasValue(EXSP.alwaysHit_List, spellID) then table.insert(tags, "alwaysHit") end
-    if ex_hasValue(EXSP.noBlock_List, spellID) then table.insert(tags, "noBlock") end
-    if ex_hasValue(EXSP.noDodge_List, spellID) then table.insert(tags, "noDodge") end
-    if ex_hasValue(EXSP.noParry_List, spellID) then table.insert(tags, "noParry") end
+    if ex_hasValue(InfinitySpellInfo.aoe_List, spellID) then table.insert(tags, "aoe") end
+    if ex_hasValue(InfinitySpellInfo.los_List, spellID) then table.insert(tags, "los") end
+    if ex_hasValue(InfinitySpellInfo.interrupt_List, spellID) then table.insert(tags, "interrupt") end
+    if ex_hasValue(InfinitySpellInfo.noReflect_List, spellID) then table.insert(tags, "noReflect") end
+    if ex_hasValue(InfinitySpellInfo.alwaysHit_List, spellID) then table.insert(tags, "alwaysHit") end
+    if ex_hasValue(InfinitySpellInfo.noBlock_List, spellID) then table.insert(tags, "noBlock") end
+    if ex_hasValue(InfinitySpellInfo.noDodge_List, spellID) then table.insert(tags, "noDodge") end
+    if ex_hasValue(InfinitySpellInfo.noParry_List, spellID) then table.insert(tags, "noParry") end
 
 -- Comment translated to English
-    if ex_hasValue(EXSP.DispelBleed_List, spellID) then table.insert(tags, "DispelBleed") end
-    if ex_hasValue(EXSP.DispelCurse_List, spellID) then table.insert(tags, "DispelCurse") end
-    if ex_hasValue(EXSP.DispelDisease_List, spellID) then table.insert(tags, "DispelDisease") end
-    if ex_hasValue(EXSP.DispelEnrage_List, spellID) then table.insert(tags, "DispelEnrage") end
-    if ex_hasValue(EXSP.DispelMagic_List, spellID) then table.insert(tags, "DispelMagic") end
-    if ex_hasValue(EXSP.DispelPoison_List, spellID) then table.insert(tags, "DispelPoison") end
+    if ex_hasValue(InfinitySpellInfo.DispelBleed_List, spellID) then table.insert(tags, "DispelBleed") end
+    if ex_hasValue(InfinitySpellInfo.DispelCurse_List, spellID) then table.insert(tags, "DispelCurse") end
+    if ex_hasValue(InfinitySpellInfo.DispelDisease_List, spellID) then table.insert(tags, "DispelDisease") end
+    if ex_hasValue(InfinitySpellInfo.DispelEnrage_List, spellID) then table.insert(tags, "DispelEnrage") end
+    if ex_hasValue(InfinitySpellInfo.DispelMagic_List, spellID) then table.insert(tags, "DispelMagic") end
+    if ex_hasValue(InfinitySpellInfo.DispelPoison_List, spellID) then table.insert(tags, "DispelPoison") end
 
 -- Comment translated to English
-    if ex_hasValue(EXSP.MechanicAsleep_List, spellID) then table.insert(tags, "MechanicAsleep") end
-    if ex_hasValue(EXSP.MechanicBleeding_List, spellID) then table.insert(tags, "MechanicBleeding") end
-    if ex_hasValue(EXSP.MechanicDisoriented_List, spellID) then table.insert(tags, "MechanicDisoriented") end
-    if ex_hasValue(EXSP.MechanicEnraged_List, spellID) then table.insert(tags, "MechanicEnraged") end
-    if ex_hasValue(EXSP.MechanicFrozen_List, spellID) then table.insert(tags, "MechanicFrozen") end
-    if ex_hasValue(EXSP.MechanicPolymorphed_List, spellID) then table.insert(tags, "MechanicPolymorphed") end
-    if ex_hasValue(EXSP.MechanicRooted_List, spellID) then table.insert(tags, "MechanicRooted") end
-    if ex_hasValue(EXSP.MechanicSnared_List, spellID) then table.insert(tags, "MechanicSnared") end
-    if ex_hasValue(EXSP.MechanicStunned_List, spellID) then table.insert(tags, "MechanicStunned") end
-    if ex_hasValue(EXSP.MechanicFleeing_List, spellID) then table.insert(tags, "MechanicFleeing") end
+    if ex_hasValue(InfinitySpellInfo.MechanicAsleep_List, spellID) then table.insert(tags, "MechanicAsleep") end
+    if ex_hasValue(InfinitySpellInfo.MechanicBleeding_List, spellID) then table.insert(tags, "MechanicBleeding") end
+    if ex_hasValue(InfinitySpellInfo.MechanicDisoriented_List, spellID) then table.insert(tags, "MechanicDisoriented") end
+    if ex_hasValue(InfinitySpellInfo.MechanicEnraged_List, spellID) then table.insert(tags, "MechanicEnraged") end
+    if ex_hasValue(InfinitySpellInfo.MechanicFrozen_List, spellID) then table.insert(tags, "MechanicFrozen") end
+    if ex_hasValue(InfinitySpellInfo.MechanicPolymorphed_List, spellID) then table.insert(tags, "MechanicPolymorphed") end
+    if ex_hasValue(InfinitySpellInfo.MechanicRooted_List, spellID) then table.insert(tags, "MechanicRooted") end
+    if ex_hasValue(InfinitySpellInfo.MechanicSnared_List, spellID) then table.insert(tags, "MechanicSnared") end
+    if ex_hasValue(InfinitySpellInfo.MechanicStunned_List, spellID) then table.insert(tags, "MechanicStunned") end
+    if ex_hasValue(InfinitySpellInfo.MechanicFleeing_List, spellID) then table.insert(tags, "MechanicFleeing") end
 
     if INFINITY_DEBUG_MODE and #tags > 0 then
-        print("|cff00ffff[EXSP Debug]|r Spell ID:", spellID, "matched tags:", table.concat(tags, ","))
+        print("|cff00ffff[InfinitySpellInfo Debug]|r Spell ID:", spellID, "matched tags:", table.concat(tags, ","))
     end
     return tags
 end
 
 -- Comment translated to English
-function EXSP_SetupModelInteractions(model)
+function InfinitySpellInfo_SetupModelInteractions(model)
     model:EnableMouse(true)
     model:EnableMouseWheel(true)
     model.ex_curRotation = 0
@@ -344,18 +344,18 @@ function EXSP_SetupModelInteractions(model)
 end
 
 -- Comment translated to English
-function EXSP_SafeModelInit(model)
+function InfinitySpellInfo_SafeModelInit(model)
     model:ClearModel()
     model:SetPosition(0, 0, 0)
     model:SetRotation(0)
     model.ex_curRotation = 0
     model.ex_zoomLevel = 0
-    EXSP_SetupModelInteractions(model)
+    InfinitySpellInfo_SetupModelInteractions(model)
 end
 
-function EXSP_DoCache()
-    if not EXSP.Database then return end
-    for _, mobs in pairs(EXSP.Database) do
+function InfinitySpellInfo_DoCache()
+    if not InfinitySpellInfo.Database then return end
+    for _, mobs in pairs(InfinitySpellInfo.Database) do
         for _, d in pairs(mobs) do
             for _, id in ipairs(d.spells) do
                 C_Spell.RequestLoadSpellData(id)
@@ -407,12 +407,12 @@ end)
 -- Comment translated to English
 -------------------------------------------------------------------
 
-function EXSP.CreateMainFrame()
-    EXSP.CurrentFont = EXSP_DEFAULT_FONT
+function InfinitySpellInfo.CreateMainFrame()
+    InfinitySpellInfo.CurrentFont = InfinitySpellInfo_DEFAULT_FONT
 
-    local f = CreateFrame("Frame", "EXSP_MainFrame", UIParent, "BackdropTemplate")
+    local f = CreateFrame("Frame", "InfinitySpellInfo_MainFrame", UIParent, "BackdropTemplate")
 -- Comment translated to English
-    tinsert(UISpecialFrames, "EXSP_MainFrame")
+    tinsert(UISpecialFrames, "InfinitySpellInfo_MainFrame")
 -- Comment translated to English
     f:SetSize(1650, 850); f:SetPoint("CENTER"); f:SetFrameStrata("DIALOG"); f:SetClampedToScreen(false)
     f:SetMovable(true); f:EnableMouse(true); f:RegisterForDrag("LeftButton")
@@ -428,14 +428,14 @@ function EXSP.CreateMainFrame()
 
     f.Title = f:CreateFontString(nil, "OVERLAY")
 -- Comment translated to English
-    f.Title:SetFont(EXSP.CurrentFont, 30, "OUTLINE")
+    f.Title:SetFont(InfinitySpellInfo.CurrentFont, 30, "OUTLINE")
     f.Title:SetPoint("TOP", 0, -12); f.Title:SetText(INFINITY_MAIN_TITLE_TEXT)
 
 
 
 -- Comment translated to English
-    if _G.EXMD and InfinityTools.UI then
-        local currentLevel = _G.EXMD.MODULE_DB.mythicLevel or 10
+    if _G.InfinityMythicDamage and InfinityTools.UI then
+        local currentLevel = _G.InfinityMythicDamage.MODULE_DB.mythicLevel or 10
 
 -- Comment translated to English
         local slider = InfinityTools.UI:CreateSlider(
@@ -448,12 +448,12 @@ function EXSP.CreateMainFrame()
             function(v) return string.format("|cffffd100+%d|r", v) end, -- formatter
             function(value) -- onValueChanged callback
                 value = math.floor(value + 0.5)
-                if value ~= _G.EXMD.MODULE_DB.mythicLevel then
-                    _G.EXMD.MODULE_DB.mythicLevel = value
+                if value ~= _G.InfinityMythicDamage.MODULE_DB.mythicLevel then
+                    _G.InfinityMythicDamage.MODULE_DB.mythicLevel = value
 
 -- Comment translated to English
-                    if EXSP.CurrentDungeon and EXSP.CurrentMob then
-                        EXSP_RefreshRightPanel(EXSP.CurrentDungeon, EXSP.CurrentMob)
+                    if InfinitySpellInfo.CurrentDungeon and InfinitySpellInfo.CurrentMob then
+                        InfinitySpellInfo_RefreshRightPanel(InfinitySpellInfo.CurrentDungeon, InfinitySpellInfo.CurrentMob)
                     end
 
 -- Comment translated to English
@@ -466,13 +466,13 @@ function EXSP.CreateMainFrame()
 -- Comment translated to English
         slider:SetPoint("TOPRIGHT", -55, -20)
 
-        EXSP.LevelSlider = slider
+        InfinitySpellInfo.LevelSlider = slider
 
 -- Comment translated to English
         InfinityTools:WatchState("RevMplus.MythicDamage.DatabaseChanged", INFINITY_MODULE_KEY, function()
-            local newLevel = _G.EXMD.MODULE_DB.mythicLevel or 10
-            if EXSP.LevelSlider and EXSP.LevelSlider:GetValue() ~= newLevel then
-                EXSP.LevelSlider:SetValue(newLevel)
+            local newLevel = _G.InfinityMythicDamage.MODULE_DB.mythicLevel or 10
+            if InfinitySpellInfo.LevelSlider and InfinitySpellInfo.LevelSlider:GetValue() ~= newLevel then
+                InfinitySpellInfo.LevelSlider:SetValue(newLevel)
             end
         end)
     end
@@ -488,11 +488,11 @@ function EXSP.CreateMainFrame()
     end
 
 -- Comment translated to English
-    if not EXSP.DungeonList then
+    if not InfinitySpellInfo.DungeonList then
         print("|cffff0000[InfinityTools] SpellGuide: Spell database not loaded. Please ensure RevMplusInfoSpellData module is enabled.|r")
         f:Hide(); return
     end
-    for i, name in ipairs(EXSP.DungeonList) do
+    for i, name in ipairs(InfinitySpellInfo.DungeonList) do
         local tab = CreateFrame("Button", nil, f)
 -- Comment translated to English
         tab:SetSize(60, 60); tab:SetPoint("TOPLEFT", 25 + (i - 1) * 75, -45)
@@ -502,37 +502,37 @@ function EXSP.CreateMainFrame()
         tex:SetTexture(icon or "Interface\\Icons\\INV_Misc_QuestionMark"); tab.icon = tex
         local sub = tab:CreateFontString(nil, "OVERLAY")
 -- Comment translated to English
-        sub:SetFont(EXSP.CurrentFont, 18, "OUTLINE"); sub:SetPoint("TOP", tab, "BOTTOM", 0, -2); sub:SetText(EXSP
-            .DungeonAbbr[name] or EXSP_GetDungeonDisplayName(name)); tab.text = sub
+        sub:SetFont(InfinitySpellInfo.CurrentFont, 18, "OUTLINE"); sub:SetPoint("TOP", tab, "BOTTOM", 0, -2); sub:SetText(InfinitySpellInfo
+            .DungeonAbbr[name] or InfinitySpellInfo_GetDungeonDisplayName(name)); tab.text = sub
         tab:SetScript("OnClick",
             function()
-                for _, t in ipairs(EXSP.Tabs) do t.icon:SetDesaturated(true) end
-                tab.icon:SetDesaturated(false); EXSP_RefreshMobList(name)
+                for _, t in ipairs(InfinitySpellInfo.Tabs) do t.icon:SetDesaturated(true) end
+                tab.icon:SetDesaturated(false); InfinitySpellInfo_RefreshMobList(name)
             end)
-        EXSP.Tabs[i] = tab
+        InfinitySpellInfo.Tabs[i] = tab
     end
 
 -- Comment translated to English
-    local search = CreateFrame("EditBox", "EXSP_Search", f, "InputBoxTemplate")
+    local search = CreateFrame("EditBox", "InfinitySpellInfo_Search", f, "InputBoxTemplate")
 -- Comment translated to English
     search:SetSize(275, 30); search:SetPoint("TOPLEFT", 20, -140); search:SetAutoFocus(false)
     search:SetText("Search mobs..."); search:SetTextInsets(10, 10, 0, 0)
     search:SetScript("OnTextChanged",
-        function(s) if EXSP.CurrentDungeon then EXSP_RefreshMobList(EXSP.CurrentDungeon, s:GetText()) end end)
+        function(s) if InfinitySpellInfo.CurrentDungeon then InfinitySpellInfo_RefreshMobList(InfinitySpellInfo.CurrentDungeon, s:GetText()) end end)
 
     local mobSF = CreateFrame("ScrollFrame", nil, f, "UIPanelScrollFrameTemplate"); mobSF:SetSize(285, 600); mobSF
         :SetPoint("TOPLEFT", 20, -180)
     local mobChild = CreateFrame("Frame", nil, mobSF); mobChild:SetSize(270, 1); mobSF:SetScrollChild(mobChild)
-    EXSP.MobScroll = mobSF
+    InfinitySpellInfo.MobScroll = mobSF
 -- Comment translated to English
-    local model = CreateFrame("PlayerModel", "EXSP_MainModel", f); model:SetSize(555, 410); model:SetPoint("TOPLEFT", 345,
+    local model = CreateFrame("PlayerModel", "InfinitySpellInfo_MainModel", f); model:SetSize(555, 410); model:SetPoint("TOPLEFT", 345,
         -135)
-    EXSP_SafeModelInit(model); EXSP.ModelFrame = model
+    InfinitySpellInfo_SafeModelInit(model); InfinitySpellInfo.ModelFrame = model
 
 -- Comment translated to English
     local infoPanel = CreateFrame("Frame", nil, f); infoPanel:SetSize(750, 200); infoPanel:SetPoint("TOP", model,
         "BOTTOM", 0, -15)
-    EXSP.NPCInfoPanel = infoPanel
+    InfinitySpellInfo.NPCInfoPanel = infoPanel
     infoPanel.Name = infoPanel:CreateFontString(nil, "OVERLAY", "GameFontNormal"); infoPanel.Name:SetPoint("TOP", 0, 0)
     infoPanel.TopLine = infoPanel:CreateTexture(nil, "OVERLAY"); infoPanel.TopLine:SetHeight(2); infoPanel.TopLine
         :SetPoint("BOTTOM", infoPanel.Name, "TOP", 0, 8); infoPanel.TopLine:SetColorTexture(1, 0.82, 0, 0.4)
@@ -548,21 +548,21 @@ function EXSP.CreateMainFrame()
     local spellSF = CreateFrame("ScrollFrame", nil, f, "UIPanelScrollFrameTemplate"); spellSF:SetSize(710, 640); spellSF
         :SetPoint("TOPLEFT", 915, -140)
     local spellChild = CreateFrame("Frame", nil, spellSF); spellChild:SetSize(700, 1); spellSF:SetScrollChild(spellChild)
-    EXSP.SpellScroll = spellSF
+    InfinitySpellInfo.SpellScroll = spellSF
 
-    f:Hide(); EXSP.MainFrame = f
+    f:Hide(); InfinitySpellInfo.MainFrame = f
 
 -- Comment translated to English
-    EXSP.RefreshRightPanel = EXSP_RefreshRightPanel
+    InfinitySpellInfo.RefreshRightPanel = InfinitySpellInfo_RefreshRightPanel
 end
 
 -------------------------------------------------------------------
 -- Comment translated to English
 -------------------------------------------------------------------
 
-function EXSP_RefreshMobList(dungeonName, filter)
-    EXSP.CurrentDungeon = dungeonName
-    local container = EXSP.MobScroll:GetScrollChild()
+function InfinitySpellInfo_RefreshMobList(dungeonName, filter)
+    InfinitySpellInfo.CurrentDungeon = dungeonName
+    local container = InfinitySpellInfo.MobScroll:GetScrollChild()
 
 -- Comment translated to English
     local children = { container:GetChildren() }
@@ -574,7 +574,7 @@ function EXSP_RefreshMobList(dungeonName, filter)
             child:Hide()
         end
     end
-    local mobs = EXSP.Database[dungeonName] or {}
+    local mobs = InfinitySpellInfo.Database[dungeonName] or {}
     local sorted = {}
     for n in pairs(mobs) do table.insert(sorted, n) end
     table.sort(sorted)
@@ -587,7 +587,7 @@ function EXSP_RefreshMobList(dungeonName, filter)
             local b = SPELL_INFO_FACTORY:Acquire("SpellInfo_MobButton", container)
             b.poolType = "SpellInfo_MobButton" -- Comment translated to English
             b:SetPoint("TOPLEFT", 5, -(idx * 70) - 5)
-            if EXSP.CurrentMob == name then
+            if InfinitySpellInfo.CurrentMob == name then
                 b:SetBackdropColor(0.1, 0.4, 0.8, 0.3); b:SetBackdropBorderColor(0, 0.8, 1, 1); b.ex_selBar:Show()
             else
                 b:SetBackdropColor(0.04, 0.04, 0.04, 0.8); b:SetBackdropBorderColor(0.4, 0.4, 0.4, 1); b.ex_selBar:Hide()
@@ -597,41 +597,41 @@ function EXSP_RefreshMobList(dungeonName, filter)
                     0.15, 0.85)
             end
 -- Comment translated to English
-            b.nameText:SetFont(EXSP.CurrentFont, 19, "OUTLINE"); b.nameText:SetText(EXSP_GetMobDisplayName(name, data))
+            b.nameText:SetFont(InfinitySpellInfo.CurrentFont, 19, "OUTLINE"); b.nameText:SetText(InfinitySpellInfo_GetMobDisplayName(name, data))
             b:SetScript("OnClick",
                 function()
-                    EXSP.CurrentMob = name; EXSP_RefreshRightPanel(dungeonName, name); EXSP_RefreshMobList(dungeonName,
+                    InfinitySpellInfo.CurrentMob = name; InfinitySpellInfo_RefreshRightPanel(dungeonName, name); InfinitySpellInfo_RefreshMobList(dungeonName,
                         filter)
                 end)
             if not firstBtn then firstBtn = b end
             idx = idx + 1
         end
     end
-    if firstBtn and not filter and not EXSP.CurrentMob then firstBtn:Click() end
+    if firstBtn and not filter and not InfinitySpellInfo.CurrentMob then firstBtn:Click() end
 end
 
-function EXSP_RefreshRightPanel(dungeonName, mobName)
+function InfinitySpellInfo_RefreshRightPanel(dungeonName, mobName)
 -- Comment translated to English
     if type(dungeonName) == "table" then dungeonName = nil end
 
-    dungeonName = dungeonName or EXSP.CurrentDungeon
-    mobName = mobName or EXSP.CurrentMob
+    dungeonName = dungeonName or InfinitySpellInfo.CurrentDungeon
+    mobName = mobName or InfinitySpellInfo.CurrentMob
 
     if not dungeonName or not mobName then return end
 
-    local dungeonData = EXSP.Database[dungeonName]
+    local dungeonData = InfinitySpellInfo.Database[dungeonName]
     if not dungeonData then return end
 
     local data = dungeonData[mobName]
-    local info = EXSP.NPCInfoPanel
-    local font = EXSP_DEFAULT_FONT
+    local info = InfinitySpellInfo.NPCInfoPanel
+    local font = InfinitySpellInfo_DEFAULT_FONT
     if not data then return end
-    if EXSP.ModelFrame.lastID ~= data.displayID then
-        EXSP.ModelFrame:SetDisplayInfo(data.displayID); EXSP.ModelFrame.lastID = data.displayID
+    if InfinitySpellInfo.ModelFrame.lastID ~= data.displayID then
+        InfinitySpellInfo.ModelFrame:SetDisplayInfo(data.displayID); InfinitySpellInfo.ModelFrame.lastID = data.displayID
     end
 
 -- Comment translated to English
-    info.Name:SetFont(font, 52, "OUTLINE"); info.Name:SetTextColor(1, 0.82, 0); info.Name:SetText(EXSP_GetMobDisplayName(mobName, data))
+    info.Name:SetFont(font, 52, "OUTLINE"); info.Name:SetTextColor(1, 0.82, 0); info.Name:SetText(InfinitySpellInfo_GetMobDisplayName(mobName, data))
 -- Comment translated to English
     local nameWidth = info.Name:GetStringWidth(); info.TopLine:SetWidth(-1); info.BottomLine:SetWidth(nameWidth + 100)
 
@@ -650,7 +650,7 @@ function EXSP_RefreshRightPanel(dungeonName, mobName)
     info.IDFootnote:SetFont(font, 18, "OUTLINE"); info.IDFootnote:SetText("|cff888888NPCID:" ..
         (data.npcID or 0) .. "|r")
 
-    local container = EXSP.SpellScroll:GetScrollChild()
+    local container = InfinitySpellInfo.SpellScroll:GetScrollChild()
     local children = { container:GetChildren() }
     for _, child in ipairs(children) do
         if child.poolType == "SpellInfo_SpellFrame" then
@@ -662,7 +662,7 @@ function EXSP_RefreshRightPanel(dungeonName, mobName)
     local last = nil
     if data.spells then
         for _, id in ipairs(data.spells) do
-            local f = EXSP_UpdateSpellItem(container, id)
+            local f = InfinitySpellInfo_UpdateSpellItem(container, id)
 -- Comment translated to English
             if last then f:SetPoint("TOPLEFT", last, "BOTTOMLEFT", 0, -8) else f:SetPoint("TOPLEFT", 0, 0) end
             last = f
@@ -671,7 +671,7 @@ function EXSP_RefreshRightPanel(dungeonName, mobName)
 end
 
 -- Comment translated to English
-function EXSP_UpdateSpellItem(parent, spellID)
+function InfinitySpellInfo_UpdateSpellItem(parent, spellID)
 -- Comment translated to English
     local f = SPELL_INFO_FACTORY:Acquire("SpellInfo_SpellFrame", parent)
     f.poolType = "SpellInfo_SpellFrame"
@@ -682,7 +682,7 @@ function EXSP_UpdateSpellItem(parent, spellID)
         obj:Hide(); obj:ClearAllPoints()
     end
 
-    local font = EXSP_DEFAULT_FONT
+    local font = InfinitySpellInfo_DEFAULT_FONT
     local function AcquireObject(type)
         for _, obj in ipairs(f.ex_internalPool) do
             if not obj:IsShown() and obj:GetObjectType() == type then
@@ -703,10 +703,10 @@ function EXSP_UpdateSpellItem(parent, spellID)
         local t = AcquireObject("FontString"); t:SetPoint("CENTER"); t:SetText("Caching..."); f:SetHeight(30); return f
     end
 
-    local tags = EXSP_GetTagsForSpell(spellID)
+    local tags = InfinitySpellInfo_GetTagsForSpell(spellID)
     local inlineTags, footerTags = {}, {}
     for _, tk in ipairs(tags) do
-        local d = EXSP.TagDefs[tk]
+        local d = InfinitySpellInfo.TagDefs[tk]
         if d then if d.category >= 2 then table.insert(inlineTags, d) else table.insert(footerTags, d) end end
     end
     table.sort(inlineTags, function(a, b) return a.category < b.category end)
@@ -754,8 +754,8 @@ function EXSP_UpdateSpellItem(parent, spellID)
 -- Comment translated to English
 -- Comment translated to English
             local displayText = line.leftText
-            if _G.EXMD then
-                displayText = _G.EXMD.ProcessDamageText(line.leftText, _G.EXMD.GetCurrentMultiplier())
+            if _G.InfinityMythicDamage then
+                displayText = _G.InfinityMythicDamage.ProcessDamageText(line.leftText, _G.InfinityMythicDamage.GetCurrentMultiplier())
             end
             fs:SetText(displayText); fs:SetPoint("TOPLEFT", lastL, "BOTTOMLEFT", 0, -5)
         end
@@ -787,19 +787,19 @@ end
 -- Comment translated to English
 -------------------------------------------------------------------
 InfinityTools:RegisterEvent("SPELL_TEXT_UPDATE", INFINITY_MODULE_KEY, function()
-    if EXSP.MainFrame and EXSP.MainFrame:IsShown() and EXSP.CurrentMob then
-        EXSP_RefreshRightPanel(EXSP.CurrentDungeon, EXSP.CurrentMob)
+    if InfinitySpellInfo.MainFrame and InfinitySpellInfo.MainFrame:IsShown() and InfinitySpellInfo.CurrentMob then
+        InfinitySpellInfo_RefreshRightPanel(InfinitySpellInfo.CurrentDungeon, InfinitySpellInfo.CurrentMob)
     end
 end)
 
 InfinityTools:RegisterEvent("SPELL_DATA_LOAD_RESULT", INFINITY_MODULE_KEY, function(_, spellID, success)
-    if success and EXSP.MainFrame and EXSP.MainFrame:IsShown() and EXSP.CurrentMob then
+    if success and InfinitySpellInfo.MainFrame and InfinitySpellInfo.MainFrame:IsShown() and InfinitySpellInfo.CurrentMob then
 -- Comment translated to English
-        local data = EXSP.Database[EXSP.CurrentDungeon] and EXSP.Database[EXSP.CurrentDungeon][EXSP.CurrentMob]
+        local data = InfinitySpellInfo.Database[InfinitySpellInfo.CurrentDungeon] and InfinitySpellInfo.Database[InfinitySpellInfo.CurrentDungeon][InfinitySpellInfo.CurrentMob]
         if data and data.spells then
             for _, id in ipairs(data.spells) do
                 if id == spellID then
-                    EXSP_RefreshRightPanel(EXSP.CurrentDungeon, EXSP.CurrentMob)
+                    InfinitySpellInfo_RefreshRightPanel(InfinitySpellInfo.CurrentDungeon, InfinitySpellInfo.CurrentMob)
                     break
                 end
             end
@@ -807,19 +807,18 @@ InfinityTools:RegisterEvent("SPELL_DATA_LOAD_RESULT", INFINITY_MODULE_KEY, funct
     end
 end)
 
-SLASH_EXSP1 = "/EXSP"
-SLASH_EXSP2 = "/EXSPELL"
-SlashCmdList["EXSP"] = function()
-    if not EXSP.MainFrame then
-        EXSP.CreateMainFrame()
+function InfinitySpellInfo:ToggleFrame()
+    if not InfinitySpellInfo.MainFrame then
+        InfinitySpellInfo.CreateMainFrame()
         -- Pré-charger les données de tous les sorts au premier usage
-        EXSP_DoCache()
+        InfinitySpellInfo_DoCache()
     end
-    if not EXSP.MainFrame then return end  -- CreateMainFrame a échoué (ex: SpellData désactivé)
-    if EXSP.MainFrame:IsShown() then
-        EXSP.MainFrame:Hide()
+    if not InfinitySpellInfo.MainFrame then return end  -- CreateMainFrame a échoué (ex: SpellData désactivé)
+    if InfinitySpellInfo.MainFrame:IsShown() then
+        InfinitySpellInfo.MainFrame:Hide()
     else
-        EXSP.MainFrame:Show(); if not EXSP.CurrentDungeon and EXSP.Tabs[1] then EXSP.Tabs[1]:Click() end
+        InfinitySpellInfo.MainFrame:Show()
+        if not InfinitySpellInfo.CurrentDungeon and InfinitySpellInfo.Tabs[1] then InfinitySpellInfo.Tabs[1]:Click() end
     end
 end
 
