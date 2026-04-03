@@ -3,7 +3,8 @@
 -- InfinityBossGUI/SettingsPage/SpellPage.lua
 -- =============================================================
 
-local InfinityTools = _G.InfinityTools
+local InfinityMythicPlus = _G.InfinityMythicPlus or _G.InfinityTools
+local InfinityTools = InfinityMythicPlus
 if not InfinityTools then return end
 
 InfinityBoss.UI.Panel.SpellPage = InfinityBoss.UI.Panel.SpellPage or {}
@@ -345,3 +346,4 @@ end
 function Page:Hide()
     if root then root:Hide() end
 end
+

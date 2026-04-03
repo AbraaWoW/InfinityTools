@@ -329,11 +329,12 @@ function RRTUI:Init()
         local btn = DF:CreateButton(tools_tab,
             function()
                 RRTUI:Hide()
-                if _G.InfinityTools and _G.InfinityTools.OpenConfig then
-                    _G.InfinityTools:OpenConfig()
+                local InfinityMythicPlus = _G.InfinityMythicPlus or _G.InfinityTools
+                if InfinityMythicPlus and InfinityMythicPlus.OpenConfig then
+                    InfinityMythicPlus:OpenConfig()
                 end
             end,
-            220, 30, "Open InfinityTools Settings",
+            220, 30, "Open InfinityMythicPlus Settings",
             nil, nil, nil, nil, nil, false,
             options_button_template, options_text_template)
         btn:SetPoint("CENTER", tools_tab, "CENTER", 0, 0)
@@ -369,16 +370,16 @@ function RRTUI:Init()
 
     local c = RRT.Settings.TabSelectionColor or {0.639, 0.188, 0.788, 1}
     local initHex = BuildThemeText(c[1], c[2], c[3])
-    RRTUI.Title:SetText("|cFF" .. initHex .. "Infinity|r Raid Tools")
-    RRTUI.StatusBar.authorName:SetText("|cFF" .. initHex .. "Infinity Raid Tools|r" .. versionNumber .. " | |cFFFFFFFF" .. authorsString .. "|r")
+    RRTUI.Title:SetText("|cFF" .. initHex .. "Infinity|r Tools")
+    RRTUI.StatusBar.authorName:SetText("|cFF" .. initHex .. "Infinity|r Tools" .. versionNumber .. " | |cFFFFFFFF" .. authorsString .. "|r")
 
     -- Register theme color callback for title, status bar, and tab buttons
     RRT_NS.ThemeColorCallbacks = RRT_NS.ThemeColorCallbacks or {}
     tinsert(RRT_NS.ThemeColorCallbacks, function(r, g, b, a)
         tabThemeR, tabThemeG, tabThemeB = r, g, b
         local hex = BuildThemeText(r, g, b)
-        RRTUI.Title:SetText("|cFF" .. hex .. "Infinity|r Raid Tools")
-        RRTUI.StatusBar.authorName:SetText("|cFF" .. hex .. "Infinity Raid Tools|r" .. versionNumber .. " | |cFFFFFFFF" .. authorsString .. "|r")
+        RRTUI.Title:SetText("|cFF" .. hex .. "Infinity|r Tools")
+        RRTUI.StatusBar.authorName:SetText("|cFF" .. hex .. "Infinity|r Tools" .. versionNumber .. " | |cFFFFFFFF" .. authorsString .. "|r")
         -- Update tab buttons
         if activeTabBtn then TabBtn_Active(activeTabBtn) end
         for _, btn in ipairs(tabContainer.AllButtons) do

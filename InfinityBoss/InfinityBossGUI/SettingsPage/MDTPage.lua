@@ -39,7 +39,8 @@ local selectedPullIndex = 1
 local selectedLeftMode = "dungeon"
 local selectedSettingKey = "general"
 
-local InfinityTools = _G.InfinityTools
+local InfinityMythicPlus = _G.InfinityMythicPlus or _G.InfinityTools
+local InfinityTools = InfinityMythicPlus
 
 local function GetCollectionItems()
     local items = {}
@@ -974,3 +975,4 @@ if InfinityTools and InfinityTools.WatchState then
         Runtime.Refresh(true)
     end)
 end
+

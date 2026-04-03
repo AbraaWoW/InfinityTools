@@ -1,7 +1,8 @@
 -- [[ Auto Buy ]]
 -- { Key = "RevTools.AutoBuy", Name = "Auto Buy", Desc = "Automatically buys preset or custom vendor items such as keystone maps or consumables.", Category = 4 },
 
-local InfinityTools = _G.InfinityTools
+local InfinityMythicPlus = _G.InfinityMythicPlus or _G.InfinityTools
+local InfinityTools = InfinityMythicPlus
 local InfinityDB = _G.InfinityDB
 if not InfinityTools then return end
 local InfinityState = InfinityTools.State
@@ -233,3 +234,4 @@ end)
 
 -- Report module ready
 InfinityTools:ReportReady(INFINITY_MODULE_KEY)
+

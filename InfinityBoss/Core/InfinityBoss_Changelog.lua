@@ -9,7 +9,8 @@
 local InfinityBoss = _G.InfinityBoss
 if not InfinityBoss then return end
 
-local InfinityTools = _G.InfinityTools
+local InfinityMythicPlus = _G.InfinityMythicPlus or _G.InfinityTools
+local InfinityTools = InfinityMythicPlus
 
 local changelogFrame
 
@@ -365,3 +366,4 @@ function InfinityBoss:HandleChangelogPopupOnUIOpen()
 end
 
 MarkSeenVersion()
+

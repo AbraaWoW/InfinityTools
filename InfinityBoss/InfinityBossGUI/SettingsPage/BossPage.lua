@@ -1,6 +1,7 @@
 ---@diagnostic disable: undefined-global, undefined-field, need-check-nil
 
-local InfinityTools = _G.InfinityTools
+local InfinityMythicPlus = _G.InfinityMythicPlus or _G.InfinityTools
+local InfinityTools = InfinityMythicPlus
 if not InfinityTools then return end
 
 InfinityBoss.UI.Panel.BossPage = InfinityBoss.UI.Panel.BossPage or {}
@@ -4316,3 +4317,4 @@ if not Page._eventsRegistered then
 
     Page._eventsRegistered = true
 end
+

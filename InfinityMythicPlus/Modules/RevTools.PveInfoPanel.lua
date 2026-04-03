@@ -3,7 +3,8 @@
 -- { Key = "RevTools.PveInfoPanel", Name = "PVE Info Panel", Desc = "Displays an extra info panel attached to the side of the dungeon finder (PVEFrame).", Category = 4 },
 -- =============================================================
 
-local InfinityTools = _G.InfinityTools
+local InfinityMythicPlus = _G.InfinityMythicPlus or _G.InfinityTools
+local InfinityTools = InfinityMythicPlus
 local InfinityDB = _G.InfinityDB
 if not InfinityTools then return end
 local L = (InfinityTools and InfinityTools.L) or setmetatable({}, { __index = function(_, key) return key end })
@@ -69,7 +70,7 @@ local function CreateHeaderIcon(parent, texture, xOfs, labelText, clickFunc)
 
     local icon = btn:CreateTexture(nil, "OVERLAY")
     icon:SetAllPoints()
-    icon:SetTexture("Interface\AddOns\InfinityCore\Textures\" .. texture)
+    icon:SetTexture("Interface\\AddOns\\InfinityCore\\Textures\\" .. texture)
     icon:SetVertexColor(0.85, 0.85, 0.85)
     btn.icon = icon
     local label = btn:CreateFontString(nil, "OVERLAY")
@@ -427,3 +428,4 @@ end)
 
 C_Timer.After(1, function() if MODULE_DB.enabled then CreateMainFrame() end end)
 InfinityTools:ReportReady(INFINITY_MODULE_KEY)
+

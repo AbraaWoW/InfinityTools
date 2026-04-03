@@ -2,7 +2,8 @@
 -- =============================================================
 -- =============================================================
 
-local InfinityTools = _G.InfinityTools
+local InfinityMythicPlus = _G.InfinityMythicPlus or _G.InfinityTools
+local InfinityTools = InfinityMythicPlus
 if not InfinityTools then
     return
 end
@@ -695,3 +696,4 @@ InfinityTools:RegisterEvent("ENCOUNTER_END", "InfinityBoss_Init_EncEnd", functio
         InfinityBoss.Timeline.Scheduler:EndBoss()
     end
 end)
+

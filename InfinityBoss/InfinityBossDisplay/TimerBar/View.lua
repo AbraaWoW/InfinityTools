@@ -4,7 +4,8 @@
 --
 -- =============================================================
 
-local InfinityTools = _G.InfinityTools
+local InfinityMythicPlus = _G.InfinityMythicPlus or _G.InfinityTools
+local InfinityTools = InfinityMythicPlus
 if not InfinityTools then return end
 
 local TimerBar      = InfinityBoss.UI.TimerBar
@@ -881,3 +882,4 @@ function TimerBar:OnRuntimeTick(elapsed, now)
 end
 
 TimerBar._active = activeBars
+

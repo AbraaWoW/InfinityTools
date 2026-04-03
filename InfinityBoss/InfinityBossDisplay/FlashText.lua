@@ -6,7 +6,8 @@
 --   InfinityBoss.UI.FlashText:RefreshVisuals()
 -- =============================================================
 
-local InfinityTools = _G.InfinityTools
+local InfinityMythicPlus = _G.InfinityMythicPlus or _G.InfinityTools
+local InfinityTools = InfinityMythicPlus
 if not InfinityTools then return end
 
 InfinityBoss.UI.FlashText = InfinityBoss.UI.FlashText or {}
@@ -317,3 +318,4 @@ InfinityTools:RegisterEvent("PLAYER_ENTERING_WORLD", MODULE_KEY .. "_init", func
         RefreshStyle()
     end)
 end)
+

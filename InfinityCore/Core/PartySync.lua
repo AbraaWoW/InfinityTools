@@ -7,7 +7,8 @@
 -- 4. Passively support external data sources such as BigWigs / Details(OpenRaid), writing everything into the same cache.
 -- =============================================================
 
-local InfinityTools = _G.InfinityTools
+local InfinityMythicPlus = _G.InfinityMythicPlus or _G.InfinityTools
+local InfinityTools = InfinityMythicPlus
 if not InfinityTools then return end
 
 local PartySync = {}
@@ -773,3 +774,4 @@ InfinityTools:RegisterEvent("CHALLENGE_MODE_MAPS_UPDATE", "PartySync", OnEvent)
 _G.C_Timer.NewTicker(GC_INTERVAL, CollectGarbage)
 TryHookExternalLibs()
 RefreshOwnData()
+

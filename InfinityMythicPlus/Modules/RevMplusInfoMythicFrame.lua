@@ -1,7 +1,8 @@
 -- Comment translated to English
 -- Comment translated to English
 
-local InfinityTools = _G.InfinityTools
+local InfinityMythicPlus = _G.InfinityMythicPlus or _G.InfinityTools
+local InfinityTools = InfinityMythicPlus
 local InfinityDB = _G.InfinityDB
 if not InfinityTools then return end
 local InfinityState = InfinityTools.State
@@ -1024,3 +1025,4 @@ end
 
 -- Comment translated to English
 InfinityTools:ReportReady(INFINITY_MODULE_KEY)
+

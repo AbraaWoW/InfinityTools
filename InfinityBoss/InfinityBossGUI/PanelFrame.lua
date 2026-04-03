@@ -129,17 +129,6 @@ local function RefreshEditModeButtonLabel()
     mainFrame._editModeBtn:SetText(enabled and "Disable Edit Mode" or "Enable Edit Mode")
 end
 
-local function TryHandleChangelogPopupOnUIOpen()
-    if not (C_Timer and C_Timer.After) then
-        return
-    end
-    C_Timer.After(0.05, function()
-        if mainFrame and mainFrame:IsShown() and InfinityBoss and InfinityBoss.HandleChangelogPopupOnUIOpen then
-            InfinityBoss:HandleChangelogPopupOnUIOpen()
-        end
-    end)
-end
-
 local function ShouldUseLeftNav(tabKey)
     return tabKey == "boss" or tabKey == "globalsettings"
 end
@@ -672,7 +661,6 @@ function Panel:Toggle()
             BossPage:OnPanelShown()
         end
         RefreshContent()
-        TryHandleChangelogPopupOnUIOpen()
     end
 end
 
@@ -686,7 +674,6 @@ function Panel:Show()
         BossPage:OnPanelShown()
     end
     RefreshContent()
-    TryHandleChangelogPopupOnUIOpen()
 end
 
 function Panel:Hide()
@@ -707,4 +694,3 @@ function Panel:SetTab(tabKey)
         RefreshContent()
     end
 end
-

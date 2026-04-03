@@ -1,6 +1,7 @@
 ---@diagnostic disable: undefined-global, undefined-field, need-check-nil
 
-local InfinityTools = _G.InfinityTools
+local InfinityMythicPlus = _G.InfinityMythicPlus or _G.InfinityTools
+local InfinityTools = InfinityMythicPlus
 if not InfinityTools then return end
 
 InfinityBoss.UI.Panel.GeneralOverviewPage = InfinityBoss.UI.Panel.GeneralOverviewPage or {}
@@ -384,3 +385,4 @@ function Page:Render(contentFrame)
         Grid:Render(sc, ScaleLayout(LAYOUT, cols), rootDB, MODULE_KEY)
     end)
 end
+

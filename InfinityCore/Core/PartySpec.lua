@@ -5,7 +5,8 @@
 -- 2. Stop depending on LibSpecialization to avoid addon communication limits in instances
 -- =============================================================
 
-local InfinityTools = _G.InfinityTools
+local InfinityMythicPlus = _G.InfinityMythicPlus or _G.InfinityTools
+local InfinityTools = InfinityMythicPlus
 if not InfinityTools then return end
 
 local PartySync = InfinityTools.PartySync
@@ -29,3 +30,4 @@ function PartySpec:Debug()
     end
     print("|cffff0000[InfinityTools PartySpec]|r PartySync not initialized.")
 end
+

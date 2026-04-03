@@ -12,7 +12,8 @@
 --      (covers ~65% of spells that apply a visible aura).
 -- =============================================================
 
-local InfinityTools = _G.InfinityTools
+local InfinityMythicPlus = _G.InfinityMythicPlus or _G.InfinityTools
+local InfinityTools = InfinityMythicPlus
 if not InfinityTools then return end
 local L = (InfinityTools and InfinityTools.L) or
     setmetatable({}, { __index = function(_, key) return key end })
@@ -1093,3 +1094,4 @@ InfinityTools:RegisterEditModeCallback(INFINITY_MODULE_KEY, function(enabled)
 end)
 
 InfinityTools:ReportReady(INFINITY_MODULE_KEY)
+

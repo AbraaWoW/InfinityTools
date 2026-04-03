@@ -2,7 +2,8 @@
 -- InfinityGrid.lua - visual grid layout engine (v4.2 enhanced)
 -- =========================================================
 
-local InfinityTools = _G.InfinityTools
+local InfinityMythicPlus = _G.InfinityMythicPlus or _G.InfinityTools
+local InfinityTools = InfinityMythicPlus
 if not InfinityTools then
     error("[InfinityGrid] Error: InfinityTools.lua must load before InfinityGrid.lua!")
 end
@@ -1651,3 +1652,4 @@ function InfinityTools:ToggleDevMode()
     end
     self.Grid:ToggleLiveEdit(self.UI.ActivePageFrame)
 end
+

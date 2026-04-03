@@ -7,7 +7,8 @@ if ondev then
     return
 end
 
-local InfinityTools = _G.InfinityTools
+local InfinityMythicPlus = _G.InfinityMythicPlus or _G.InfinityTools
+local InfinityTools = InfinityMythicPlus
 local InfinityDB = _G.InfinityDB
 if not InfinityTools then return end
 
@@ -1211,3 +1212,4 @@ end)
 -- Report module ready
 -- =============================================================
 InfinityTools:ReportReady(INFINITY_MODULE_KEY)
+

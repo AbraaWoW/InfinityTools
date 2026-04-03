@@ -3,7 +3,8 @@
 -- { Key = "RevMplus.InterruptTracker", Name = "Interrupt Tracker (Bars)", Desc = "Tracks teammate interrupt cooldowns in real time (bar style).", Category = 2 },
 -- =============================================================
 
-local InfinityTools = _G.InfinityTools
+local InfinityMythicPlus = _G.InfinityMythicPlus or _G.InfinityTools
+local InfinityTools = InfinityMythicPlus
 if not InfinityTools then return end
 local L = (InfinityTools and InfinityTools.L) or setmetatable({}, { __index = function(_, key) return key end })
 
@@ -1945,3 +1946,4 @@ _G.SlashCmdList["EXTEST"] = function()
 end
 
 InfinityTools:ReportReady(INFINITY_MODULE_KEY)
+

@@ -6,7 +6,8 @@
 -- 3. Expose an API to open the changelog window manually
 -- =============================================================
 
-local InfinityTools = _G.InfinityTools
+local InfinityMythicPlus = _G.InfinityMythicPlus or _G.InfinityTools
+local InfinityTools = InfinityMythicPlus
 if not InfinityTools then return end
 
 local MODULE_DB = _G.InfinityToolsDB
@@ -375,3 +376,4 @@ end
 
 -- Initialization: save the current version to WTF as soon as we enter the game
 MarkSeenVersion()
+

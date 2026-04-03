@@ -3,7 +3,8 @@
 -- { Key = "RevTools.PveKeystoneInfo", Name = "DaMi Party Keystones", Desc = "Displays player and party keystone info on the PVEFrame.", Category = 4 },
 -- =============================================================
 
-local InfinityTools = _G.InfinityTools
+local InfinityMythicPlus = _G.InfinityMythicPlus or _G.InfinityTools
+local InfinityTools = InfinityMythicPlus
 local InfinityDB = _G.InfinityDB
 if not InfinityTools then return end
 local L = (InfinityTools and InfinityTools.L) or setmetatable({}, { __index = function(_, key) return key end })
@@ -624,3 +625,4 @@ _G.C_Timer.After(1, function()
 end)
 
 InfinityTools:ReportReady(INFINITY_MODULE_KEY)
+

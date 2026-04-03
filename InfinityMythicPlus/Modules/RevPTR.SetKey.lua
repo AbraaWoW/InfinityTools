@@ -1,7 +1,8 @@
 -- [[ BETA Keystone Setter ]]
 -- { Key = "RevPTR.SetKey", Name = "BETA Keystone Setter", Desc = "Quickly set keystone level/map and display your current keystone.", Category = 3 },
 
-local InfinityTools = _G.InfinityTools
+local InfinityMythicPlus = _G.InfinityMythicPlus or _G.InfinityTools
+local InfinityTools = InfinityMythicPlus
 if not InfinityTools then return end
 local L = (InfinityTools and InfinityTools.L) or setmetatable({}, { __index = function(_, key) return key end })
 
@@ -455,3 +456,4 @@ _G.C_Timer.After(1.5, function()
 end)
 
 InfinityTools:ReportReady(INFINITY_MODULE_KEY)
+

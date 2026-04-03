@@ -1,7 +1,8 @@
 -- [[ Mythic+ Icon Overlay ]]
 -- { Key = "RevMplusInfo.MythicIcon", Name = "Mythic+ Icon Overlay", Desc = "Shows dungeon short names, best level, and score on challenge panel icons.", Category = 2 },
 
-local InfinityTools = _G.InfinityTools
+local InfinityMythicPlus = _G.InfinityMythicPlus or _G.InfinityTools
+local InfinityTools = InfinityMythicPlus
 if not InfinityTools then return end
 local InfinityState = InfinityTools.State
 local L = (InfinityTools and InfinityTools.L) or setmetatable({}, { __index = function(_, key) return key end })
@@ -566,3 +567,4 @@ end
 
 -- Report module ready
 InfinityTools:ReportReady(INFINITY_MODULE_KEY)
+

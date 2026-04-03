@@ -1,7 +1,8 @@
 -- [[ Mythic+ Damage Calculator ]]
 -- { Key = "RevMplus.MythicDamage", Name = "Mythic+ Damage Calculator", Desc = "Calculates actual spell damage from key level scaling.", Category = 2 },
 
-local InfinityTools = _G.InfinityTools
+local InfinityMythicPlus = _G.InfinityMythicPlus or _G.InfinityTools
+local InfinityTools = InfinityMythicPlus
 local InfinityDB = _G.InfinityDB
 if not InfinityTools then return end
 local L = (InfinityTools and InfinityTools.L) or setmetatable({}, { __index = function(_, key) return key end })
@@ -164,3 +165,4 @@ end)
 
 -- Report module ready
 InfinityTools:ReportReady(INFINITY_MODULE_KEY)
+

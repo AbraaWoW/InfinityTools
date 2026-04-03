@@ -3,7 +3,8 @@
 -- { Key = "RevClass.BrewmasterStagger", Name = "Brewmaster Stagger Monitor", Desc = "Shows Brewmaster Monk stagger as a configurable percentage bar.", Category = 4 },
 -- =============================================================
 
-local InfinityTools = _G.InfinityTools
+local InfinityMythicPlus = _G.InfinityMythicPlus or _G.InfinityTools
+local InfinityTools = InfinityMythicPlus
 local InfinityDB = _G.InfinityDB
 if not InfinityTools then return end
 
@@ -588,3 +589,4 @@ end)
 C_Timer.After(2, RefreshBar)
 
 InfinityTools:ReportReady(MODULE_KEY)
+

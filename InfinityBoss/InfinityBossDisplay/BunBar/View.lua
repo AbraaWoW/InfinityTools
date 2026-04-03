@@ -3,7 +3,8 @@
 -- InfinityBossDisplay/BunBar/View.lua
 -- =============================================================
 
-local InfinityTools = _G.InfinityTools
+local InfinityMythicPlus = _G.InfinityMythicPlus or _G.InfinityTools
+local InfinityTools = InfinityMythicPlus
 if not InfinityTools then return end
 local BunBar                = InfinityBoss.UI.BunBar
 local LSM                   = LibStub and LibStub("LibSharedMedia-3.0", true)
@@ -1239,3 +1240,4 @@ InfinityTools:RegisterEvent("PLAYER_ENTERING_WORLD", MODULE_KEY .. "_init", func
 end)
 
 BunBar._active = activeNodes
+

@@ -1,6 +1,6 @@
 ## Interface: 120000, 120001
 ## Title: |cFFBB66FFInfinity Tools|r
-## Version: 2.1.8
+## Version: 1.0.0
 ## IconTexture: Interface\AddOns\InfinityTools\Media\logo.png
 ## Author: Abraa
 ## DefaultState: Enable

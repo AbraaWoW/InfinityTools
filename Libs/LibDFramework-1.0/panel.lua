@@ -5012,12 +5012,12 @@ end
 function detailsFramework:BuildStatusbarAuthorInfo(f, addonBy, authorsNameString)
 	local authorName = detailsFramework:CreateLabel(f, "" .. (addonBy or "An addon by ") .. "|cFFFFFFFF" .. (authorsNameString or "Terciob") .. "|r")
 	authorName.textcolor = "silver"
-	local discordLabel = detailsFramework:CreateLabel(f, "Discord: ")
+	local discordLabel = detailsFramework:CreateLabel(f, "Twitch: ")
 	discordLabel.textcolor = "silver"
 
 	local options_dropdown_template = detailsFramework:GetTemplate("dropdown", "OPTIONS_DROPDOWN_TEMPLATE")
 	local discordTextEntry = detailsFramework:CreateTextEntry(f, function()end, 200, 18, "DiscordTextBox", _, _, options_dropdown_template)
-	discordTextEntry:SetText("https://discord.gg/AGSzAZX")
+	discordTextEntry:SetText("https://www.twitch.tv/abraa_")
 	discordTextEntry:SetFrameLevel(5000)
 
 	authorName:SetPoint("left", f, "left", 2, 0)

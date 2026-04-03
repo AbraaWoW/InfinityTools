@@ -2,7 +2,8 @@
 -- [[ Movement CD Alert (No Move Skill Alert) ]]
 -- =============================================================
 
-local InfinityTools = _G.InfinityTools
+local InfinityMythicPlus = _G.InfinityMythicPlus or _G.InfinityTools
+local InfinityTools = InfinityMythicPlus
 local InfinityDB = _G.InfinityDB
 if not InfinityTools then return end
 local L = (InfinityTools and InfinityTools.L) or setmetatable({}, { __index = function(_, key) return key end })
@@ -654,3 +655,4 @@ InfinityTools:RegisterHUD(INFINITY_MODULE_KEY, alertFrame)
 -- RegisterHUD internally forces EnableMouse(true); disable immediately after registration to restore click-through
 SetAlertFrameMouseInteractive(false)
 InfinityTools:ReportReady(INFINITY_MODULE_KEY)
+

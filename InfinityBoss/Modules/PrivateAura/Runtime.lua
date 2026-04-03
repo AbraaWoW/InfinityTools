@@ -3,7 +3,8 @@
 InfinityBoss.PrivateAura = InfinityBoss.PrivateAura or {}
 local PrivateAura = InfinityBoss.PrivateAura
 
-local InfinityTools = _G.InfinityTools
+local InfinityMythicPlus = _G.InfinityMythicPlus or _G.InfinityTools
+local InfinityTools = InfinityMythicPlus
 if not InfinityTools then
     return
 end
@@ -225,3 +226,4 @@ end)
 InfinityTools:WatchState(MODULE_KEY .. ".DatabaseChanged", "InfinityBoss_PrivateAura_ConfigChanged", function()
     PrivateAura:RefreshActiveRegistrations()
 end)
+

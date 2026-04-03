@@ -3,7 +3,8 @@
 -- { Key = "RevClass.SpellEffectAlpha", Name = "Spell Effect Alpha", Desc = "Automatically adjusts the opacity of spell proc overlays based on the current spec.", Category = 5 },
 -- =============================================================
 
-local InfinityTools = _G.InfinityTools
+local InfinityMythicPlus = _G.InfinityMythicPlus or _G.InfinityTools
+local InfinityTools = InfinityMythicPlus
 if not InfinityTools then return end
 local L = (InfinityTools and InfinityTools.L) or setmetatable({}, { __index = function(_, key) return key end })
 local InfinityState = InfinityTools.State
@@ -952,3 +953,4 @@ function REGISTER_LAYOUT()
 end
 
 REGISTER_LAYOUT()
+

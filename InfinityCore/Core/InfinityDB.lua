@@ -1,7 +1,8 @@
 -- InfinityDB.lua - global shared database
 -- Provides static data such as classes and specializations, reducing API calls and serving all modules.
 
-local InfinityTools = _G.InfinityTools
+local InfinityMythicPlus = _G.InfinityMythicPlus or _G.InfinityTools
+local InfinityTools = InfinityMythicPlus
 if not InfinityTools then return end
 
 -- Create the global database table
@@ -589,3 +590,4 @@ end
 -- Export to InfinityTools
 -------------------------------------------------------
 InfinityTools.DB_Static = InfinityDB
+

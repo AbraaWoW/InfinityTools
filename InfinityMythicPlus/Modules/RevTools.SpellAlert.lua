@@ -22,7 +22,8 @@ if ondev then
     return
 end
 
-local InfinityTools = _G.InfinityTools
+local InfinityMythicPlus = _G.InfinityMythicPlus or _G.InfinityTools
+local InfinityTools = InfinityMythicPlus
 local InfinityDB = _G.InfinityDB
 
 local LSM = LibStub("LibSharedMedia-3.0")
@@ -1577,3 +1578,4 @@ InfinityTools:ReportReady(INFINITY_MODULE_KEY)
 
 
 print("|cff00ff00[SpellAlert] Module loaded.|r")
+

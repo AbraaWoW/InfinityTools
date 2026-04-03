@@ -3,7 +3,8 @@
 -- InfinityBossGUI/SettingsPage/CountdownPage.lua
 -- =============================================================
 
-local InfinityTools = _G.InfinityTools
+local InfinityMythicPlus = _G.InfinityMythicPlus or _G.InfinityTools
+local InfinityTools = InfinityMythicPlus
 if not InfinityTools then return end
 
 InfinityBoss.UI.Panel.CountdownPage = InfinityBoss.UI.Panel.CountdownPage or {}
@@ -307,3 +308,4 @@ function Page:Render(contentFrame)
         Grid:Render(sc, ScaleLayout(renderLayout, cols), currentDB, MODULE_KEY)
     end)
 end
+

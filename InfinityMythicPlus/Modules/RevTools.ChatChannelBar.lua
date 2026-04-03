@@ -3,7 +3,8 @@
 -- { Key = "RevTools.ChatChannelBar", Name = "Chat Channel Bar", Desc = "A toolbar for quickly switching chat channels.", Category = 1 },
 -- =============================================================
 
-local InfinityTools = _G.InfinityTools
+local InfinityMythicPlus = _G.InfinityMythicPlus or _G.InfinityTools
+local InfinityTools = InfinityMythicPlus
 if not InfinityTools then return end
 local L = (InfinityTools and InfinityTools.L) or setmetatable({}, { __index = function(_, key) return key end })
 
@@ -633,3 +634,4 @@ _G.SlashCmdList["EXCHATCHANNEL"] = function(msg)
 end
 
 InfinityTools:ReportReady(INFINITY_MODULE_KEY)
+

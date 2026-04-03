@@ -3,7 +3,8 @@
 -- InfinityBossGUI/SettingsPage/FlashTextPage.lua
 -- =============================================================
 
-local InfinityTools = _G.InfinityTools
+local InfinityMythicPlus = _G.InfinityMythicPlus or _G.InfinityTools
+local InfinityTools = InfinityMythicPlus
 if not InfinityTools then return end
 
 InfinityBoss.UI.Panel.FlashTextPage = InfinityBoss.UI.Panel.FlashTextPage or {}
@@ -188,3 +189,4 @@ function Page:Render(contentFrame)
         Grid:Render(sc, ScaleLayout(LAYOUT, cols), gridDB, MODULE_KEY)
     end)
 end
+

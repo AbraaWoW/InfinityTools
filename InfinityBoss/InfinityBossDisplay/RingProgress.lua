@@ -3,7 +3,8 @@
 -- InfinityBossDisplay/RingProgress.lua
 -- =============================================================
 
-local InfinityTools = _G.InfinityTools
+local InfinityMythicPlus = _G.InfinityMythicPlus or _G.InfinityTools
+local InfinityTools = InfinityMythicPlus
 if not InfinityTools then return end
 
 InfinityBoss.UI.RingProgress = InfinityBoss.UI.RingProgress or {}
@@ -327,3 +328,4 @@ InfinityTools:RegisterEvent("PLAYER_ENTERING_WORLD", MODULE_KEY .. "_init", func
         Ring:RefreshVisuals()
     end)
 end)
+

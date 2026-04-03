@@ -2,7 +2,8 @@
 -- Comment translated to English
 -- =========================================================
 
-local InfinityTools = _G.InfinityTools
+local InfinityMythicPlus = _G.InfinityMythicPlus or _G.InfinityTools
+local InfinityTools = InfinityMythicPlus -- Backward-compatible local alias while modules are migrated.
 if not InfinityTools then return end
 
 local L = InfinityTools.L
@@ -11,6 +12,7 @@ local L = InfinityTools.L
 local RevUI = InfinityTools.UI or {}
 InfinityTools.UI = RevUI
 _G.InfinityToolsUI = RevUI
+_G.InfinityMythicPlusUI = RevUI
 
 
 -- =========================================================
@@ -85,7 +87,7 @@ end
 -- =========================================================
 function RevUI:CreateMainFrame()
 -- Comment translated to English
-    local f = CreateFrame("Frame", "InfinityToolsMainFrame", UIParent, "BackdropTemplate")
+    local f = CreateFrame("Frame", "InfinityMythicPlusMainFrame", UIParent, "BackdropTemplate")
     f:SetSize(1200, 720)
     f:SetPoint("CENTER")
     f:SetFrameStrata("DIALOG")
@@ -106,7 +108,7 @@ function RevUI:CreateMainFrame()
 -- Comment translated to English
     local title = f:CreateFontString(nil, "OVERLAY", "GameFontNormalLarge")
     title:SetPoint("TOPLEFT", 20, -15)
-    title:SetText("|cFFBB66FFInfinity|rTools " .. L["Settings"])
+    title:SetText("|cFFBB66FFInfinity|rMythicPlus " .. L["Settings"])
     f.Title = title
 
 -- Comment translated to English
@@ -133,7 +135,8 @@ function RevUI:CreateMainFrame()
 -- Comment translated to English
 -- Comment translated to English
 -- Comment translated to English
-    tinsert(UISpecialFrames, "InfinityToolsMainFrame")
+    _G.InfinityToolsMainFrame = f -- Backward-compatible alias.
+    tinsert(UISpecialFrames, "InfinityMythicPlusMainFrame")
     RevUI.MainFrame = f
 
 -- Comment translated to English
@@ -741,7 +744,7 @@ function RevUI:ShowHomePage()
     local logoTitle = hero:CreateFontString(nil, "OVERLAY")
     logoTitle:SetFont(FONT, 30, "OUTLINE")
     logoTitle:SetPoint("TOPLEFT", 20, -18)
-    logoTitle:SetText(PURPLE .. "InfinityTools|r")
+    logoTitle:SetText(PURPLE .. "InfinityMythicPlus|r")
 
     local subTitle = hero:CreateFontString(nil, "OVERLAY")
     subTitle:SetFont(FONT, 13, "")
@@ -815,12 +818,12 @@ function RevUI:ShowHomePage()
     local webLabel = infoPanel:CreateFontString(nil, "OVERLAY")
     webLabel:SetFont(FONT, 12, "OUTLINE")
     webLabel:SetPoint("TOPLEFT", authorValue, "BOTTOMLEFT", 0, -20)
-    webLabel:SetText(GREY .. L["Discord"] .. "|r")
+    webLabel:SetText(GREY .. L["Twitch"] .. "|r")
 
-    local siteBox = RevUI:CreateEditBox(infoPanel, "https://discord.gg/5bhTbtQtCf", INNER_W, 28, nil, {})
+    local siteBox = RevUI:CreateEditBox(infoPanel, "https://www.twitch.tv/abraa_", INNER_W, 28, nil, {})
     siteBox:SetPoint("TOPLEFT", webLabel, "BOTTOMLEFT", 0, -8)
     do
-        local fixedText = "https://discord.gg/5bhTbtQtCf"
+        local fixedText = "https://www.twitch.tv/abraa_"
         siteBox:SetAutoFocus(false)
         siteBox:SetText(fixedText)
         siteBox:HookScript("OnEditFocusGained", function(self) self:HighlightText() end)
@@ -852,10 +855,10 @@ function RevUI:ShowHomePage()
     curseLabel:SetText("AbraaWoW: " .. CYAN .. "Curseforge|r")
     curseLabel:SetTextColor(0.82, 0.82, 0.88, 1)
 
-    local curseBox = RevUI:CreateEditBox(infoPanel, "https://www.curseforge.com/wow/addons/reversionraidtools", INNER_W, 28, nil, {})
+    local curseBox = RevUI:CreateEditBox(infoPanel, "https://www.curseforge.com/wow/addons/infinitytools", INNER_W, 28, nil, {})
     curseBox:SetPoint("TOPLEFT", curseLabel, "BOTTOMLEFT", 0, -8)
     do
-        local fixedText = "https://www.curseforge.com/wow/addons/reversionraidtools"
+        local fixedText = "https://www.curseforge.com/wow/addons/infinitytools"
         curseBox:SetAutoFocus(false)
         curseBox:SetText(fixedText)
         curseBox:HookScript("OnEditFocusGained", function(self) self:HighlightText() end)
@@ -981,8 +984,7 @@ function RevUI:ShowHomePage()
     footerText:SetWidth(W - 36)
     footerText:SetJustifyH("CENTER")
     footerText:SetWordWrap(true)
-    footerText:SetText(GREY ..
-        L["Author: Abraa  |  Discord: https://discord.gg/5bhTbtQtCf  |  Curseforge: reversionraidtools"] .. "|r")
+    footerText:SetText(GREY .. L["Author: Abraa"] .. "|r")
     footerText:SetTextColor(0.55, 0.55, 0.62, 1)
 
     page:SetHeight(PAGE_H)

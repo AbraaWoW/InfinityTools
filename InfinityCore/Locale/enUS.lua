@@ -118,7 +118,8 @@ L["Tips"] = true
 L["Use the Modules page to enable/disable modules. Changes take effect after /reload."] = true
 L["Inside a module settings page, use the Grid panel to adjust styles, position, and toggles."] = true
 L["Global edit mode: /ex edmode (drag HUD elements to reposition)."] = true
-L["Author: Abraa  |  Discord: https://discord.gg/5bhTbtQtCf  |  Curseforge: reversionraidtools"] = true
+L["Author: Abraa"] = true
+L["Twitch"] = true
 
 -- InfinityToolsUI.lua — profiles page
 L["Export Profile"] = true

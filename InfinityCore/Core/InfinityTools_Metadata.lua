@@ -2,7 +2,7 @@
 -- This file is auto-generated or modified by the packaging script to control the version number.
 -- Do not manually commit version number changes in this file via Git unless you are testing.
 
-local addonVersion = (C_AddOns and C_AddOns.GetAddOnMetadata and C_AddOns.GetAddOnMetadata("InfinityTools", "Version")) or "DEV-Build"
+local addonVersion = (C_AddOns and C_AddOns.GetAddOnMetadata and C_AddOns.GetAddOnMetadata("InfinityTools", "Version")) or "1.0.0"
 local displayVersion = addonVersion:match("^v") and addonVersion or ("v" .. addonVersion)
 
 InfinityTools_MetaData = {

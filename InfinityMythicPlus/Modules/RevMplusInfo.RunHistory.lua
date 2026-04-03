@@ -1,7 +1,8 @@
 -- [[ Mythic+ Season Run History ]]
 -- { Key = "RevMplusInfo.RunHistory", Name = "Mythic+ Season Run History", Desc = "View this season's completed Mythic+ run table.", Category = 2 },
 
-local InfinityTools = _G.InfinityTools
+local InfinityMythicPlus = _G.InfinityMythicPlus or _G.InfinityTools
+local InfinityTools = InfinityMythicPlus
 if not InfinityTools then return end
 local InfinityState = InfinityTools.State
 local L = (InfinityTools and InfinityTools.L) or setmetatable({}, { __index = function(_, key) return key end })
@@ -394,3 +395,4 @@ end
 
 -- Report module ready
 InfinityTools:ReportReady(INFINITY_MODULE_KEY)
+

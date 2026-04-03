@@ -12,7 +12,8 @@ local frame
 local mobRows = {}
 local MIN_OVERLAY_W = 360
 local MIN_OVERLAY_H = 380
-local InfinityTools = _G.InfinityTools
+local InfinityMythicPlus = _G.InfinityMythicPlus or _G.InfinityTools
+local InfinityTools = InfinityMythicPlus
 
 local function SavePosition(self)
     local db = MDTMod.EnsureDB()
@@ -286,3 +287,4 @@ Runtime.RegisterListener("MDTOverlay", function(state)
     Overlay.Refresh(state)
 end)
 Overlay.Refresh(Runtime.GetState())
+

@@ -1,7 +1,8 @@
 -- [[ Spell Encyclopedia Database (Spell Data) ]]
 -- { Key = "RevMplusInfoSpellData", Name = "Spell Encyclopedia Database", Desc = "Stores all spell mechanic data. Used as the backend data source for SpellInfo.", Category = 2 },
 
-local InfinityTools = _G.InfinityTools
+local InfinityMythicPlus = _G.InfinityMythicPlus or _G.InfinityTools
+local InfinityTools = InfinityMythicPlus
 local InfinityDB = _G.InfinityDB
 if not InfinityTools then return end
 local InfinityState = InfinityTools.State
@@ -297,3 +298,4 @@ EXSP.Database = {
 EXSP.DungeonList = { "Seat", "Eco", "Nexus", "Mold", "Myza", "Sky", "Vortex", "MGT" }
 
 InfinityTools:ReportReady(INFINITY_MODULE_KEY)
+

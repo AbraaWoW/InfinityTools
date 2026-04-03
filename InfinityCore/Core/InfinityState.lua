@@ -33,7 +33,8 @@
     - PStat_EquippedItemLevel, PStat_MaxHealth, PStat_Movement, PStat_Durability
 --]]
 
-local InfinityTools = _G.InfinityTools
+local InfinityMythicPlus = _G.InfinityMythicPlus or _G.InfinityTools
+local InfinityTools = InfinityMythicPlus
 if not InfinityTools then
     error("[InfinityState] InfinityTools core not loaded! Check .toc load order.")
     return
@@ -880,3 +881,4 @@ end
 
 -- Delayed initialization (ensure InfinityTools core is fully loaded)
 C_Timer.After(0.5, InitializeStateMonitors)
+

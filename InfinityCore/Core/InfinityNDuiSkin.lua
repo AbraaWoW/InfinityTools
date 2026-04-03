@@ -16,7 +16,8 @@
 -- [v1.0.0] 2026-02-27 Written from an NDui source audit.
 -- =============================================================
 
-local InfinityTools = _G.InfinityTools
+local InfinityMythicPlus = _G.InfinityMythicPlus or _G.InfinityTools
+local InfinityTools = InfinityMythicPlus
 if not InfinityTools then return end
 
 -- Mutual exclusion: if the ElvUI skin is loaded, do not enable the NDui skin.
@@ -958,3 +959,4 @@ eventFrame:SetScript("OnEvent", function(self, event)
         end
     end
 end)
+

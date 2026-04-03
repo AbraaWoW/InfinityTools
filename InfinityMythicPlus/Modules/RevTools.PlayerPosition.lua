@@ -1,7 +1,8 @@
 -- =============================================================
 -- [[ Player Position Marker >> RevTools.PlayerPosition ]]
 -- =============================================================
-local InfinityTools = _G.InfinityTools
+local InfinityMythicPlus = _G.InfinityMythicPlus or _G.InfinityTools
+local InfinityTools = InfinityMythicPlus
 local InfinityDB = _G.InfinityDB
 if not InfinityTools then return end
 
@@ -367,3 +368,4 @@ C_Timer.After(1, function()
     -- print("|cff00ff00[InfinityTools] PlayerPosition: Ready (RangeSpell: "..tostring(current)..")|r")
 end)
 InfinityTools:ReportReady(INFINITY_MODULE_KEY)
+

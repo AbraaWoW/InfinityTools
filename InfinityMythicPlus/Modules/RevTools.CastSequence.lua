@@ -3,7 +3,8 @@
 -- { Key = "RevTools.CastSequence", Name = "Cast Sequence", Desc = "Displays your recent casts with cast/channel/instant/interrupted states.", Category = 4 },
 -- =============================================================
 
-local InfinityTools = _G.InfinityTools
+local InfinityMythicPlus = _G.InfinityMythicPlus or _G.InfinityTools
+local InfinityTools = InfinityMythicPlus
 local InfinityDB = _G.InfinityDB
 if not InfinityTools then return end
 local L = (InfinityTools and InfinityTools.L) or setmetatable({}, { __index = function(_, key) return key end })
@@ -1183,3 +1184,4 @@ end)
 
 -- Report module ready
 InfinityTools:ReportReady(INFINITY_MODULE_KEY)
+

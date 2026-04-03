@@ -3,7 +3,8 @@
 -- InfinityBossGUI/SettingsPage/PrivateAuraMonitorPage.lua
 -- =============================================================
 
-local InfinityTools = _G.InfinityTools
+local InfinityMythicPlus = _G.InfinityMythicPlus or _G.InfinityTools
+local InfinityTools = InfinityMythicPlus
 if not InfinityTools then return end
 
 InfinityBoss.UI.Panel.PrivateAuraMonitorPage = InfinityBoss.UI.Panel.PrivateAuraMonitorPage or {}
@@ -367,3 +368,4 @@ function Page:Hide()
         end
     end
 end
+

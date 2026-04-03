@@ -1,6 +1,8 @@
 local addonName, addonTable = ...
-local InfinityTools = addonTable
-_G.InfinityTools = InfinityTools
+local InfinityMythicPlus = addonTable
+local InfinityTools = InfinityMythicPlus -- Backward-compatible alias for existing modules.
+_G.InfinityMythicPlus = InfinityMythicPlus
+_G.InfinityTools = InfinityMythicPlus
 
 -- Attach the Locale proxy to addonTable (InfinityLocale is pre-initialized by Locale/Init.lua)
 InfinityTools.L = _G.InfinityLocale and _G.InfinityLocale.GetProxy() or

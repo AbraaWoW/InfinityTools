@@ -13,7 +13,8 @@
 --             ElvUI/Game/Shared/Modules/Skins/Skins.lua (Handle* definitions)
 -- =============================================================
 
-local InfinityTools = _G.InfinityTools
+local InfinityMythicPlus = _G.InfinityMythicPlus or _G.InfinityTools
+local InfinityTools = InfinityMythicPlus
 if not InfinityTools then return end
 
 local ElvUISkin = {}
@@ -933,3 +934,4 @@ eventFrame:SetScript("OnEvent", function(self, event)
         end
     end
 end)
+

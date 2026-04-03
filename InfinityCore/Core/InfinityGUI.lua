@@ -3,7 +3,8 @@
 -- Wrap LibSharedMedia (LSM) with native WoW UI widgets.
 -- =========================================================
 
-local InfinityTools = _G.InfinityTools
+local InfinityMythicPlus = _G.InfinityMythicPlus or _G.InfinityTools
+local InfinityTools = InfinityMythicPlus
 if not InfinityTools then return end
 
 -- Ensure the RevUI namespace exists (this file may load before InfinityToolsUI.lua).
@@ -2590,3 +2591,4 @@ function RevUI:CreateTimerBarGroup(parent, width, label, db, key, onUpdate)
 
     return container
 end
+

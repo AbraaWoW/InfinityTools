@@ -3,7 +3,8 @@
 -- { Key = "RevTools.SpellQueue", Name = "Global Spell Queue Window", Desc = "Automatically adjusts SpellQueueWindow based on your current specialization.", Category = 5 },
 -- =============================================================
 
-local InfinityTools = _G.InfinityTools
+local InfinityMythicPlus = _G.InfinityMythicPlus or _G.InfinityTools
+local InfinityTools = InfinityMythicPlus
 if not InfinityTools then return end
 local L = (InfinityTools and InfinityTools.L) or setmetatable({}, { __index = function(_, key) return key end })
 local InfinityState = InfinityTools.State
@@ -232,3 +233,4 @@ InfinityTools:ReportReady(INFINITY_MODULE_KEY)
 -- Part 6: Initial layout registration
 -- =============================================================
 REGISTER_LAYOUT()
+

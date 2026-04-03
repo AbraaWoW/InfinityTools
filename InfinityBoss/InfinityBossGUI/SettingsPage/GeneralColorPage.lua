@@ -1,6 +1,7 @@
 ---@diagnostic disable: undefined-global, undefined-field, need-check-nil
 
-local InfinityTools = _G.InfinityTools
+local InfinityMythicPlus = _G.InfinityMythicPlus or _G.InfinityTools
+local InfinityTools = InfinityMythicPlus
 if not InfinityTools then return end
 
 InfinityBoss.UI.Panel.GeneralColorPage = InfinityBoss.UI.Panel.GeneralColorPage or {}
@@ -303,3 +304,4 @@ function Page:Render(contentFrame)
         Grid:Render(sc, ScaleLayout(layout, cols), colorDB, MODULE_KEY)
     end)
 end
+

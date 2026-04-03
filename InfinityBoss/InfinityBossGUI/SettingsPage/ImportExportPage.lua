@@ -1,6 +1,7 @@
 ---@diagnostic disable: undefined-global, undefined-field, need-check-nil
 
-local InfinityTools = _G.InfinityTools
+local InfinityMythicPlus = _G.InfinityMythicPlus or _G.InfinityTools
+local InfinityTools = InfinityMythicPlus
 if not InfinityTools then return end
 
 InfinityBoss.UI.Panel.ImportExportPage = InfinityBoss.UI.Panel.ImportExportPage or {}
@@ -968,3 +969,4 @@ end
 function Page:Hide()
     if scrollFrame then scrollFrame:Hide() end
 end
+

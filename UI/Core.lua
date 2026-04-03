@@ -62,12 +62,15 @@ local options_button_template = DF:GetTemplate("button", "OPTIONS_BUTTON_TEMPLAT
 local RRTUI_panel_options = {
     UseStatusBar = true
 }
-local RRTUI = DF:CreateSimplePanel(UIParent, window_width, window_height, "|cFFBB66FFInfinity|r Raid Tools", "RRTUI",
+local RRTUI = DF:CreateSimplePanel(UIParent, window_width, window_height, "|cFFBB66FFInfinity|r Tools", "RRTUI",
     RRTUI_panel_options)
 RRTUI:SetPoint("CENTER")
 RRTUI:SetFrameStrata("HIGH")
 DF:BuildStatusbarAuthorInfo(RRTUI.StatusBar, _, "x |cFFBB66FFbird|r")
-RRTUI.StatusBar.discordTextEntry:SetText("https://discord.gg/5bhTbtQtCf")
+if RRTUI.StatusBar.discordLabel then
+    RRTUI.StatusBar.discordLabel:SetText("Twitch: ")
+end
+RRTUI.StatusBar.discordTextEntry:SetText("https://www.twitch.tv/abraa_")
 
 -- Red close button
 do

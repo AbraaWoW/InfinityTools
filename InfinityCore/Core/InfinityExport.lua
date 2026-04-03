@@ -2,7 +2,8 @@
 -- InfinityExport.lua - configuration import/export core engine
 -- =============================================================
 
-local InfinityTools = _G.InfinityTools
+local InfinityMythicPlus = _G.InfinityMythicPlus or _G.InfinityTools
+local InfinityTools = InfinityMythicPlus
 if not InfinityTools then return end
 
 local LibSerialize = LibStub and LibStub("LibSerialize")
@@ -295,3 +296,4 @@ StaticPopupDialogs["INFINITY_IMPORT_SUCCESS"] = {
 }
 
 InfinityDebug("InfinityExport core loaded")
+

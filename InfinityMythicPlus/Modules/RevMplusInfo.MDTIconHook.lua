@@ -1,7 +1,8 @@
 -- [[ MDT Spell Icon Hook ]]
 -- { Key = "RevMplusInfo.MDTIconHook", Name = "MDT Spell Icon Hook", Desc = "Replaces enemy portraits in the MDT map with spell icons and supports automatic raid markers.", Category = 2 },
 
-local InfinityTools = _G.InfinityTools
+local InfinityMythicPlus = _G.InfinityMythicPlus or _G.InfinityTools
+local InfinityTools = InfinityMythicPlus
 local InfinityDB = _G.InfinityDB
 if not InfinityTools then return end
 local L = (InfinityTools and InfinityTools.L) or setmetatable({}, { __index = function(_, key) return key end })
@@ -561,3 +562,4 @@ InfinityTools:WatchState(INFINITY_MODULE_KEY .. ".ButtonClicked", INFINITY_MODUL
 end)
 
 InfinityTools:ReportReady(INFINITY_MODULE_KEY)
+

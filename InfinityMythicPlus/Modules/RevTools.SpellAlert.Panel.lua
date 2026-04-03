@@ -7,7 +7,8 @@ if ondev then
     return
 end
 
-local InfinityTools = _G.InfinityTools
+local InfinityMythicPlus = _G.InfinityMythicPlus or _G.InfinityTools
+local InfinityTools = InfinityMythicPlus
 local InfinityDB = _G.InfinityDB
 if not InfinityTools then return end
 
@@ -2092,3 +2093,4 @@ function _G.SpellAlertPanel.Refresh()
 end
 
 print("|cff00ff00[SpellAlert.Panel] Loaded|r")
+

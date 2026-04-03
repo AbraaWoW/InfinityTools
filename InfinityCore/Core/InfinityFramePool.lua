@@ -3,7 +3,8 @@
 
 
 
-local InfinityTools = _G.InfinityTools
+local InfinityMythicPlus = _G.InfinityMythicPlus or _G.InfinityTools
+local InfinityTools = InfinityMythicPlus
 if not InfinityTools then return end
 
 local FrameFactory = {}
@@ -617,3 +618,4 @@ function FrameFactory:ReleaseGridWidget(frame)
         end
     end
 end
+

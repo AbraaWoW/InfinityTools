@@ -1,7 +1,8 @@
 -- [[ Player Stats Panel ]]
 -- { Key = "RevTools.PlayerStats", Name = "Player Stats Panel", Desc = "Displays highly customizable player stats on screen (Haste, Versatility, Dodge, etc.).", Category = 4 },
 
-local InfinityTools = _G.InfinityTools
+local InfinityMythicPlus = _G.InfinityMythicPlus or _G.InfinityTools
+local InfinityTools = InfinityMythicPlus
 if not InfinityTools then return end
 local InfinityState = InfinityTools.State
 local L = (InfinityTools and InfinityTools.L) or setmetatable({}, { __index = function(_, key) return key end })
@@ -709,3 +710,4 @@ end)
 
 C_Timer.After(1.5, function() EXStatsUI:Init() end)
 InfinityTools:ReportReady(INFINITY_MODULE_KEY)
+
