@@ -313,7 +313,7 @@ local function RaidClearActive()
 end
 
 local function RaidPumpQueue()
-    if raidActiveGUID or _G.InCombatLockdown() then return end
+    if raidActiveGUID then return end
     while #RaidQueue > 0 do
         local unit = table.remove(RaidQueue, 1)
         if UnitExists(unit) then
@@ -1149,11 +1149,6 @@ InfinityTools:RegisterEvent("PLAYER_ENTERING_WORLD", INFINITY_MODULE_KEY, functi
             end
         end
     end)
-end)
-
--- Raid: reprend la queue après combat
-InfinityTools:RegisterEvent("PLAYER_REGEN_ENABLED", INFINITY_MODULE_KEY, function()
-    if IsInRaid() then RaidPumpQueue() end
 end)
 
 -- Raid: lit la spec dès que l'inspect est prêt, met à jour les barres
