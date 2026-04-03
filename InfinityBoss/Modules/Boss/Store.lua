@@ -913,7 +913,7 @@ if InfinityTools and InfinityTools.RegisterEvent then
         BossConfig:PublishRuntimeSelection()
     end)
     InfinityTools:RegisterEvent("ADDON_LOADED", "InfinityBoss.BossConfig.Init", function(_, addonName)
-        if tostring(addonName or ""):lower() ~= "reversionraidtools" then
+        if tostring(addonName or ""):lower() ~= "infinitytools" and tostring(addonName or ""):lower() ~= "infinityboss" then
             return
         end
         BossConfig:Ensure()

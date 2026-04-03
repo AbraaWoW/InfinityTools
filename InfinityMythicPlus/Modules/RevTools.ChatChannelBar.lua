@@ -27,8 +27,9 @@ local function REGISTER_LAYOUT()
 
         { key = "div1", type = "divider", x = 2, y = 7, w = 50, h = 1 },
         { key = "subheader_basic", type = "subheader", x = 2, y = 6, w = 50, h = 1, label = "General", labelSize = 20 },
-        { key = "locked", type = "checkbox", x = 2, y = 8, w = 8, h = 2, label = "Locked" },
-        { key = "btn_reset_pos", type = "button", x = 12, y = 8, w = 12, h = 2, label = "Reset Position" },
+        { key = "enabled", type = "checkbox", x = 2, y = 8, w = 8, h = 2, label = "Enable" },
+        { key = "locked", type = "checkbox", x = 11, y = 8, w = 8, h = 2, label = "Locked" },
+        { key = "btn_reset_pos", type = "button", x = 22, y = 8, w = 12, h = 2, label = "Reset Position" },
 
         { key = "fontSize", type = "slider", x = 2, y = 11, w = 16, h = 2, label = "Font Size", min = 10, max = 30, step = 1 },
         { key = "buttonPadding", type = "slider", x = 20, y = 11, w = 16, h = 2, label = "Button Spacing", min = 0, max = 20, step = 1 },
@@ -112,7 +113,7 @@ REGISTER_LAYOUT()
 if not InfinityTools:IsModuleEnabled(INFINITY_MODULE_KEY) then return end
 
 local MODULE_DEFAULTS = {
-    enabled = false,
+    enabled = true,
     locked = true,
     fontSize = 16,
     buttonPadding = 3,
@@ -629,7 +630,7 @@ _G.SlashCmdList["EXCHATCHANNEL"] = function(msg)
         MODULE_DB.offsetY = 30
         RefreshAll()
     else
-        InfinityTools:OpenSettingsPanel(INFINITY_MODULE_KEY)
+        InfinityTools:OpenConfig(INFINITY_MODULE_KEY)
     end
 end
 

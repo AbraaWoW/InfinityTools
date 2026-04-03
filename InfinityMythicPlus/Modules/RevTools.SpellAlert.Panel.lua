@@ -2,10 +2,7 @@
 -- RevTools.SpellAlert.Panel.lua
 -- SpellAlert standalone floating panel, full migrated version
 -- =========================================================
-local ondev = true
-if ondev then
-    return
-end
+local ondev = false
 
 local InfinityMythicPlus = _G.InfinityMythicPlus or _G.InfinityTools
 local InfinityTools = InfinityMythicPlus

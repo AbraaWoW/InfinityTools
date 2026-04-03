@@ -577,7 +577,7 @@ end
 
 InfinityTools:RegisterEvent("ADDON_LOADED", "InfinityBoss_Init_Loaded", function(event, addonName)
     local name = tostring(addonName or ""):lower()
-    if name ~= "reversionraidtools" then return end
+    if name ~= "infinitytools" and name ~= "infinityboss" then return end
 
     if InfinityBoss.DB and InfinityBoss.DB.Init then
         InfinityBoss.DB:Init()

@@ -635,7 +635,7 @@ do
     f:RegisterEvent("ADDON_LOADED")
     f:SetScript("OnEvent", function(self, _, addonName)
         local loadedAddon = tostring(addonName or ""):lower()
-        if loadedAddon == "infinitytools" or loadedAddon == "reversionraidtools" then
+        if loadedAddon == "infinitytools" or loadedAddon == "infinitybossdata" then
             InitInfinityBossDataDB()
             CompactAllEventOverrides()
             RebuildTimelineBosses()

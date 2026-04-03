@@ -20,7 +20,8 @@ local function build_language_options()
             value = i,
             onclick = function()
                 RRT.Settings.Language = lang
-                print("|cFFBB66FFInfinity Raid Tools:|r Language set to " .. v.label .. ". Type /reload to apply.")
+                print("|cFFBB66FFInfinity Tools:|r Language set to " .. v.label .. ". Reloading to apply.")
+                ReloadUI()
             end
         })
     end

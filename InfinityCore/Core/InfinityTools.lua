@@ -744,7 +744,7 @@ local function ShowMissingInfinityToolsWarning()
 end
 
 function InfinityTools:OpenConfig(moduleKey)
-    if type(moduleKey) == "string" and string.sub(moduleKey, 1, 14) == "InfinityBoss." then
+    if type(moduleKey) == "string" and string.sub(moduleKey, 1, 13) == "InfinityBoss." then
         local panel = _G.InfinityBoss and _G.InfinityBoss.UI and _G.InfinityBoss.UI.Panel
         if panel and panel.Show and panel.SetTab then
             if self.UI.MainFrame and self.UI.MainFrame:IsShown() then

@@ -1247,7 +1247,7 @@ function RRT_NS:CreateReminderMoverFrame(Name, SettingsTable, SettingsName, IsTe
         self:MoveFrameInit(self[Name], SettingsName)
         self:MoveFrameSettings(self[Name], SettingsTable, IsText)
         local labelText = ({ IconMover = "Icon Display", BarMover = "Bar Display", TextMover = "Text Display" })[Name] or Name
-        if self[Name].Label then self[Name].Label:SetText("RRT / " .. labelText) end
+        if self[Name].Label then self[Name].Label:SetText("InfinityTools / " .. labelText) end
     else
         self:MoveFrameSettings(self[Name], SettingsTable, IsText)
     end
@@ -1260,7 +1260,7 @@ function RRT_NS:CreateNoteMoverFrame(Name, SettingsTable, Shared, Personal, Extr
         self:MoveFrameInit(self[Name.."Mover"], Name, SettingsTable.BGcolor)
         self:MoveFrameSettings(self[Name.."Mover"], SettingsTable)
         local labelText = ({ ReminderFrame = "Shared Reminder", PersonalReminderFrame = "Personal Reminder", ExtraReminderFrame = "Extra Reminder" })[Name] or Name
-        if self[Name.."Mover"].Label then self[Name.."Mover"].Label:SetText("RRT / " .. labelText) end
+        if self[Name.."Mover"].Label then self[Name.."Mover"].Label:SetText("InfinityTools / " .. labelText) end
         if SettingsTable.enabled and SettingsTable.Moveable then
             self:UpdateReminderFrame(false, Shared, Personal, Extra)
             self:ToggleMoveFrames(self[Name.."Mover"], true)
