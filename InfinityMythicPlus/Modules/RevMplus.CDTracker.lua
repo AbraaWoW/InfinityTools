@@ -291,12 +291,88 @@ local function IsCatEnabled(db, cat)
     return false
 end
 
+-- =============================================================
+-- Raid Inspect — spec detection for raid members
+-- PartySync is intentionally disabled in raids (AddOnMessageLockdown).
+-- This local system uses NotifyInspect, which IS allowed in raids.
+-- M+ / party path → unchanged (PartySpec / PartySync).
+-- =============================================================
+local RaidSpecCache  = {}   -- [guid] = specID
+local RaidUnitByGuid = {}   -- [guid] = unitToken
+local RaidQueue      = {}   -- FIFO of unit tokens to inspect
+local RaidQueued     = {}   -- [guid] = true (dedup)
+local raidActiveGUID = nil
+local raidInspTimer  = nil
+local RAID_TIMEOUT   = 1.5
+local RAID_INTERVAL  = 0.25
+
+local function RaidClearActive()
+    raidActiveGUID = nil
+    if raidInspTimer then raidInspTimer:Cancel(); raidInspTimer = nil end
+    if _G.ClearInspectPlayer then _G.ClearInspectPlayer() end
+end
+
+local function RaidPumpQueue()
+    if raidActiveGUID or _G.InCombatLockdown() then return end
+    while #RaidQueue > 0 do
+        local unit = table.remove(RaidQueue, 1)
+        if UnitExists(unit) then
+            local guid = UnitGUID(unit)
+            if guid then
+                RaidQueued[guid] = nil
+                if _G.CanInspect and _G.CanInspect(unit) then
+                    raidActiveGUID = guid
+                    _G.NotifyInspect(unit)
+                    raidInspTimer = C_Timer.NewTimer(RAID_TIMEOUT, function()
+                        RaidClearActive()
+                        RaidPumpQueue()
+                    end)
+                    return
+                end
+            end
+        end
+    end
+end
+
+local function RaidQueueUnit(unit)
+    if not UnitExists(unit) or _G.UnitIsUnit(unit, "player") then return end
+    local guid = UnitGUID(unit)
+    if not guid or RaidQueued[guid] then return end
+    if RaidSpecCache[guid] and RaidSpecCache[guid] > 0 then return end
+    RaidQueued[guid] = true
+    RaidQueue[#RaidQueue + 1] = unit
+    RaidPumpQueue()
+end
+
+local function RaidRebuildRoster()
+    if not IsInRaid() then return end
+    wipe(RaidUnitByGuid)
+    wipe(RaidQueue)
+    wipe(RaidQueued)
+    RaidClearActive()
+    for i = 1, GetNumGroupMembers() do
+        local unit = "raid" .. i
+        if UnitExists(unit) then
+            local guid = UnitGUID(unit)
+            if guid then
+                RaidUnitByGuid[guid] = unit
+                RaidQueueUnit(unit)
+            end
+        end
+    end
+end
+
 local function GetUnitSpecID(unit)
     local specID = 0
     if PartySpec then specID = PartySpec:GetSpec(unit) or 0 end
     if specID == 0 and unit == "player" then
         local id = GetSpecializationInfo(GetSpecialization() or 1)
         specID = id or 0
+    end
+    -- Raid fallback: use local inspect cache (PartySync is disabled in raids)
+    if specID == 0 and IsInRaid() then
+        local guid = UnitGUID(unit)
+        if guid then specID = RaidSpecCache[guid] or 0 end
     end
     return specID
 end
@@ -1046,6 +1122,9 @@ InfinityTools:RegisterEvent("INFINITY_PARTY_SPEC_UPDATED", INFINITY_MODULE_KEY, 
 end)
 
 InfinityTools:RegisterEvent("GROUP_ROSTER_UPDATE", INFINITY_MODULE_KEY, function()
+    if IsInRaid() then
+        RaidRebuildRoster()
+    end
     for i = 1, MAX_GROUPS do
         local g = GROUPS[i]
         if g and not g.isPreviewing then UpdateGroupLayout(g) end
@@ -1061,6 +1140,7 @@ InfinityTools:RegisterEvent("PLAYER_ENTERING_WORLD", INFINITY_MODULE_KEY, functi
         end
     end
     C_Timer.After(1, function()
+        if IsInRaid() then RaidRebuildRoster() end
         for i = 1, MAX_GROUPS do
             local g = GROUPS[i]
             if g and g.db.enabled then
@@ -1069,6 +1149,32 @@ InfinityTools:RegisterEvent("PLAYER_ENTERING_WORLD", INFINITY_MODULE_KEY, functi
             end
         end
     end)
+end)
+
+-- Raid: reprend la queue après combat
+InfinityTools:RegisterEvent("PLAYER_REGEN_ENABLED", INFINITY_MODULE_KEY, function()
+    if IsInRaid() then RaidPumpQueue() end
+end)
+
+-- Raid: lit la spec dès que l'inspect est prêt, met à jour les barres
+InfinityTools:RegisterEvent("INSPECT_READY", INFINITY_MODULE_KEY, function(_, guid)
+    if not IsInRaid() or guid ~= raidActiveGUID then return end
+    local unit = RaidUnitByGuid[guid]
+    if unit and UnitExists(unit) then
+        local specID = _G.GetInspectSpecialization and _G.GetInspectSpecialization(unit)
+        if specID and specID > 0 then
+            RaidSpecCache[guid] = specID
+            for i = 1, MAX_GROUPS do
+                local g = GROUPS[i]
+                if g and g.db.enabled and not g.isPreviewing then
+                    UpdateGroupUnitBars(g, guid, unit, specID)
+                    GroupReLayout(g)
+                end
+            end
+        end
+    end
+    RaidClearActive()
+    C_Timer.After(RAID_INTERVAL, RaidPumpQueue)
 end)
 
 -- =============================================================
