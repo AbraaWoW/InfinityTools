@@ -14,7 +14,6 @@
     <Script file="RevPTR.SetKey.lua"/>
     <Script file="RevMplus.MythicCast.lua"/>
     <Script file="RevMplus.InterruptTracker.lua"/>
-    <Script file="RevMplus.CDTracker.lua"/>
 
     <!-- RevTools (Mini Tools) -->
     <Script file="RevTools.MiniTools.lua"/>
