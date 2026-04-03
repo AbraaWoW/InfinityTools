@@ -157,7 +157,6 @@ end
 -- =============================================================
 local CD_DATA     = {}   -- [specID] = { entry, ... }
 local SPELL_BY_ID = {}   -- [spellID] = entry  (used for COMM receive + UNIT_SPELLCAST_SUCCEEDED)
-local AURA_BY_ID  = {}   -- [auraID]  = entry  (used for reactive UNIT_AURA detection in raid)
 
 local function AddSpell(specs, entry)
     for _, spec in ipairs(specs) do
@@ -166,9 +165,6 @@ local function AddSpell(specs, entry)
     end
     if not SPELL_BY_ID[entry.id] then
         SPELL_BY_ID[entry.id] = entry
-    end
-    if entry.aura and not AURA_BY_ID[entry.aura] then
-        AURA_BY_ID[entry.aura] = entry
     end
 end
 
@@ -434,20 +430,8 @@ local function BroadcastSpec()
     end
 end
 
--- Called when a SPEC COMM arrives: store spec and build bars immediately.
-local function OnSpecCommReceived(guid, unit, specID)
-    -- Store in raid cache so GetUnitSpecID picks it up
-    RaidSpecCache[guid] = specID
-    -- Remove from inspect queue if still pending
-    RaidQueued[guid] = nil
-    for i = 1, MAX_GROUPS do
-        local g = GROUPS[i]
-        if g and g.db.enabled and not g.isPreviewing then
-            UpdateGroupUnitBars(g, guid, unit, specID)
-            GroupReLayout(g)
-        end
-    end
-end
+-- Forward declaration — assigned after UpdateGroupUnitBars / GroupReLayout are defined.
+local OnSpecCommReceived
 
 -- Called when a CD COMM arrives from a teammate.
 local function OnCDCommReceived(guid, spellID)
@@ -1092,6 +1076,24 @@ for i = 1, MAX_GROUPS do
 end
 
 -- =============================================================
+-- SPEC COMM handler — assigned here so UpdateGroupUnitBars / GroupReLayout
+-- are already in scope (both are local functions defined above).
+-- EnsureCommRegistered captured the local variable OnSpecCommReceived
+-- early (forward declaration), so the callback sees the correct value.
+-- =============================================================
+OnSpecCommReceived = function(guid, unit, specID)
+    RaidSpecCache[guid] = specID
+    RaidQueued[guid]    = nil
+    for i = 1, MAX_GROUPS do
+        local g = GROUPS[i]
+        if g and g.db.enabled and not g.isPreviewing then
+            UpdateGroupUnitBars(g, guid, unit, specID)
+            GroupReLayout(g)
+        end
+    end
+end
+
+-- =============================================================
 -- Detection 1: UNIT_SPELLCAST_SUCCEEDED
 --   Player self only — spell IDs are never secret for the caster.
 --   Broadcasts via AceComm so teammates with the addon track our CD.
@@ -1142,7 +1144,6 @@ InfinityTools:RegisterEvent("UNIT_AURA", INFINITY_MODULE_KEY, function(_, unit)
         if g and g.db.enabled and not g.isPreviewing then
             local playerBars = g.activeBars[guid]
 
-            -- Path A: bars already exist (spec known) — standard aura check
             if playerBars then
                 for spellID, data in pairs(playerBars) do
                     local entry = data.entry
@@ -1164,54 +1165,6 @@ InfinityTools:RegisterEvent("UNIT_AURA", INFINITY_MODULE_KEY, function(_, unit)
                             end
                         elseif not present then
                             lastAuras[key] = nil
-                        end
-                    end
-                end
-
-            -- Path B: no bars yet for this raid member (spec not yet inspected)
-            -- Reactive creation: scan AURA_BY_ID to find a known aura on this unit.
-            -- This mirrors MiniCC behaviour — show the CD as soon as we see the aura.
-            elseif IsInRaid() and unit ~= "player" then
-                for auraID, entry in pairs(AURA_BY_ID) do
-                    if IsCatEnabled(g.db, entry.cat) then
-                        local key = guid .. "_" .. auraID
-                        if not lastAuras[key] then
-                            local ok, aura = pcall(C_UnitAuras.GetAuraDataBySpellID, unit, auraID)
-                            if ok and aura then
-                                lastAuras[key] = true
-                                -- Create a minimal bar for this spell on the fly
-                                g.activeBars[guid] = g.activeBars[guid] or {}
-                                if not g.activeBars[guid][entry.id] then
-                                    local bar = AcquireBar(g)
-                                    ApplyBarSettings(bar, g.db)
-                                    local ok2, info = pcall(C_Spell.GetSpellInfo, entry.id)
-                                    if ok2 and info and info.iconID then
-                                        bar.IconTex:SetTexture(info.iconID)
-                                    else
-                                        bar.IconTex:SetTexture(134400)
-                                    end
-                                    local pName = UnitName(unit) or unit
-                                    if bar.NameText then bar.NameText:SetText(pName) end
-                                    local col = CAT_COLOR[entry.cat] or { 0.5, 0.5, 0.5 }
-                                    bar.CatStripe:SetColorTexture(col[1], col[2], col[3], 0.9)
-                                    SetBarColor(bar, unit, entry, g.db)
-                                    if bar.TimerText then bar.TimerText:SetText("") end
-                                    g.activeBars[guid][entry.id] = {
-                                        bar = bar, entry = entry, startTime = nil, unit = unit,
-                                    }
-                                end
-                                local data = g.activeBars[guid][entry.id]
-                                if not data.startTime then
-                                    TriggerCooldown(g, guid, entry.id)
-                                end
-                                GroupReLayout(g)
-                                -- Also kick off an inspect so we get their full spec next time
-                                RaidQueueUnit(unit)
-                            end
-                        else
-                            -- Aura gone: clear the key
-                            local ok, aura = pcall(C_UnitAuras.GetAuraDataBySpellID, unit, auraID)
-                            if not (ok and aura) then lastAuras[key] = nil end
                         end
                     end
                 end
