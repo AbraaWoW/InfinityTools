@@ -669,6 +669,21 @@ local function BuildReminderOptions()
             end,
         },
         {
+            type  = "input",
+            name  = "Text Size",
+            desc  = "Size of the text in the display frame (8-60).",
+            width = 40,
+            get   = function() return tostring(RRT.Settings["GlobalFontSize"] or 20) end,
+            func  = function(self, fixedparam, value)
+                local n = tonumber(value)
+                if n then
+                    n = math.max(8, math.min(60, n))
+                    RRT.Settings["GlobalFontSize"] = n
+                    RRT_NS:ApplyGlobalFont()
+                end
+            end,
+        },
+        {
             type = "toggle",
             boxfirst = true,
             name = L["rem_use_shared"],

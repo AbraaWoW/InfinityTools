@@ -1,8 +1,17 @@
 ---@diagnostic disable: undefined-global
 -- =============================================================
 -- InfinityBossData/FixedTimelineBosses.lua
+-- Unified trigger config center (TIME / AI / BLZ)
 --
+-- Trigger type descriptions:
+--   TIME = Fixed timeline (first/interval expansion)
+--   AI   = duration->eventID mapping inference
+--   BLZ  = Blizzard native timeline
 --
+-- Compatibility exports:
+--   _G.InfinityBoss_FIXED_TIMELINE_ENCOUNTERS  (TIME whitelist)
+--   _G.InfinityBoss_DURATION_EVENT_RULES        (AI mapping table)
+--   _G.InfinityBoss_ENCOUNTER_TRIGGERS          (full trigger config)
 -- =============================================================
 
 local TRIGGER_TIME = "TIME"
@@ -19,10 +28,11 @@ end
 
 -- encounterID -> { trigger = TIME|AI|BLZ, durationRules = { {time,eventID}, ... }? }
 local encounterTriggers = {
+    -- Seat of the Triumvirate (Seat of the Triumvirate)
     [2065] = { trigger = TRIGGER_TIME }, -- The Ascendant Zulal
     [2066] = { trigger = TRIGGER_TIME }, -- Saprish
     [2067] = {
-        trigger = TRIGGER_AI, -- Overseer Nezar
+        trigger = TRIGGER_AI,            -- Overseer Nezar
         durationRules = {
             { time = 6,  eventID = 376, sync = true },
             { time = 26, eventID = 246, sync = true },
@@ -38,12 +48,14 @@ local encounterTriggers = {
             { time = 6,  eventID = 244 },
         },
     },
-    [2068] = { trigger = TRIGGER_BLZ },  -- Rula
+    [2068] = { trigger = TRIGGER_BLZ }, -- Rula
 
+    -- Stonevault (Pit of Saron)
     [1999] = { trigger = TRIGGER_TIME }, -- Forge-Lord Gavust
     [2000] = { trigger = TRIGGER_TIME }, -- Plague-Lord Tyranus
     [2001] = { trigger = TRIGGER_TIME }, -- Ikk and Korik
 
+    -- Skyveil Peak (Skyreach)
     [1698] = { trigger = TRIGGER_TIME }, -- Lanjit
     [1699] = {
         trigger = TRIGGER_AI,            -- Alacanas
@@ -57,7 +69,7 @@ local encounterTriggers = {
         },
     },
     [1700] = {
-        trigger = TRIGGER_AI,            -- Ruklan
+        trigger = TRIGGER_AI, -- Ruklan
         durationRules = {
             { time = 5,  eventID = 306, sync = true },
             { time = 12, eventID = 305, sync = true },
@@ -65,12 +77,15 @@ local encounterTriggers = {
             { time = 12, eventID = 306 },
             { time = 21, eventID = 305 },
         },
+
     },
     [1701] = { trigger = TRIGGER_TIME }, -- High Sage Virix
 
+    -- Aegisar Academy (Algeth'ar Academy)
     [2562] = { trigger = TRIGGER_TIME }, -- Veksamus
     [2563] = {
         trigger = TRIGGER_TIME,          -- Ancient Treant
+        -- Legacy AI rules kept as compatibility fallback
         durationRules = {
             { time = 9,  eventID = 282 },
             { time = 30, eventID = 283 },
@@ -89,7 +104,7 @@ local encounterTriggers = {
         },
     },
     [2565] = {
-        trigger = TRIGGER_AI,            -- Echo of Dracurgosa
+        trigger = TRIGGER_AI, -- Echo of Dracurgosa
         durationRules = {
             { time = 7,  eventID = 293 },
             { time = 9,  eventID = 294 },
@@ -100,9 +115,10 @@ local encounterTriggers = {
         },
     },
 
+    -- Measara Cavern (Maisara Caverns)
     [3212] = { trigger = TRIGGER_TIME }, -- Mrokin and Nekrax
     [3213] = {
-        trigger = TRIGGER_AI,            -- Vodaza
+        trigger = TRIGGER_AI, -- Vodaza
         durationRules = {
             { time = 3,      eventID = 16, sync = true },
             { time = 70,     eventID = 20, sync = true },
@@ -116,8 +132,9 @@ local encounterTriggers = {
     },
     [3214] = { trigger = TRIGGER_TIME }, -- Laktul, Soul-Vessel
 
+    -- Node Sinas (Nexus-Point Xenas)
     [3328] = {
-        trigger = TRIGGER_AI,            -- Chief Engineer Kaslesor
+        trigger = TRIGGER_AI, -- Chief Engineer Kaslesor
         durationRules = {
             { time = 1,  eventID = 108 },
             { time = 5,  eventID = 107 },
@@ -132,8 +149,9 @@ local encounterTriggers = {
         },
     },
     [3332] = { trigger = TRIGGER_BLZ }, -- Core Guardian Nasara
+
     [3333] = {
-        trigger = TRIGGER_BLZ,           -- Losaksen
+        trigger = TRIGGER_BLZ, -- Losaksen
         durationRules = {
             { time = 2,  eventID = 111 },
             { time = 11, eventID = 109 },
@@ -147,8 +165,10 @@ local encounterTriggers = {
         eventActions = {
             [110] = { clearActiveSnapshotAfter = 2 },
         },
+
     },
 
+    -- Windrunner's Spire (Windrunner Spire)
     [3056] = { trigger = TRIGGER_TIME }, -- Cinderdawn
     [3057] = {
         trigger = TRIGGER_AI,            -- Forsaken Duo
@@ -160,9 +180,9 @@ local encounterTriggers = {
             { time = 48,     eventID = 27 },
         },
     },
-    [3058] = { trigger = TRIGGER_BLZ },  -- Commander Koruko
+    [3058] = { trigger = TRIGGER_BLZ }, -- Commander Koruko
     [3059] = {
-        trigger = TRIGGER_AI,            -- Sleepless Heart
+        trigger = TRIGGER_AI,           -- Sleepless Heart
         durationRules = {
             { time = 9,    eventID = 23 },
             { time = 11,   eventID = 23 },
@@ -172,8 +192,9 @@ local encounterTriggers = {
             { time = 39,   eventID = 22 },
             { time = 53,   eventID = 21 },
         },
-    },
 
+    },
+    -- Arcanist Platform (Magister's Terrace)
     [3071] = { trigger = TRIGGER_TIME }, -- Arcane Colossus Custus
     [3072] = { trigger = TRIGGER_TIME }, -- Ceranael Sunlash
     [3073] = { trigger = TRIGGER_BLZ },  -- Gimelrus

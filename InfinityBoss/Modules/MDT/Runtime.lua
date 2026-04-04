@@ -12,7 +12,6 @@ local Presets = MDTMod.Presets
 
 local listeners = {}
 local eventFrame = nil
-local lastTick = 0
 local currentState = nil
 local INSTANCE_ID_TO_CHALLENGE_MAP = {
     [1753] = 239,
@@ -422,15 +421,8 @@ local function EnsureEventFrame()
     eventFrame:RegisterEvent("SCENARIO_UPDATE")
     eventFrame:RegisterEvent("SCENARIO_CRITERIA_UPDATE")
     eventFrame:SetScript("OnEvent", OnEvent)
-    eventFrame:SetScript("OnUpdate", function(_, elapsed)
-        lastTick = lastTick + elapsed
-        if lastTick < 0.5 then
-            return
-        end
-        lastTick = 0
-        Runtime.Refresh(false)
-    end)
 end
 
 EnsureEventFrame()
 Runtime.Refresh(true)
+OnEvent(nil, "PLAYER_ENTERING_WORLD")

@@ -445,7 +445,8 @@ function RRT_NS:VantusRuneCheck()
             for j=1, 100 do
                 local buff = C_UnitAuras.GetAuraDataByIndex(unitid, j, "HELPFUL")
                 if not buff then break end
-                if buff.name:find(prefix) then
+                local ok, matches = pcall(function() return buff.name:find(prefix) end)
+                if ok and matches then
                     found = true
                     break
                 end

@@ -3,8 +3,7 @@
 InfinityBoss.PrivateAura = InfinityBoss.PrivateAura or {}
 local PrivateAura = InfinityBoss.PrivateAura
 
-local InfinityMythicPlus = _G.InfinityMythicPlus or _G.InfinityTools
-local InfinityTools = InfinityMythicPlus
+local InfinityTools = _G.InfinityTools
 if not InfinityTools then
     return
 end
@@ -15,7 +14,7 @@ local MODULE_DEFAULTS = {
 }
 
 local ENTRY_DEFAULTS = {
-    enabled = false,
+    enabled = true,
     sourceType = "pack",
     label = "",
     customLSM = "",
@@ -23,7 +22,7 @@ local ENTRY_DEFAULTS = {
 }
 
 local activeSoundIDs = {}
-local currentEncounterID = nil
+local refreshPending = false
 
 local function NormalizeSourceType(value)
     local sourceType = tostring(value or "pack"):lower()
@@ -145,6 +144,42 @@ local function CollectRaidRows(encounterID)
     return out
 end
 
+local function CollectRaidRowsForCurrentInstance()
+    local out = {}
+    local instanceName, instanceType = GetInstanceInfo and GetInstanceInfo() or nil, nil
+    if GetInstanceInfo then
+        instanceName, instanceType = select(1, GetInstanceInfo()), select(2, GetInstanceInfo())
+    end
+    if instanceType ~= "raid" or type(instanceName) ~= "string" or instanceName == "" then
+        return out
+    end
+    local raw = type(PrivateAura.GetRawData) == "function" and PrivateAura:GetRawData() or nil
+    local raid = raw and raw.raid
+    if type(raid) ~= "table" then
+        return out
+    end
+    for encounterID, row in pairs(raid) do
+        if type(row) == "table" and row.dungeon == instanceName and type(row.spells) == "table" then
+            for spellID, spellRow in pairs(row.spells) do
+                local sid = tonumber(spellID)
+                if sid and type(spellRow) == "table" then
+                    out[#out + 1] = {
+                        key = BuildRaidKey(encounterID, sid),
+                        spellID = sid,
+                    }
+                end
+            end
+        end
+    end
+    table.sort(out, function(a, b)
+        if (a.spellID or 0) == (b.spellID or 0) then
+            return tostring(a.key or "") < tostring(b.key or "")
+        end
+        return (a.spellID or 0) < (b.spellID or 0)
+    end)
+    return out
+end
+
 local function CollectMplusRows()
     local out = {}
     local instanceName = GetInstanceInfo and select(1, GetInstanceInfo()) or nil
@@ -188,32 +223,42 @@ local function ApplyRows(rows)
     end
 end
 
+local function CanRefreshNow()
+    return not (InCombatLockdown and InCombatLockdown())
+end
+
+local function QueueRefresh()
+    refreshPending = true
+end
+
+local function FinishRefresh()
+    refreshPending = false
+end
+
 function PrivateAura:RefreshActiveRegistrations()
+    if not CanRefreshNow() then
+        QueueRefresh()
+        return
+    end
+
     local instanceType = GetInstanceInfo and select(2, GetInstanceInfo()) or nil
-    if instanceType == "raid" and currentEncounterID then
-        ApplyRows(CollectRaidRows(currentEncounterID))
+    if instanceType == "raid" then
+        ApplyRows(CollectRaidRowsForCurrentInstance())
+        FinishRefresh()
         return
     end
     if instanceType == "party" then
         ApplyRows(CollectMplusRows())
+        FinishRefresh()
         return
     end
     RemoveAllRegisteredSounds()
+    FinishRefresh()
 end
 
 function PrivateAura:ClearActiveRegistrations()
     RemoveAllRegisteredSounds()
 end
-
-InfinityTools:RegisterEvent("ENCOUNTER_START", "InfinityBoss_PrivateAura_EncStart", function(_, encounterID)
-    currentEncounterID = tonumber(encounterID)
-    PrivateAura:RefreshActiveRegistrations()
-end)
-
-InfinityTools:RegisterEvent("ENCOUNTER_END", "InfinityBoss_PrivateAura_EncEnd", function()
-    currentEncounterID = nil
-    PrivateAura:RefreshActiveRegistrations()
-end)
 
 InfinityTools:RegisterEvent("PLAYER_ENTERING_WORLD", "InfinityBoss_PrivateAura_PEW", function()
     PrivateAura:RefreshActiveRegistrations()
@@ -225,5 +270,11 @@ end)
 
 InfinityTools:WatchState(MODULE_KEY .. ".DatabaseChanged", "InfinityBoss_PrivateAura_ConfigChanged", function()
     PrivateAura:RefreshActiveRegistrations()
+end)
+
+InfinityTools:RegisterEvent("PLAYER_REGEN_ENABLED", "InfinityBoss_PrivateAura_RegenEnabled", function()
+    if refreshPending then
+        PrivateAura:RefreshActiveRegistrations()
+    end
 end)
 

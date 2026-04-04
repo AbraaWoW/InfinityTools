@@ -54,16 +54,15 @@ local function REGISTER_LAYOUT()
 
         { key = "div_general", type = "divider", x = 1, y = 8, w = 53, h = 1 },
         { key = "sub_general", type = "subheader", x = 1, y = 7, w = 53, h = 1, label = "General", labelSize = 20 },
-        { key = "enabled", type = "checkbox", x = 1, y = 9, w = 6, h = 2, label = L["Enable"] },
         { key = "showOffensive", type = "checkbox", x = 10, y = 9, w = 15, h = 2, label = "Show Offensive CDs" },
         { key = "showPlayer", type = "checkbox", x = 27, y = 9, w = 12, h = 2, label = "Track Self" },
+        { key = "autoSwitchMode", type = "checkbox", x = 1, y = 11, w = 45, h = 2, label = "Auto-switch mode on group change (Party → Attached, Raid → Bars)" },
 
         -- Bar Mode
         { key = "bar_header", type = "header", x = 1, y = 13, w = 53, h = 2, label = "Bar Mode", labelSize = 20 },
         { key = "barEnabled", type = "checkbox", x = 1, y = 16, w = 8, h = 2, label = "Enable" },
         { key = "barLocked", type = "checkbox", x = 12, y = 16, w = 8, h = 2, label = L["Lock Position"] },
         { key = "barPreview", type = "checkbox", x = 22, y = 16, w = 8, h = 2, label = L["Preview Mode"] },
-        { key = "btn_reset_bar", type = "button", x = 33, y = 16, w = 14, h = 2, label = L["Reset Position"] },
         { key = "barWidth", type = "slider", x = 1, y = 19, w = 17, h = 2, label = "Bar Width", min = 100, max = 500 },
         { key = "barHeight", type = "slider", x = 20, y = 19, w = 15, h = 2, label = "Bar Height", min = 12, max = 48 },
         { key = "barSpacing", type = "slider", x = 1, y = 22, w = 17, h = 2, label = "Spacing", min = 0, max = 20 },
@@ -72,29 +71,38 @@ local function REGISTER_LAYOUT()
         { key = "barUseClassColor", type = "checkbox", x = 15, y = 25, w = 12, h = 2, label = "Class Colors" },
         { key = "barShowIcon", type = "checkbox", x = 29, y = 25, w = 10, h = 2, label = "Show Icon" },
         { key = "barShowName", type = "checkbox", x = 1, y = 28, w = 10, h = 2, label = "Show Name" },
-        { key = "barShowSpell", type = "checkbox", x = 13, y = 28, w = 14, h = 2, label = "Show Spell Name" },
         { key = "barShowTimer", type = "checkbox", x = 29, y = 28, w = 10, h = 2, label = "Show Timer" },
+        { key = "bar_win_header", type = "subheader", x = 1, y = 31, w = 53, h = 1, label = "Windows", labelSize = 16 },
+        { key = "barExtEnabled", type = "checkbox", x = 1, y = 33, w = 18, h = 2, label = "External Defensive" },
+        { key = "btn_reset_bar_ext", type = "button", x = 22, y = 33, w = 14, h = 2, label = L["Reset Position"] },
+        { key = "barBigEnabled", type = "checkbox", x = 1, y = 36, w = 18, h = 2, label = "Big Defensive" },
+        { key = "btn_reset_bar_big", type = "button", x = 22, y = 36, w = 14, h = 2, label = L["Reset Position"] },
+        { key = "barImpEnabled", type = "checkbox", x = 1, y = 39, w = 18, h = 2, label = "Important" },
+        { key = "btn_reset_bar_imp", type = "button", x = 22, y = 39, w = 14, h = 2, label = L["Reset Position"] },
+        { key = "barOffEnabled", type = "checkbox", x = 1, y = 42, w = 18, h = 2, label = "Offensive" },
+        { key = "btn_reset_bar_off", type = "button", x = 22, y = 42, w = 14, h = 2, label = L["Reset Position"] },
 
         -- Icon Mode
-        { key = "icon_header", type = "header", x = 1, y = 33, w = 53, h = 2, label = "Icon Mode", labelSize = 20 },
-        { key = "iconEnabled", type = "checkbox", x = 1, y = 36, w = 8, h = 2, label = "Enable" },
-        { key = "iconLocked", type = "checkbox", x = 12, y = 36, w = 8, h = 2, label = L["Lock Position"] },
-        { key = "iconPreview", type = "checkbox", x = 22, y = 36, w = 8, h = 2, label = L["Preview Mode"] },
-        { key = "btn_reset_icon", type = "button", x = 33, y = 36, w = 14, h = 2, label = L["Reset Position"] },
-        { key = "iconSize", type = "slider", x = 1, y = 39, w = 17, h = 2, label = "Icon Size", min = 16, max = 64 },
-        { key = "iconCols", type = "slider", x = 20, y = 39, w = 15, h = 2, label = "Per Row", min = 1, max = 20 },
-        { key = "iconSpacing", type = "slider", x = 37, y = 39, w = 14, h = 2, label = "Spacing", min = 0, max = 16 },
-        { key = "iconShowName", type = "checkbox", x = 1, y = 42, w = 15, h = 2, label = "Show Player Name" },
-        { key = "iconShowTimer", type = "checkbox", x = 18, y = 42, w = 12, h = 2, label = "Show Timer" },
+        { key = "icon_header", type = "header", x = 1, y = 46, w = 53, h = 2, label = "Icon Mode", labelSize = 20 },
+        { key = "iconEnabled", type = "checkbox", x = 1, y = 49, w = 8, h = 2, label = "Enable" },
+        { key = "iconLocked", type = "checkbox", x = 12, y = 49, w = 8, h = 2, label = L["Lock Position"] },
+        { key = "iconPreview", type = "checkbox", x = 22, y = 49, w = 8, h = 2, label = L["Preview Mode"] },
+        { key = "btn_reset_icon", type = "button", x = 33, y = 49, w = 14, h = 2, label = L["Reset Position"] },
+        { key = "iconSize", type = "slider", x = 1, y = 52, w = 17, h = 2, label = "Icon Size", min = 16, max = 64 },
+        { key = "iconCols", type = "slider", x = 20, y = 52, w = 15, h = 2, label = "Per Row", min = 1, max = 20 },
+        { key = "iconSpacing", type = "slider", x = 37, y = 52, w = 14, h = 2, label = "Spacing", min = 0, max = 16 },
+        { key = "iconShowName", type = "checkbox", x = 1, y = 55, w = 15, h = 2, label = "Show Player Name" },
+        { key = "iconShowTimer", type = "checkbox", x = 18, y = 55, w = 12, h = 2, label = "Show Timer" },
 
         -- Attached Mode
-        { key = "attach_header", type = "header", x = 1, y = 47, w = 53, h = 2, label = "Attached Mode (Raid Frames)", labelSize = 20 },
-        { key = "attachEnabled", type = "checkbox", x = 1, y = 50, w = 10, h = 2, label = "Enable" },
-        { key = "attachSide", type = "dropdown", x = 14, y = 50, w = 14, h = 2, label = "Position", items = "RIGHT,LEFT,ABOVE,BELOW" },
-        { key = "attachIconSize", type = "slider", x = 30, y = 50, w = 17, h = 2, label = "Icon Size", min = 12, max = 48 },
-        { key = "attachOffsetX", type = "slider", x = 1, y = 53, w = 17, h = 2, label = "Offset X", min = -100, max = 100 },
-        { key = "attachOffsetY", type = "slider", x = 20, y = 53, w = 17, h = 2, label = "Offset Y", min = -100, max = 100 },
-        { key = "attachSpacing", type = "slider", x = 39, y = 53, w = 14, h = 2, label = "Spacing", min = 0, max = 16 },
+        { key = "attach_header", type = "header", x = 1, y = 60, w = 53, h = 2, label = "Attached Mode (Raid Frames)", labelSize = 20 },
+        { key = "attachEnabled", type = "checkbox", x = 1, y = 63, w = 10, h = 2, label = "Enable" },
+        { key = "attachSide", type = "dropdown", x = 14, y = 63, w = 14, h = 2, label = "Position", items = "RIGHT,LEFT,TOP,DOWN" },
+        { key = "attachIconSize", type = "slider", x = 30, y = 63, w = 17, h = 2, label = "Icon Size", min = 12, max = 48 },
+        { key = "attachOffsetX", type = "slider", x = 1, y = 66, w = 17, h = 2, label = "Offset X", min = -100, max = 100 },
+        { key = "attachOffsetY", type = "slider", x = 20, y = 66, w = 17, h = 2, label = "Offset Y", min = -100, max = 100 },
+        { key = "attachSpacing", type = "slider", x = 39, y = 66, w = 14, h = 2, label = "Spacing", min = 0, max = 16 },
+        { key = "attachCols", type = "slider", x = 1, y = 69, w = 17, h = 2, label = "Per Row", min = 1, max = 8 },
     }
     InfinityTools:RegisterModuleLayout(INFINITY_MODULE_KEY, layout)
 end
@@ -107,7 +115,6 @@ if not InfinityTools:IsModuleEnabled(INFINITY_MODULE_KEY) then return end
 -- =====================================================================
 
 local MODULE_DEFAULTS = {
-    enabled = false,
     showOffensive = false,
     showPlayer = true,
 
@@ -122,9 +129,15 @@ local MODULE_DEFAULTS = {
     barUseClassColor = true,
     barShowIcon = true,
     barShowName = true,
-    barShowSpell = true,
     barShowTimer = true,
-    barPos = { "CENTER", "UIParent", "CENTER", -400, 0 },
+    barExtEnabled = true,
+    barBigEnabled = true,
+    barImpEnabled = true,
+    barOffEnabled = false,
+    barExtPos = { "CENTER", "UIParent", "CENTER", -500,  150 },
+    barBigPos = { "CENTER", "UIParent", "CENTER", -500,   50 },
+    barImpPos = { "CENTER", "UIParent", "CENTER", -500,  -50 },
+    barOffPos = { "CENTER", "UIParent", "CENTER", -500, -150 },
 
     iconEnabled = false,
     iconLocked = false,
@@ -136,16 +149,18 @@ local MODULE_DEFAULTS = {
     iconShowTimer = true,
     iconPos = { "CENTER", "UIParent", "CENTER", -400, 100 },
 
+    autoSwitchMode = true,
+
     attachEnabled = false,
     attachSide = "RIGHT",
     attachIconSize = 20,
     attachOffsetX = 2,
     attachOffsetY = 0,
     attachSpacing = 2,
+    attachCols = 5,
 }
 
 local DB = InfinityTools:GetModuleDB(INFINITY_MODULE_KEY, MODULE_DEFAULTS)
-if not DB.enabled then return end
 
 -- =====================================================================
 -- SECTION 3: Rules (ported from MiniCC — Jaliborc)
@@ -155,31 +170,34 @@ local Rules = {}
 
 Rules.BySpec = {
     [65] = { -- Holy Paladin
-        { BuffDuration = 12, Cooldown = 120, Important = true, BigDefensive = false, ExternalDefensive = false, RequiresEvidence = "Cast", SpellId = 31884, MinDuration = true, ExcludeIfTalent = 216331 }, -- Avenging Wrath
-        { BuffDuration = 10, Cooldown = 60, Important = true, BigDefensive = false, ExternalDefensive = false, RequiresEvidence = "Cast", SpellId = 216331, MinDuration = true, RequiresTalent = 216331 }, -- Avenging Crusader
-        { BuffDuration = 8, Cooldown = 300, BigDefensive = true, ExternalDefensive = false, Important = true, RequiresEvidence = { "Cast", "Debuff", "UnitFlags" }, CanCancelEarly = true, SpellId = 642 }, -- Divine Shield
-        { BuffDuration = 8, Cooldown = 60, BigDefensive = true, Important = true, ExternalDefensive = false, RequiresEvidence = "Cast", SpellId = 498 }, -- Divine Protection
-        { BuffDuration = 10, Cooldown = 300, ExternalDefensive = true, BigDefensive = false, Important = false, CanCancelEarly = true, RequiresEvidence = "Cast", SpellId = 204018, RequiresTalent = 5692 }, -- Blessing of Spellwarding
-        { BuffDuration = 10, Cooldown = 300, ExternalDefensive = true, BigDefensive = false, Important = false, CanCancelEarly = true, RequiresEvidence = "Cast", SpellId = 1022, ExcludeIfTalent = 5692 }, -- Blessing of Protection
-        { BuffDuration = 12, Cooldown = 120, ExternalDefensive = true, BigDefensive = false, Important = false, RequiresEvidence = "Cast", SpellId = 6940 }, -- Blessing of Sacrifice
+        { BuffDuration = 12, Cooldown = 120, Important = true,  BigDefensive = false, ExternalDefensive = false, RequiresEvidence = "Cast", SpellId = 31884, MinDuration = true, ExcludeIfTalent = 216331 }, -- Avenging Wrath
+        { BuffDuration = 10, Cooldown = 60,  Important = true,  BigDefensive = false, ExternalDefensive = false, RequiresEvidence = "Cast", SpellId = 216331, MinDuration = true, RequiresTalent = 216331 }, -- Avenging Crusader
+        { BuffDuration = 8,  Cooldown = 300, BigDefensive = true,  ExternalDefensive = false, Important = true,  RequiresEvidence = { "Cast", "Debuff", "UnitFlags" }, CanCancelEarly = true, SpellId = 642 }, -- Divine Shield
+        { BuffDuration = 8,  Cooldown = 60,  BigDefensive = true,  Important = true,  ExternalDefensive = false, RequiresEvidence = "Cast", SpellId = 498 }, -- Divine Protection
+        { BuffDuration = 10, Cooldown = 300, ExternalDefensive = true,  BigDefensive = false, Important = false, CanCancelEarly = true, RequiresEvidence = "Cast", SpellId = 204018, RequiresTalent = 5692, DirectCast = true }, -- Blessing of Spellwarding
+        { BuffDuration = 10, Cooldown = 300, ExternalDefensive = true,  BigDefensive = false, Important = false, CanCancelEarly = true, RequiresEvidence = "Cast", SpellId = 1022,   ExcludeIfTalent = 5692, DirectCast = true }, -- Blessing of Protection
+        { BuffDuration = 12, Cooldown = 120, ExternalDefensive = true,  BigDefensive = false, Important = false, RequiresEvidence = "Cast", SpellId = 6940,   DirectCast = true }, -- Blessing of Sacrifice
+        { BuffDuration = 12, Cooldown = 120, ExternalDefensive = true,  BigDefensive = false, Important = false, RequiresEvidence = "Cast", SpellId = 31884,  DirectCast = true }, -- Avenging Wrath (external)
+        { BuffDuration = 8,  Cooldown = 180, ExternalDefensive = false, BigDefensive = false, Important = true,  RequiresEvidence = "Cast", SpellId = 31821,  ExcludeIfTalent = 392911, DirectCast = true }, -- Aura Mastery
+        { BuffDuration = 8,  Cooldown = 150, ExternalDefensive = false, BigDefensive = false, Important = true,  RequiresEvidence = "Cast", SpellId = 31821,  RequiresTalent = 392911,  DirectCast = true }, -- Aura Mastery (Unwavering Spirit)
     },
     [66] = { -- Protection Paladin
-        { BuffDuration = 25, Cooldown = 120, Important = true, ExternalDefensive = false, BigDefensive = false, MinDuration = true, RequiresEvidence = "Cast", SpellId = 31884, ExcludeIfTalent = 389539 }, -- Avenging Wrath
-        { BuffDuration = 20, Cooldown = 120, Important = true, ExternalDefensive = false, BigDefensive = false, MinDuration = true, RequiresEvidence = "Cast", SpellId = 389539, RequiresTalent = 389539, ExcludeIfTalent = 31884 }, -- Sentinel
-        { BuffDuration = 8, Cooldown = 300, BigDefensive = true, ExternalDefensive = false, Important = true, RequiresEvidence = { "Cast", "Debuff", "UnitFlags" }, CanCancelEarly = true, SpellId = 642 }, -- Divine Shield
-        { BuffDuration = 8, Cooldown = 90, BigDefensive = true, Important = true, ExternalDefensive = false, SpellId = 31850, RequiresEvidence = "Cast" }, -- Ardent Defender
-        { BuffDuration = 8, Cooldown = 180, BigDefensive = true, Important = false, ExternalDefensive = false, RequiresEvidence = "Cast", SpellId = 86659 }, -- Guardian of Ancient Kings
-        { BuffDuration = 10, Cooldown = 300, ExternalDefensive = true, BigDefensive = false, Important = false, CanCancelEarly = true, RequiresEvidence = "Cast", SpellId = 204018, RequiresTalent = 5692 },
-        { BuffDuration = 10, Cooldown = 300, ExternalDefensive = true, BigDefensive = false, Important = false, CanCancelEarly = true, RequiresEvidence = "Cast", SpellId = 1022, ExcludeIfTalent = 5692 },
-        { BuffDuration = 12, Cooldown = 120, ExternalDefensive = true, BigDefensive = false, Important = false, RequiresEvidence = "Cast", SpellId = 6940 },
+        { BuffDuration = 25, Cooldown = 120, Important = true,  ExternalDefensive = false, BigDefensive = false, MinDuration = true, RequiresEvidence = "Cast", SpellId = 31884, ExcludeIfTalent = 389539 }, -- Avenging Wrath
+        { BuffDuration = 20, Cooldown = 120, Important = true,  ExternalDefensive = false, BigDefensive = false, MinDuration = true, RequiresEvidence = "Cast", SpellId = 389539, RequiresTalent = 389539, ExcludeIfTalent = 31884 }, -- Sentinel
+        { BuffDuration = 8,  Cooldown = 300, BigDefensive = true,  ExternalDefensive = false, Important = true,  RequiresEvidence = { "Cast", "Debuff", "UnitFlags" }, CanCancelEarly = true, SpellId = 642 }, -- Divine Shield
+        { BuffDuration = 8,  Cooldown = 90,  BigDefensive = true,  Important = true,  ExternalDefensive = false, SpellId = 31850, RequiresEvidence = "Cast" }, -- Ardent Defender
+        { BuffDuration = 8,  Cooldown = 180, BigDefensive = true,  Important = false, ExternalDefensive = false, RequiresEvidence = "Cast", SpellId = 86659 }, -- Guardian of Ancient Kings
+        { BuffDuration = 10, Cooldown = 300, ExternalDefensive = true,  BigDefensive = false, Important = false, CanCancelEarly = true, RequiresEvidence = "Cast", SpellId = 204018, RequiresTalent = 5692, DirectCast = true },
+        { BuffDuration = 10, Cooldown = 300, ExternalDefensive = true,  BigDefensive = false, Important = false, CanCancelEarly = true, RequiresEvidence = "Cast", SpellId = 1022,   ExcludeIfTalent = 5692, DirectCast = true },
+        { BuffDuration = 12, Cooldown = 120, ExternalDefensive = true,  BigDefensive = false, Important = false, RequiresEvidence = "Cast", SpellId = 6940,   DirectCast = true },
     },
     [70] = { -- Retribution Paladin
-        { BuffDuration = 24, Cooldown = 60, Important = true, ExternalDefensive = false, BigDefensive = false, RequiresEvidence = "Cast", SpellId = 31884, ExcludeIfTalent = 458359 }, -- Avenging Wrath
-        { BuffDuration = 8, Cooldown = 300, BigDefensive = true, ExternalDefensive = false, Important = true, RequiresEvidence = { "Cast", "Debuff", "UnitFlags" }, CanCancelEarly = true, SpellId = 642 },
-        { BuffDuration = 8, Cooldown = 90, Important = true, ExternalDefensive = false, BigDefensive = false, RequiresEvidence = { "Cast", "Shield" }, SpellId = 403876 }, -- Divine Protection (Ret)
-        { BuffDuration = 10, Cooldown = 300, ExternalDefensive = true, BigDefensive = false, Important = false, CanCancelEarly = true, RequiresEvidence = "Cast", SpellId = 204018, RequiresTalent = 5692 },
-        { BuffDuration = 10, Cooldown = 300, ExternalDefensive = true, BigDefensive = false, Important = false, CanCancelEarly = true, RequiresEvidence = "Cast", SpellId = 1022, ExcludeIfTalent = 5692 },
-        { BuffDuration = 12, Cooldown = 120, ExternalDefensive = true, BigDefensive = false, Important = false, RequiresEvidence = "Cast", SpellId = 6940 },
+        { BuffDuration = 24, Cooldown = 60,  Important = true,  ExternalDefensive = false, BigDefensive = false, RequiresEvidence = "Cast", SpellId = 31884, ExcludeIfTalent = 458359 }, -- Avenging Wrath
+        { BuffDuration = 8,  Cooldown = 300, BigDefensive = true,  ExternalDefensive = false, Important = true,  RequiresEvidence = { "Cast", "Debuff", "UnitFlags" }, CanCancelEarly = true, SpellId = 642 },
+        { BuffDuration = 8,  Cooldown = 90,  Important = true,  ExternalDefensive = false, BigDefensive = false, RequiresEvidence = { "Cast", "Shield" }, SpellId = 403876 }, -- Divine Protection (Ret)
+        { BuffDuration = 10, Cooldown = 300, ExternalDefensive = true,  BigDefensive = false, Important = false, CanCancelEarly = true, RequiresEvidence = "Cast", SpellId = 204018, RequiresTalent = 5692, DirectCast = true },
+        { BuffDuration = 10, Cooldown = 300, ExternalDefensive = true,  BigDefensive = false, Important = false, CanCancelEarly = true, RequiresEvidence = "Cast", SpellId = 1022,   ExcludeIfTalent = 5692, DirectCast = true },
+        { BuffDuration = 12, Cooldown = 120, ExternalDefensive = true,  BigDefensive = false, Important = false, RequiresEvidence = "Cast", SpellId = 6940,   DirectCast = true },
     },
     [62] = { { BuffDuration = 15, Cooldown = 90, Important = true, ExternalDefensive = false, BigDefensive = false, RequiresEvidence = "Cast", MinDuration = true, SpellId = 365350 } }, -- Arcane Surge
     [63] = { { BuffDuration = 10, Cooldown = 120, Important = true, ExternalDefensive = false, BigDefensive = false, RequiresEvidence = "Cast", SpellId = 190319, MinDuration = true } }, -- Combustion
@@ -202,14 +220,22 @@ Rules.BySpec = {
         { BuffDuration = 14, Cooldown = 90, BigDefensive = true, ExternalDefensive = false, Important = true, RequiresEvidence = "Cast", SpellId = 55233 },
     },
     [251] = { { BuffDuration = 12, Cooldown = 45, Important = true, BigDefensive = false, ExternalDefensive = false, RequiresEvidence = "Cast", MinDuration = true, SpellId = 51271 } }, -- Pillar of Frost
-    [256] = { { BuffDuration = 8, Cooldown = 180, ExternalDefensive = true, BigDefensive = false, Important = false, RequiresEvidence = "Cast", SpellId = 33206 } }, -- Pain Suppression
     [257] = { -- Holy Priest
-        { BuffDuration = 10, Cooldown = 180, ExternalDefensive = true, BigDefensive = false, Important = false, CanCancelEarly = true, RequiresEvidence = "Cast", SpellId = 47788 }, -- Guardian Spirit
-        { BuffDuration = 5, Cooldown = 180, Important = true, BigDefensive = false, ExternalDefensive = false, CanCancelEarly = true, RequiresEvidence = "Cast", SpellId = 64843 }, -- Divine Hymn
+        { BuffDuration = 10,  Cooldown = 180, ExternalDefensive = true,  BigDefensive = false, Important = false, CanCancelEarly = true, RequiresEvidence = "Cast", SpellId = 47788, ExcludeIfTalent = 200209, DirectCast = true }, -- Guardian Spirit
+        { BuffDuration = 10,  Cooldown = 70,  ExternalDefensive = true,  BigDefensive = false, Important = false, CanCancelEarly = true, RequiresEvidence = "Cast", SpellId = 47788, RequiresTalent = 200209,  DirectCast = true }, -- Guardian Spirit (Guardian Angel)
+        { BuffDuration = 20, Cooldown = 120, ExternalDefensive = false, BigDefensive = false, Important = true, RequiresEvidence = "Cast", SpellId = 200183, DirectCast = true }, -- Apotheosis
+        { BuffDuration = 5,   Cooldown = 180, ExternalDefensive = false, BigDefensive = false, Important = true,  CanCancelEarly = true, RequiresEvidence = "Cast", SpellId = 64843, ExcludeIfTalent = 419110, DirectCast = true }, -- Divine Hymn
+        { BuffDuration = 5,   Cooldown = 120, ExternalDefensive = false, BigDefensive = false, Important = true,  CanCancelEarly = true, RequiresEvidence = "Cast", SpellId = 64843, RequiresTalent = 419110,  DirectCast = true }, -- Divine Hymn (Seraphic Crescendo)
     },
     [258] = { -- Shadow Priest
         { BuffDuration = 6, Cooldown = 120, BigDefensive = true, ExternalDefensive = false, Important = true, CanCancelEarly = true, RequiresEvidence = "Cast", SpellId = 47585 }, -- Dispersion
         { BuffDuration = 20, Cooldown = 120, Important = true, ExternalDefensive = false, BigDefensive = false, RequiresEvidence = "Cast", SpellId = 228260 }, -- Voidform
+    },
+    [259] = { -- Discipline Priest
+        { BuffDuration = 0,  Cooldown = 90,  ExternalDefensive = false, BigDefensive = false, Important = true,  CanCancelEarly = true, RequiresEvidence = "Cast", SpellId = 472433, DirectCast = true }, -- Evangelism
+        { BuffDuration = 1,  Cooldown = 240, ExternalDefensive = false, BigDefensive = false, Important = true,  CanCancelEarly = true, RequiresEvidence = "Cast", SpellId = 421453, DirectCast = true }, -- Ultimate Penitence
+        { BuffDuration = 10, Cooldown = 180, ExternalDefensive = false, BigDefensive = false, Important = true,  CanCancelEarly = true, RequiresEvidence = "Cast", SpellId = 62618,  DirectCast = true }, -- Power Word: Barrier
+        { BuffDuration = 8,  Cooldown = 180, ExternalDefensive = true,  BigDefensive = false, Important = false, RequiresEvidence = "Cast", SpellId = 33206,  DirectCast = true }, -- Pain Suppression
     },
     [102] = { { BuffDuration = 20, Cooldown = 180, Important = true, BigDefensive = false, ExternalDefensive = false, RequiresEvidence = "Cast", MinDuration = true, SpellId = 102560 } }, -- Incarnation Balance
     [103] = { -- Feral Druid
@@ -217,12 +243,29 @@ Rules.BySpec = {
         { BuffDuration = 20, Cooldown = 180, Important = true, BigDefensive = false, ExternalDefensive = false, RequiresEvidence = "Cast", SpellId = 102543, RequiresTalent = 102543 }, -- Incarnation Feral
     },
     [104] = { { BuffDuration = 30, Cooldown = 180, Important = true, BigDefensive = false, ExternalDefensive = false, RequiresEvidence = "Cast", SpellId = 102558 } }, -- Incarnation Guardian
-    [105] = { { BuffDuration = 12, Cooldown = 90, ExternalDefensive = true, BigDefensive = false, Important = false, RequiresEvidence = "Cast", SpellId = 102342 } }, -- Ironbark
-    [268] = { -- Brewmaster Monk
-        { BuffDuration = 25, Cooldown = 120, Important = true, BigDefensive = false, ExternalDefensive = false, RequiresEvidence = "Cast", SpellId = 132578 }, -- Invoke Niuzao
-        { BuffDuration = 15, Cooldown = 360, BigDefensive = true, Important = false, ExternalDefensive = false, RequiresEvidence = "Cast", SpellId = 115203 }, -- Fortifying Brew
+    [105] = { -- Restoration Druid
+        { BuffDuration = 12, Cooldown = 90,  ExternalDefensive = true,  BigDefensive = false, Important = false, RequiresEvidence = "Cast", SpellId = 102342, DirectCast = true }, -- Ironbark
+        { BuffDuration = 8,  Cooldown = 180, ExternalDefensive = false, BigDefensive = false, Important = true,  RequiresEvidence = "Cast", SpellId = 740, ExcludeIfTalent = 197073, DirectCast = true }, -- Tranquility
+        { BuffDuration = 8,  Cooldown = 150, ExternalDefensive = false, BigDefensive = false, Important = true,  RequiresEvidence = "Cast", SpellId = 740, RequiresTalent = 197073,  DirectCast = true }, -- Tranquility (Inner Peace)
+        { BuffDuration = 4,  Cooldown = 120, ExternalDefensive = false, BigDefensive = false, Important = true,  RequiresEvidence = "Cast", SpellId = 391528, ExcludeIfTalent = 393371, DirectCast = true }, -- Convoke the Spirits
+        { BuffDuration = 3,  Cooldown = 60,  ExternalDefensive = false, BigDefensive = false, Important = true,  RequiresEvidence = "Cast", SpellId = 391528, RequiresTalent = 393371,  DirectCast = true }, -- Convoke the Spirits (Cenarius' Guidance)
+        { BuffDuration = 30, Cooldown = 180, ExternalDefensive = false, BigDefensive = false, Important = true,  RequiresEvidence = "Cast", SpellId = 33891, ExcludeIfTalent = 393371, DirectCast = true }, -- Incarnation: Tree of Life
+        { BuffDuration = 30, Cooldown = 150, ExternalDefensive = false, BigDefensive = false, Important = true,  RequiresEvidence = "Cast", SpellId = 33891, RequiresTalent = 393371,  DirectCast = true }, -- Incarnation: Tree of Life (Cenarius' Guidance)
     },
-    [270] = { { BuffDuration = 12, Cooldown = 120, ExternalDefensive = true, BigDefensive = false, Important = false, CanCancelEarly = true, RequiresEvidence = "Cast", SpellId = 116849 } }, -- Life Cocoon
+    [268] = { -- Brewmaster Monk
+        { BuffDuration = 25, Cooldown = 100, Important = true, BigDefensive = false, ExternalDefensive = false, RequiresEvidence = "Cast", SpellId = 132578, DirectCast = true }, -- Invoke Niuzao
+        { BuffDuration = 15, Cooldown = 420, BigDefensive = true, Important = false, ExternalDefensive = false, RequiresEvidence = "Cast", SpellId = 115203 }, -- Fortifying Brew
+        { BuffDuration = 15, Cooldown = 45, BigDefensive = true, Important = false, ExternalDefensive = false, RequiresEvidence = "Cast", SpellId = 1241059, DirectCast = true }, -- Celestial Infusion
+    },
+    [269] = { -- Mistweaver Monk
+        { BuffDuration = 1,  Cooldown = 180, ExternalDefensive = false, BigDefensive = false, Important = true,  RequiresEvidence = "Cast", SpellId = 115310, ExcludeIfTalent = 388551, DirectCast = true }, -- Revival
+        { BuffDuration = 1,  Cooldown = 150, ExternalDefensive = false, BigDefensive = false, Important = true,  RequiresEvidence = "Cast", SpellId = 115310, RequiresTalent = 388551, DirectCast = true },  -- Revival (Uplifted Spirits)
+        { BuffDuration = 12,  Cooldown = 60, ExternalDefensive = false, BigDefensive = false, Important = true,  RequiresEvidence = "Cast", SpellId = 322118, ExcludeIfTalent = 388212, DirectCast = true }, -- Invoke Yu'lon, the Jade Serpent
+        { BuffDuration = 12,  Cooldown = 120, ExternalDefensive = false, BigDefensive = false, Important = true,  RequiresEvidence = "Cast", SpellId = 322118, RequiresTalent = 388212, DirectCast = true },  -- Invoke Yu'lon, the Jade Serpent (Gift of the Celestials)
+        { BuffDuration = 12,  Cooldown = 60, ExternalDefensive = false, BigDefensive = false, Important = true,  RequiresEvidence = "Cast", SpellId = 325197, ExcludeIfTalent = 388212, DirectCast = true }, -- Invoke Chi-Ji, the Red Crane
+        { BuffDuration = 12,  Cooldown = 120, ExternalDefensive = false, BigDefensive = false, Important = true,  RequiresEvidence = "Cast", SpellId = 325197, RequiresTalent = 388212, DirectCast = true },  -- Invoke Chi-Ji, the Red Crane (Gift of the Celestials)
+    },
+    [270] = { { BuffDuration = 12, Cooldown = 120, ExternalDefensive = true, BigDefensive = false, Important = false, CanCancelEarly = true, RequiresEvidence = "Cast", SpellId = 116849, DirectCast = true } }, -- Life Cocoon
     [577] = { { BuffDuration = 10, Cooldown = 60, BigDefensive = true, ExternalDefensive = false, Important = true, RequiresEvidence = "Cast", SpellId = 198589 } }, -- Blur Havoc
     [581] = { -- Vengeance DH
         { BuffDuration = 12, Cooldown = 60, BigDefensive = true, ExternalDefensive = false, Important = false, MinDuration = true, RequiresEvidence = "Cast", SpellId = 204021 }, -- Fiery Brand
@@ -243,9 +286,21 @@ Rules.BySpec = {
         { BuffDuration = 18, Cooldown = 90, Important = true, BigDefensive = false, ExternalDefensive = false, RequiresEvidence = "Cast", SpellId = 121471 },
         { BuffDuration = 20, Cooldown = 90, Important = true, BigDefensive = false, ExternalDefensive = false, RequiresEvidence = "Cast", SpellId = 121471 },
     },
-    [1467] = { { BuffDuration = 18, Cooldown = 120, Important = true, BigDefensive = false, ExternalDefensive = false, RequiresEvidence = "Cast", MinDuration = true, SpellId = 375087 } }, -- Dragonrage
-    [1468] = { { BuffDuration = 8, Cooldown = 60, ExternalDefensive = true, BigDefensive = false, Important = false, RequiresEvidence = "Cast", SpellId = 357170 } }, -- Time Dilation
-    [1473] = { { BuffDuration = 13.4, Cooldown = 90, BigDefensive = true, ExternalDefensive = false, Important = true, RequiresEvidence = "Cast", MinDuration = true, SpellId = 363916 } }, -- Obsidian Scales Aug
+    [1467] = { -- Devastation Evoker
+        { BuffDuration = 18, Cooldown = 120, Important = true,  BigDefensive = false, ExternalDefensive = false, RequiresEvidence = "Cast", MinDuration = true, SpellId = 375087 }, -- Dragonrage
+        { BuffDuration = 20, Cooldown = 120, Important = true,  BigDefensive = false, ExternalDefensive = false, RequiresEvidence = "Cast", MinDuration = true, SpellId = 375087, RequiresTalent = 406732 }, -- Dragonrage (Tyranny)
+    },
+    [1468] = { -- Preservation Evoker
+        { BuffDuration = 8,  Cooldown = 60,  ExternalDefensive = true,  BigDefensive = false, Important = false, RequiresEvidence = "Cast", SpellId = 357170, DirectCast = true }, -- Time Dilation
+        { BuffDuration = 2,  Cooldown = 240, ExternalDefensive = false, BigDefensive = false, Important = true,  RequiresEvidence = "Cast", SpellId = 363534, DirectCast = true }, -- Rewind
+        { BuffDuration = 2,  Cooldown = 180, ExternalDefensive = false, BigDefensive = false, Important = true,  RequiresEvidence = "Cast", SpellId = 363534, RequiresTalent = 370979, DirectCast = true }, -- Rewind (Temporal Compression)
+        { BuffDuration = 15, Cooldown = 120, ExternalDefensive = false, BigDefensive = false, Important = true,  RequiresEvidence = "Cast", SpellId = 359816, DirectCast = true }, -- Dream Flight
+        { BuffDuration = 15, Cooldown = 90,  ExternalDefensive = false, BigDefensive = false, Important = true,  RequiresEvidence = { "Cast", "Debuff", "UnitFlags" }, SpellId = 370537, DirectCast = true }, -- Stasis
+    },
+    [1473] = { -- Augmentation Evoker
+        { BuffDuration = 13.4, Cooldown = 90,  BigDefensive = true,  ExternalDefensive = false, Important = true,  RequiresEvidence = "Cast", MinDuration = true, SpellId = 363916 }, -- Obsidian Scales
+        { BuffDuration = 6,    Cooldown = 120, BigDefensive = false, ExternalDefensive = false, Important = true,  RequiresEvidence = "Cast", MinDuration = true, SpellId = 403631 }, -- Breath of Eons
+    },
     [262] = { -- Elemental Shaman
         { BuffDuration = 15, Cooldown = 180, Important = true, BigDefensive = false, ExternalDefensive = false, RequiresEvidence = "Cast", SpellId = 114050, RequiresTalent = 114050 },
         { BuffDuration = 18, Cooldown = 180, Important = true, BigDefensive = false, ExternalDefensive = false, RequiresEvidence = "Cast", SpellId = 114050, RequiresTalent = 114050 },
@@ -255,15 +310,20 @@ Rules.BySpec = {
         { BuffDuration = 10, Cooldown = 60, Important = true, BigDefensive = false, ExternalDefensive = false, RequiresEvidence = "Cast", SpellId = 384352, RequiresTalent = 384352, ExcludeIfTalent = { 114051, 378270 } },
         { BuffDuration = 15, Cooldown = 180, Important = true, BigDefensive = false, ExternalDefensive = false, RequiresEvidence = "Cast", SpellId = 114051, RequiresTalent = 114051 }, -- Ascendance
     },
-    [264] = { { BuffDuration = 15, Cooldown = 180, Important = true, BigDefensive = false, ExternalDefensive = false, RequiresEvidence = "Cast", SpellId = 114052, RequiresTalent = 114052 } }, -- Ascendance Resto
+    [264] = { -- restoration Shaman
+        { BuffDuration = 6, Cooldown = 180, ExternalDefensive = false, BigDefensive = false, Important = true, RequiresEvidence = "Cast", SpellId = 98008, DirectCast = true }, -- Spirit Link Totem
+        { BuffDuration = 10,  Cooldown = 180, ExternalDefensive = false, BigDefensive = false, Important = true,  RequiresEvidence = "Cast", SpellId = 108280, ExcludeIfTalent = 462440, DirectCast = true }, -- Healing Tide Totem
+        { BuffDuration = 10,  Cooldown = 120, ExternalDefensive = false, BigDefensive = false, Important = true,  RequiresEvidence = "Cast", SpellId = 108280, RequiresTalent = 462440, DirectCast = true },  -- Healing Tide Totem (First Ascendant)
+        { BuffDuration = 15,  Cooldown = 180, ExternalDefensive = false, BigDefensive = false, Important = true,  RequiresEvidence = "Cast", SpellId = 114052, ExcludeIfTalent = 462440, DirectCast = true }, -- Ascendance
+        { BuffDuration = 15,  Cooldown = 120, ExternalDefensive = false, BigDefensive = false, Important = true,  RequiresEvidence = "Cast", SpellId = 114052, RequiresTalent = 462440, DirectCast = true },  -- Ascendance (First Ascendant)
+    },
 }
-
 Rules.ByClass = {
     PALADIN = {
         { BuffDuration = 8, Cooldown = 300, BigDefensive = true, Important = true, ExternalDefensive = false, RequiresEvidence = { "Cast", "Debuff", "UnitFlags" }, CanCancelEarly = true, SpellId = 642 }, -- Divine Shield
         { BuffDuration = 8, Cooldown = 25, Important = true, ExternalDefensive = false, BigDefensive = false, CanCancelEarly = true, RequiresEvidence = "Cast", SpellId = 1044 }, -- Blessing of Freedom
-        { BuffDuration = 10, Cooldown = 45, ExternalDefensive = true, Important = false, BigDefensive = false, CanCancelEarly = true, RequiresEvidence = "Cast", SpellId = 204018, RequiresTalent = 5692 },
-        { BuffDuration = 10, Cooldown = 300, ExternalDefensive = true, Important = false, BigDefensive = false, CanCancelEarly = true, RequiresEvidence = "Cast", SpellId = 1022, ExcludeIfTalent = 5692 },
+        { BuffDuration = 10, Cooldown = 45,  ExternalDefensive = true, Important = false, BigDefensive = false, CanCancelEarly = true, RequiresEvidence = "Cast", SpellId = 204018, RequiresTalent = 5692,  DirectCast = true },
+        { BuffDuration = 10, Cooldown = 300, ExternalDefensive = true, Important = false, BigDefensive = false, CanCancelEarly = true, RequiresEvidence = "Cast", SpellId = 1022,   ExcludeIfTalent = 5692, DirectCast = true },
     },
     WARRIOR = {},
     MAGE = {
@@ -296,14 +356,16 @@ Rules.ByClass = {
         { BuffDuration = 15, Cooldown = 120, BigDefensive = true, ExternalDefensive = false, Important = false, RequiresEvidence = "Cast", SpellId = 115203 }, -- Fortifying Brew
     },
     SHAMAN = {
-        { BuffDuration = 12, Cooldown = 120, BigDefensive = true, ExternalDefensive = false, Important = true, RequiresEvidence = "Cast", SpellId = 108271 }, -- Astral Shift
+        { BuffDuration = 12, Cooldown = 120, BigDefensive = true, ExternalDefensive = false, Important = false, RequiresEvidence = "Cast", SpellId = 108271, DirectCast = true }, -- Astral Shift
+        { BuffDuration = 12, Cooldown = 90, Important = true, BigDefensive = false, ExternalDefensive = false, CanCancelEarly = true, RequiresEvidence = "Cast", SpellId = 108271, RequiresTalent = 381647, DirectCast = true }, -- Astral Shift (Planes Traveler)
     },
     WARLOCK = {
         { BuffDuration = 8, Cooldown = 180, BigDefensive = true, ExternalDefensive = false, Important = true, RequiresEvidence = "Cast", SpellId = 104773 }, -- Unending Resolve
         { BuffDuration = 3, Cooldown = 45, Important = true, BigDefensive = false, ExternalDefensive = false, CanCancelEarly = true, RequiresEvidence = "Cast", SpellId = 212295, RequiresTalent = 3624 }, -- Nether Ward
     },
     PRIEST = {
-        { BuffDuration = 10, Cooldown = 90, BigDefensive = true, ExternalDefensive = false, Important = true, RequiresEvidence = "Cast", SpellId = 19236 }, -- Desperate Prayer
+        { BuffDuration = 10, Cooldown = 90, BigDefensive = true, ExternalDefensive = false, Important = false, RequiresEvidence = "Cast", SpellId = 19236, DirectCast = true }, -- Desperate Prayer
+        { BuffDuration = 10, Cooldown = 70, Important = true, BigDefensive = false, ExternalDefensive = false, CanCancelEarly = true, RequiresEvidence = "Cast", SpellId = 19236, RequiresTalent = 238100, DirectCast = true }, -- Desperate Prayer (Angel's Mercy)
     },
     EVOKER = {
         { BuffDuration = 12, Cooldown = 90, BigDefensive = true, ExternalDefensive = false, Important = true, RequiresEvidence = "Cast", MinDuration = true, SpellId = 363916 }, -- Obsidian Scales
@@ -314,8 +376,36 @@ Rules.OffensiveSpellIds = {
     [375087] = true, [107574] = true, [121471] = true, [31884] = true, [216331] = true,
     [190319] = true, [288613] = true, [228260] = true, [102560] = true, [102543] = true,
     [106951] = true, [102558] = true, [1250646] = true, [384352] = true, [114051] = true,
-    [114050] = true, [365350] = true, [51271] = true,
+    [114050] = true, [365350] = true, [51271] = true, [403631] = true,
 }
+
+-- Lookup for spells detected via CLEU SPELL_CAST_SUCCESS instead of the aura filter system.
+-- Populated from all rules where DirectCast = true.
+-- directCastRules[spellId] = rule
+-- directCastRules[spellId] = { rule, rule, ... }
+-- Multiple variants can share a SpellId (e.g. Divine Hymn 180s base vs 120s with Seraphic Crescendo).
+-- RequiresTalent variants are sorted BEFORE ExcludeIfTalent variants so that when talent state is
+-- unknown (nil), we prefer the talent variant (the more common case) over the base cooldown.
+local directCastRules = {}
+do
+    local function scanList(list)
+        if not list then return end
+        for _, rule in ipairs(list) do
+            if rule.DirectCast and rule.SpellId then
+                directCastRules[rule.SpellId] = directCastRules[rule.SpellId] or {}
+                local bucket = directCastRules[rule.SpellId]
+                -- RequiresTalent rules go first so they are evaluated before ExcludeIfTalent fallbacks.
+                if rule.RequiresTalent then
+                    table.insert(bucket, 1, rule)
+                else
+                    bucket[#bucket + 1] = rule
+                end
+            end
+        end
+    end
+    for _, list in pairs(Rules.BySpec)  do scanList(list) end
+    for _, list in pairs(Rules.ByClass) do scanList(list) end
+end
 
 -- =====================================================================
 -- SECTION 4: Spec cache + Inspect queue
@@ -378,42 +468,137 @@ end)
 -- SECTION 5: Player talent check
 -- =====================================================================
 
+-- playerTalentCache[spellId] = rank  (rank > 0 = talent active)
+-- Populated via talent export string decode — same method as MiniCC (proven reliable).
 local playerTalentCache = {}
 
-local function RefreshPlayerTalents()
-    wipe(playerTalentCache)
-    if not C_ClassTalents or not C_ClassTalents.GetActiveConfigID then return end
-    local configId = C_ClassTalents.GetActiveConfigID()
-    if not configId then return end
-    if not C_Traits or not C_Traits.GetConfig then return end
-    local configInfo = C_Traits.GetConfig(configId)
-    if not configInfo then return end
-    for _, treeId in ipairs(configInfo.treeIDs or {}) do
-        local nodes = C_Traits.GetTreeNodes and C_Traits.GetTreeNodes(treeId) or {}
-        for _, nodeId in ipairs(nodes) do
-            local node = C_Traits.GetNodeInfo and C_Traits.GetNodeInfo(configId, nodeId)
-            if node and node.activeRank and node.activeRank > 0 then
-                for _, entryId in ipairs(node.entryIDs or {}) do
-                    local entryInfo = C_Traits.GetEntryInfo and C_Traits.GetEntryInfo(configId, entryId)
+-- Builds nodeId_choiceIndex → { spellId, maxRank } map for the given spec.
+-- Uses VIEW_TRAIT_CONFIG_ID so all nodes are visible regardless of current loadout.
+local _talentMapCache = {}
+local function BuildTalentToSpellMap(specId)
+    if _talentMapCache[specId] then return _talentMapCache[specId] end
+    if not (C_ClassTalents and C_Traits and Constants and Constants.TraitConsts) then return nil end
+    local configId = Constants.TraitConsts.VIEW_TRAIT_CONFIG_ID
+    C_ClassTalents.InitializeViewLoadout(specId, 100)
+    C_ClassTalents.ViewLoadout({})
+    local configInfo = C_Traits.GetConfigInfo(configId)
+    if not configInfo then return nil end
+    local map = {}
+    for _, treeId in ipairs(configInfo.treeIDs) do
+        for _, nodeId in ipairs(C_Traits.GetTreeNodes(treeId)) do
+            local node = C_Traits.GetNodeInfo(configId, nodeId)
+            if node and node.ID ~= 0 then
+                for choiceIndex, entryId in ipairs(node.entryIDs) do
+                    local entryInfo = C_Traits.GetEntryInfo(configId, entryId)
                     if entryInfo and entryInfo.definitionID then
-                        local defInfo = C_Traits.GetDefinitionInfo and C_Traits.GetDefinitionInfo(entryInfo.definitionID)
+                        local defInfo = C_Traits.GetDefinitionInfo(entryInfo.definitionID)
                         if defInfo and defInfo.spellID then
-                            playerTalentCache[defInfo.spellID] = true
+                            map[node.ID .. "_" .. choiceIndex] = { spellId = defInfo.spellID, maxRank = node.maxRanks }
                         end
                     end
                 end
             end
         end
     end
+    _talentMapCache[specId] = map
+    return map
 end
 
--- Returns true if the unit has the given talent spellId.
--- For non-player units, always returns nil (unconstrained — skip talent filtering).
+-- Decodes one talent record from the bit stream.
+local function DecodeTalentRecord(stream)
+    local function readbool() return stream:ExtractValue(1) == 1 end
+    local selected = readbool()
+    local purchased, rank, choiceIndex = nil, nil, 1
+    if selected then
+        purchased = readbool()
+        if purchased then
+            if readbool() then rank = stream:ExtractValue(6) end  -- notMaxRank → read rank
+            if readbool() then choiceIndex = stream:ExtractValue(2) + 1 end  -- choiceNode
+        end
+    end
+    return selected, purchased, rank, choiceIndex
+end
+
+local function RefreshPlayerTalents()
+    wipe(playerTalentCache)
+    if not (C_Traits and C_Traits.GenerateImportString and C_ClassTalents) then return end
+    if not (ImportDataStreamMixin and CreateAndInitFromMixin) then return end
+    local configId = C_ClassTalents.GetActiveConfigID and C_ClassTalents.GetActiveConfigID()
+    if not configId then return end
+    local specIdx = GetSpecialization and GetSpecialization()
+    if not specIdx then return end
+    local specId = GetSpecializationInfo and select(1, GetSpecializationInfo(specIdx))
+    if not specId then return end
+    local talentString = C_Traits.GenerateImportString(configId)
+    if not talentString or talentString == "" then return end
+    -- Version check (MiniCC requires version 2)
+    if C_Traits.GetLoadoutSerializationVersion and C_Traits.GetLoadoutSerializationVersion() ~= 2 then return end
+    local talentMap = BuildTalentToSpellMap(specId)
+    if not talentMap then return end
+    local traitTree = C_ClassTalents.GetTraitTreeForSpec and C_ClassTalents.GetTraitTreeForSpec(specId)
+    if not traitTree then return end
+    local stream = CreateAndInitFromMixin(ImportDataStreamMixin, talentString)
+    local version = stream:ExtractValue(8)
+    if version ~= 2 then return end
+    stream:ExtractValue(16)   -- specId (skip)
+    stream:ExtractValue(128)  -- treeHash (skip)
+    for _, nodeId in ipairs(C_Traits.GetTreeNodes(traitTree)) do
+        local selected, purchased, rank, choiceIndex = DecodeTalentRecord(stream)
+        if selected and purchased then
+            local entry = talentMap[nodeId .. "_" .. choiceIndex]
+            if entry and entry.spellId then
+                playerTalentCache[entry.spellId] = rank or entry.maxRank or 1
+            end
+        end
+    end
+end
+
+-- Ported from MiniCC Talents.lua — assumed talent ranks for non-inspected players.
+-- Used as fallback when no real talent data is available for a group member.
+-- { [talentSpellId] = rank } — rank > 0 means assumed present.
+local ClassDefaultTalentRanks = {
+    DEATHKNIGHT = { [205727] = 1 }, -- Anti-Magic Barrier: AMS -20s (nearly universal)
+    HUNTER      = { [1258485] = 1 }, -- Improved Aspect of the Turtle: -30s (nearly universal)
+    MAGE        = { [382424] = 2, [1265517] = 1 }, -- Winter's Protection r2, Permafrost Bauble
+    MONK        = { [388813] = 1 }, -- Expeditious Fortification: Fortifying Brew CDR
+    PALADIN     = { [114154] = 1 }, -- Unbreakable Spirit: Bubble/DP -30%
+    SHAMAN      = { [381647] = 1 }, -- Planes Traveler: Astral Shift -30s
+    WARRIOR     = { [107574] = 1, [184364] = 1 }, -- Avatar, Enraged Regen
+}
+local SpecDefaultTalentRanks = {
+    [65]   = { [384820] = 1, [216331] = 1 }, -- Holy Paladin: BoSac -15s, Avenging Crusader
+    [66]   = { [384820] = 1 }, -- Prot Paladin: BoSac -60s
+    [70]   = { [458359] = 1, [384820] = 1 }, -- Ret Paladin: Radiant Glory, BoSac -60s
+    [72]   = { [383468] = 1 }, -- Fury Warrior: Invigorating Fury
+    [102]  = { [468743] = 1 }, -- Balance Druid: Whirling Stars -60s
+    [103]  = { [102543] = 1, [391174] = 1, [391548] = 1 }, -- Feral Druid
+    [105]  = { [382552] = 1 }, -- Resto Druid: Improved Ironbark -20s
+    [254]  = { [260404] = 1 }, -- MM Hunter: Calling the Shots -30s
+    [63]   = { [1254194] = 1 }, -- Fire Mage: Kindling -60s
+    [257]  = { [419110] = 1 }, -- Holy Priest: Seraphic Crescendo (Divine Hymn -60s)
+    [258]  = { [288733] = 1 }, -- Shadow Priest: Intangibility (Dispersion -30s)
+    [262]  = { [114050] = 1, [462440] = 1, [462443] = 1 }, -- Ele Shaman: Ascendance
+    [263]  = { [384352] = 1, [384444] = 1 }, -- Enh Shaman: Doomwinds, Thorim's Invocation
+    [264]  = { [114052] = 1, [462440] = 1 }, -- Resto Shaman: Ascendance
+    [270]  = { [202424] = 1 }, -- Mistweaver: Chrysalis (Life Cocoon -45s)
+    [1468] = { [376204] = 1 }, -- Preservation Evoker: Just in Time -10s
+}
+
+-- Returns true/false/nil for a talent.
+-- Player: exact check from talent cache.
+-- Others: check class/spec defaults (nearly-universal assumptions); nil if unknown.
 local function UnitHasTalent(unit, talentId)
     if UnitIsUnit(unit, "player") then
-        return playerTalentCache[talentId] == true
+        return (playerTalentCache[talentId] or 0) > 0
     end
-    return nil -- nil = skip this check for others
+    local _, classToken = UnitClass(unit)
+    local specId = GetUnitSpec(unit)
+    local classDef = classToken and ClassDefaultTalentRanks[classToken]
+    local specDef  = specId and SpecDefaultTalentRanks[specId]
+    if (classDef and (classDef[talentId] or 0) > 0) or (specDef and (specDef[talentId] or 0) > 0) then
+        return true  -- assumed present (nearly universal default)
+    end
+    return nil  -- unknown, skip talent check
 end
 
 -- =====================================================================
@@ -575,6 +760,7 @@ local Observer = {}
 local observerWatched = {}      -- entry -> { Watcher, CastFrame }
 local observerCallbacks = {}    -- aura-changed callbacks
 local observerCastCallbacks = {}
+local observerDirectCastCallbacks = {}  -- fn(unit, spellId) — for DirectCast spells not trackable via auras
 local observerShieldCallbacks = {}
 local observerFlagsCallbacks = {}
 local observerDebuffCallbacks = {}
@@ -594,7 +780,11 @@ local function MakeCastFrame(entry)
         local u = entry.Unit
         if not u or UnitCanAttack("player", u) then return end
         if event == "UNIT_SPELLCAST_SUCCEEDED" then
+            local _, _, spellId = ...
             for _, fn in ipairs(observerCastCallbacks) do fn(u) end
+            if spellId and next(observerDirectCastCallbacks) then
+                for _, fn in ipairs(observerDirectCastCallbacks) do fn(u, spellId) end
+            end
         elseif event == "UNIT_FLAGS" then
             for _, fn in ipairs(observerFlagsCallbacks) do fn(u) end
         elseif event == "UNIT_AURA" then
@@ -640,6 +830,7 @@ end
 
 function Observer:RegisterAuraChanged(fn) observerCallbacks[#observerCallbacks + 1] = fn end
 function Observer:RegisterCast(fn) observerCastCallbacks[#observerCastCallbacks + 1] = fn end
+function Observer:RegisterDirectCast(fn) observerDirectCastCallbacks[#observerDirectCastCallbacks + 1] = fn end
 function Observer:RegisterShield(fn) observerShieldCallbacks[#observerShieldCallbacks + 1] = fn end
 function Observer:RegisterFlags(fn) observerFlagsCallbacks[#observerFlagsCallbacks + 1] = fn end
 function Observer:RegisterDebuff(fn) observerDebuffCallbacks[#observerDebuffCallbacks + 1] = fn end
@@ -931,6 +1122,40 @@ Observer:RegisterDebuff(function(unit, updateInfo)
         end
     end
 end)
+-- DirectCast: spells not detectable via aura filters (IsSpellImportant = false, not BIG/EXTERNAL_DEFENSIVE).
+-- Detected via UNIT_SPELLCAST_SUCCEEDED (already registered per unit by the Observer).
+-- Only uses variables declared before this point: directCastRules, Rules, cdCommittedCallback (forward-declared).
+Observer:RegisterDirectCast(function(unit, spellId)
+    local ok, variants = pcall(function() return directCastRules[spellId] end)
+    if not ok or not variants then return end
+    -- Pick the first variant whose talent requirements match this unit.
+    local rule = nil
+    for _, v in ipairs(variants) do
+        local ok = true
+        if v.RequiresTalent then
+            local has = UnitHasTalent(unit, v.RequiresTalent)
+            if has == false then ok = false end
+        end
+        if ok and v.ExcludeIfTalent then
+            local excl = type(v.ExcludeIfTalent) == "table" and v.ExcludeIfTalent or { v.ExcludeIfTalent }
+            for _, tid in ipairs(excl) do
+                if UnitHasTalent(unit, tid) == true then ok = false; break end
+            end
+        end
+        if ok then rule = v; break end
+    end
+    if not rule then return end
+    local now = GetTime()
+    -- SpellIcon left nil — cdCommittedCallback resolves it internally via GetSpellIcon.
+    local cdData = {
+        StartTime   = now,
+        Cooldown    = rule.Cooldown,
+        Remaining   = rule.Cooldown,
+        SpellId     = rule.SpellId,
+        IsOffensive = Rules.OffensiveSpellIds[rule.SpellId] == true,
+    }
+    cdCommittedCallback(unit, rule.SpellId, cdData, nil)
+end)
 
 -- =====================================================================
 -- SECTION 9: Cooldown Store
@@ -940,6 +1165,80 @@ end)
 local activeCDs = {}
 -- entry.ActiveCooldowns[spellId] = true
 local watchEntries = {}  -- unit -> entry
+
+-- Static abilities cache: unit -> { specId, result[] }
+-- result[i] = { SpellId, IsOffensive }
+local staticAbilitiesCache = {}
+
+-- Returns the ordered list of unique spells tracked for a unit's spec/class.
+-- When the spell is not on CD the icon shows at full brightness (no swipe).
+local function GetStaticAbilities(unit)
+    local _, classToken = UnitClass(unit)
+    if not classToken then return {} end
+    local specId = GetUnitSpec(unit) or 0
+
+    local cached = staticAbilitiesCache[unit]
+    if cached and cached.specId == specId then return cached.result end
+
+    -- Category priority: ext=4, big=3, imp=2, off=1
+    -- A spell with multiple rules (same SpellId) gets the highest-priority category.
+    local CAT_PRIO = { ext = 4, big = 3, imp = 2, off = 1 }
+    local seen   = {}   -- spellId -> index in result
+    local result = {}
+    local isPlayer = UnitIsUnit(unit, "player")
+
+    local function addRules(ruleList)
+        if not ruleList then return end
+        for _, rule in ipairs(ruleList) do
+            if rule.SpellId then
+                local ok = true
+                if isPlayer then
+                    if rule.RequiresTalent then
+                        local has = UnitHasTalent(unit, rule.RequiresTalent)
+                        if has == false then ok = false end
+                    end
+                    if ok and rule.ExcludeIfTalent then
+                        local excl = type(rule.ExcludeIfTalent) == "table" and rule.ExcludeIfTalent or { rule.ExcludeIfTalent }
+                        for _, tid in ipairs(excl) do
+                            if UnitHasTalent(unit, tid) == true then ok = false; break end
+                        end
+                    end
+                end
+                if ok then
+                    local isOff = Rules.OffensiveSpellIds and Rules.OffensiveSpellIds[rule.SpellId] == true
+                    local cat
+                    if isOff then cat = "off"
+                    elseif rule.ExternalDefensive then cat = "ext"
+                    elseif rule.BigDefensive then cat = "big"
+                    else cat = "imp"
+                    end
+                    local idx = seen[rule.SpellId]
+                    if idx then
+                        -- Update category if this rule has higher priority
+                        local existing = result[idx]
+                        if CAT_PRIO[cat] > CAT_PRIO[existing.Category] then
+                            existing.Category = cat
+                            existing.IsOffensive = isOff
+                        end
+                    else
+                        seen[rule.SpellId] = #result + 1
+                        result[#result + 1] = {
+                            SpellId = rule.SpellId,
+                            IsOffensive = isOff,
+                            Category = cat,
+                        }
+                    end
+                end
+            end
+        end
+    end
+
+    addRules(specId > 0 and Rules.BySpec[specId])
+    addRules(Rules.ByClass[classToken])
+
+    staticAbilitiesCache[unit] = { specId = specId, result = result }
+    return result
+end
 
 local function GetSpellIcon(spellId)
     if not spellId then return nil end
@@ -974,6 +1273,14 @@ end
 -- =====================================================================
 -- SECTION 10: Frame detection (port of MiniCC Frames)
 -- =====================================================================
+
+-- GetAttribute is a protected call on secure frames and cannot be called
+-- during combat lockdown from non-secure code (causes ADDON_ACTION_FORBIDDEN).
+local function SafeGetUnit(frame)
+    if not frame or not frame.GetAttribute then return nil end
+    local ok, val = pcall(frame.GetAttribute, frame, "unit")
+    return ok and val or nil
+end
 
 local Frames = {}
 
@@ -1058,6 +1365,97 @@ function Frames:DandersFrames()
     return frames
 end
 
+function Frames:ShadowedUFFrames()
+    local frames = {}
+    if not SUFUnitplayer and not SUFHeaderpartyUnitButton1 and not SUFHeaderraidUnitButton1 then
+        return frames
+    end
+    local function Add(f)
+        if f and not (f.IsForbidden and f:IsForbidden()) then frames[#frames + 1] = f end
+    end
+    Add(SUFUnitplayer)
+    for i = 1, 4 do
+        Add(_G["SUFHeaderpartyUnitButton" .. i])
+        Add(_G["SUFUnitparty" .. i])
+    end
+    for i = 1, 40 do
+        Add(_G["SUFHeaderraidUnitButton" .. i])
+        Add(_G["SUFUnitraidunit" .. i])
+    end
+    return frames
+end
+
+function Frames:PlexusFrames()
+    local frames = {}
+    if not PlexusLayoutHeader1 then return frames end
+    local seen = {}
+    local headerIndex = 1
+    while true do
+        local header = _G["PlexusLayoutHeader" .. headerIndex]
+        if not header then break end
+        for _, child in ipairs({ header:GetChildren() }) do
+            local unit = child.unit or SafeGetUnit(child)
+            if unit and unit ~= "" and not seen[child] then
+                if not (child.IsForbidden and child:IsForbidden()) then
+                    seen[child] = true
+                    frames[#frames + 1] = child
+                end
+            end
+        end
+        headerIndex = headerIndex + 1
+    end
+    return frames
+end
+
+function Frames:CellFrames()
+    local frames = {}
+    if not CellPartyFrameHeader and not CellRaidFrameHeader0 then return frames end
+    local headers = { CellPartyFrameHeader, CellSoloFrame }
+    for i = 0, 8 do
+        local h = _G["CellRaidFrameHeader" .. i]
+        if h then headers[#headers + 1] = h end
+    end
+    for _, header in ipairs(headers) do
+        if header then
+            for _, child in ipairs({ header:GetChildren() }) do
+                local unit = child.unit or SafeGetUnit(child)
+                if unit and unit ~= "" then
+                    if not (child.IsForbidden and child:IsForbidden()) then
+                        frames[#frames + 1] = child
+                    end
+                end
+            end
+        end
+    end
+    return frames
+end
+
+function Frames:IsBlizzardPartyFrame(frame)
+    if not frame or (frame.IsForbidden and frame:IsForbidden()) then return false end
+    local name = frame:GetName()
+    if name and name:find("CompactPartyFrame") then return true end
+    if PartyFrame and frame:GetParent() == PartyFrame then return true end
+    return false
+end
+
+-- Returns true for any Blizzard compact/standard CUF (used to gate hooksecurefunc)
+function Frames:IsFriendlyCuf(frame)
+    if not frame or (frame.IsForbidden and frame:IsForbidden()) then return false end
+    local name = frame:GetName()
+    if not name then return false end
+    if name:find("CompactParty") or name:find("CompactRaid") then return true end
+    if PartyFrame and frame:GetParent() == PartyFrame then return true end
+    return false
+end
+
+-- Returns the frame strata one level above the given strata, clamped at TOOLTIP
+local _strataOrder = { "BACKGROUND", "LOW", "MEDIUM", "HIGH", "DIALOG", "FULLSCREEN", "FULLSCREEN_DIALOG", "TOOLTIP" }
+local _strataIndex = {}
+for i, v in ipairs(_strataOrder) do _strataIndex[v] = i end
+function Frames:GetNextStrata(strata)
+    return _strataOrder[math.min((_strataIndex[strata] or 1) + 1, #_strataOrder)]
+end
+
 function Frames:GetAll()
     local all = {}
     local blizzard  = Frames:BlizzardFrames()
@@ -1065,11 +1463,17 @@ function Frames:GetAll()
     local grid2     = Frames:Grid2Frames()
     local vuhdo     = Frames:VuhDoFrames()
     local danders   = Frames:DandersFrames()
+    local suf       = Frames:ShadowedUFFrames()
+    local plexus    = Frames:PlexusFrames()
+    local cell      = Frames:CellFrames()
     for _, f in ipairs(blizzard) do all[#all + 1] = f end
     for _, f in ipairs(elvui)    do all[#all + 1] = f end
     for _, f in ipairs(grid2)    do all[#all + 1] = f end
     for _, f in ipairs(vuhdo)    do all[#all + 1] = f end
     for _, f in ipairs(danders)  do all[#all + 1] = f end
+    for _, f in ipairs(suf)      do all[#all + 1] = f end
+    for _, f in ipairs(plexus)   do all[#all + 1] = f end
+    for _, f in ipairs(cell)     do all[#all + 1] = f end
     return all
 end
 
@@ -1116,12 +1520,21 @@ end
 -- SECTION 12: Display — Bar Mode
 -- =====================================================================
 
-local barContainer = nil
-local barPool = {}
-local barActive = {}   -- ordered list of active bars
+local BAR_CATS       = { "ext", "big", "imp", "off" }
+local BAR_CAT_POSKEY = { ext = "barExtPos", big = "barBigPos", imp = "barImpPos", off = "barOffPos" }
+local BAR_CAT_ENKEY  = { ext = "barExtEnabled", big = "barBigEnabled", imp = "barImpEnabled", off = "barOffEnabled" }
+local BAR_CAT_DEFPOS = {
+    ext = { "CENTER", "UIParent", "CENTER", -500,  150 },
+    big = { "CENTER", "UIParent", "CENTER", -500,   50 },
+    imp = { "CENTER", "UIParent", "CENTER", -500,  -50 },
+    off = { "CENTER", "UIParent", "CENTER", -500, -150 },
+}
+local barContainers = { ext = nil, big = nil, imp = nil, off = nil }
+local barPools      = { ext = {},  big = {},  imp = {},  off = {}  }
+local barActives    = { ext = {},  big = {},  imp = {},  off = {}  }
 
-local function CreateBarWidget()
-    local bar = CreateFrame("Frame", nil, barContainer)
+local function CreateBarWidget(container)
+    local bar = CreateFrame("Frame", nil, container)
     bar:SetHeight(DB.barHeight)
     local bg = bar:CreateTexture(nil, "BACKGROUND")
     bg:SetAllPoints()
@@ -1144,138 +1557,371 @@ local function CreateBarWidget()
     bar.icon = icon
     local nameText = bar:CreateFontString(nil, "OVERLAY", "GameFontNormal")
     nameText:SetPoint("LEFT", icon, "RIGHT", 4, 0)
-    nameText:SetPoint("RIGHT", bar, "RIGHT", -40, 0)
+    nameText:SetPoint("RIGHT", bar, "RIGHT", -56, 0)
     nameText:SetJustifyH("LEFT")
+    nameText:SetJustifyV("MIDDLE")
     nameText:SetHeight(DB.barHeight)
     bar.nameText = nameText
     local timerText = bar:CreateFontString(nil, "OVERLAY", "GameFontNormal")
     timerText:SetPoint("RIGHT", bar, "RIGHT", -4, 0)
-    timerText:SetWidth(36)
+    timerText:SetWidth(52)
+    timerText:SetHeight(DB.barHeight)
     timerText:SetJustifyH("RIGHT")
+    timerText:SetJustifyV("MIDDLE")
     bar.timerText = timerText
     bar:Hide()
     return bar
 end
 
-local function InitBarContainer()
-    if barContainer then return end
-    barContainer = CreateFrame("Frame", "InfinityFCDBarContainer", UIParent)
-    barContainer:SetSize(DB.barWidth, DB.barHeight)
-    barContainer:SetClampedToScreen(true)
-    barContainer:EnableMouse(not DB.barLocked)
-    barContainer:SetMovable(not DB.barLocked)
-    if not DB.barLocked then
-        barContainer:RegisterForDrag("LeftButton")
-        barContainer:SetScript("OnDragStart", function(f) f:StartMoving() end)
-        barContainer:SetScript("OnDragStop", function(f)
-            f:StopMovingOrSizing()
-            local p, _, rp, x, y = f:GetPoint()
-            DB.barPos = { p, "UIParent", rp, x, y }
-        end)
-    end
-    local pos = DB.barPos
-    if pos then
-        barContainer:SetPoint(pos[1], pos[2], pos[3], pos[4], pos[5])
-    else
-        barContainer:SetPoint("CENTER", UIParent, "CENTER", -400, 0)
-    end
-
-    -- Reset button handler
-    if InfinityTools.GetModuleDB then
-        -- wired via settings button
+local function InitBarContainers()
+    if InCombatLockdown() then return end
+    for _, cat in ipairs(BAR_CATS) do
+        if DB[BAR_CAT_ENKEY[cat]] and not barContainers[cat] then
+            local c = CreateFrame("Frame", "InfinityFCDBarContainer_" .. cat, UIParent)
+            c:SetSize(DB.barWidth, 1)
+            c:SetClampedToScreen(true)
+            c:EnableMouse(not DB.barLocked)
+            c:SetMovable(not DB.barLocked)
+            if not DB.barLocked then
+                c:RegisterForDrag("LeftButton")
+                c:SetScript("OnDragStart", function(f) f:StartMoving() end)
+                local posKey = BAR_CAT_POSKEY[cat]
+                c:SetScript("OnDragStop", function(f)
+                    f:StopMovingOrSizing()
+                    local p, _, rp, x, y = f:GetPoint()
+                    DB[posKey] = { p, "UIParent", rp, x, y }
+                end)
+            end
+            local pos = DB[BAR_CAT_POSKEY[cat]] or BAR_CAT_DEFPOS[cat]
+            c:SetPoint(pos[1], _G[pos[2]] or UIParent, pos[3], pos[4], pos[5])
+            barContainers[cat] = c
+        end
     end
 end
 
-local function AcquireBar()
-    local bar = table.remove(barPool)
-    if not bar then bar = CreateBarWidget() end
+local function AcquireBar(cat)
+    local bar = table.remove(barPools[cat])
+    if not bar then bar = CreateBarWidget(barContainers[cat]) end
     bar:Show()
     return bar
 end
 
-local function ReleaseBar(bar)
+local function ReleaseBar(cat, bar)
     bar:Hide()
-    barPool[#barPool + 1] = bar
+    barPools[cat][#barPools[cat] + 1] = bar
 end
 
-local function RebuildBars()
-    if not barContainer then return end
-    for _, bar in ipairs(barActive) do ReleaseBar(bar) end
-    barActive = {}
+-- Returns a flat list of { unit, spellId, tex, onCD, remaining, startTime, cooldown, unitName, class }
+-- for all tracked abilities across all current group members.
+-- When a spell is available (not on CD) it is still included so Bar/Icon modes show the full
+-- ability roster — same behaviour as Attached mode.
+local function BuildAbilityLists()
+    local lists    = { ext = {}, big = {}, imp = {}, off = {} }
+    local now      = GetTime()
+    local isPreview = DB.barPreview or DB.iconPreview
 
-    -- Collect all active CDs sorted by remaining time (descending = most recently used)
-    local list = {}
-    local now = GetTime()
-    for unit, cds in pairs(activeCDs) do
-        for cdKey, cdData in pairs(cds) do
-            local elapsed = now - cdData.StartTime
-            local remaining = cdData.Cooldown - elapsed
-            if remaining > 0 then
-                list[#list + 1] = {
-                    unit = unit,
-                    cdKey = cdKey,
-                    data = cdData,
-                    remaining = remaining,
-                    elapsed = elapsed,
-                }
+    -- ---- Build unit list (forward-safe; no reference to activeEntries) ----
+    local units    = {}
+    local unitsSeen = {}
+    local function AddUnit(u)
+        if not unitsSeen[u] then
+            unitsSeen[u] = true
+            units[#units + 1] = u
+        end
+    end
+
+    if DB.showPlayer then AddUnit("player") end
+    if IsInRaid() then
+        local n = GetNumGroupMembers()
+        for i = 1, n do AddUnit("raid" .. i) end
+    else
+        local n = GetNumGroupMembers()
+        for i = 1, n do AddUnit("party" .. i) end
+    end
+    -- Preview: also pull any fake units injected into activeCDs
+    if isPreview then
+        for previewUnit in pairs(activeCDs) do AddUnit(previewUnit) end
+    end
+
+    -- ---- Per-unit ability list ----
+    for _, unit in ipairs(units) do
+        local realUnit = UnitExists(unit)
+
+        if realUnit then
+            -- Normal path: real unit in the world
+            local unitName = UnitName(unit) or unit
+            local _, class = UnitClass(unit)
+            local cds      = activeCDs[unit] or {}
+            -- activeCDs may key by a different token (e.g. party1 vs raid1)
+            for u, data in pairs(activeCDs) do
+                if u ~= unit and UnitIsUnit(u, unit) then
+                    cds = data
+                    break
+                end
+            end
+
+            local staticAbils = GetStaticAbilities(unit)
+            local shownSpells = {}
+            for _, ability in ipairs(staticAbils) do
+                if DB.showOffensive or not ability.IsOffensive then
+                    local tex = C_Spell.GetSpellTexture(ability.SpellId)
+                    if tex then
+                        shownSpells[ability.SpellId] = true
+                        local cd        = cds[ability.SpellId]
+                        local onCD      = false
+                        local remaining = 0
+                        local startTime = nil
+                        local cooldown  = nil
+                        if cd then
+                            remaining = cd.Cooldown - (now - cd.StartTime)
+                            if remaining > 0 then
+                                onCD      = true
+                                startTime = cd.StartTime
+                                cooldown  = cd.Cooldown
+                            end
+                        end
+                        local cat = ability.Category or "imp"
+                        local sublist = lists[cat]
+                        sublist[#sublist + 1] = {
+                            unit      = unit,
+                            spellId   = ability.SpellId,
+                            tex       = tex,
+                            onCD      = onCD,
+                            remaining = remaining,
+                            startTime = startTime,
+                            cooldown  = cooldown,
+                            unitName  = unitName,
+                            class     = class,
+                        }
+                    end
+                end
+            end
+            -- Also show CDs from DirectCast spells not covered by static abilities
+            -- (happens when spec is unknown at cast time — e.g. inspect not yet done)
+            for cdKey, cd in pairs(cds) do
+                if type(cdKey) == "number" and not shownSpells[cdKey] then
+                    if DB.showOffensive or not (Rules.OffensiveSpellIds and Rules.OffensiveSpellIds[cdKey]) then
+                        local remaining = cd.Cooldown - (now - cd.StartTime)
+                        if remaining > 0 then
+                            local tex = C_Spell.GetSpellTexture(cdKey)
+                            if tex then
+                                lists["imp"][#lists["imp"] + 1] = {
+                                    unit=unit, spellId=cdKey, tex=tex,
+                                    onCD=true, remaining=remaining,
+                                    startTime=cd.StartTime, cooldown=cd.Cooldown,
+                                    unitName=unitName, class=class,
+                                }
+                            end
+                        end
+                    end
+                end
+            end
+
+        elseif isPreview and activeCDs[unit] then
+            -- Preview path: fake unit injected by SetupPreview; show its injected CDs
+            for spellId, cd in pairs(activeCDs[unit]) do
+                local tex = C_Spell.GetSpellTexture(spellId)
+                if tex then
+                    local remaining = cd.Cooldown - (now - cd.StartTime)
+                    local onCD      = remaining > 0
+                    local cat       = cd.Category or "imp"
+                    local sublist   = lists[cat]
+                    sublist[#sublist + 1] = {
+                        unit      = unit,
+                        spellId   = spellId,
+                        tex       = tex,
+                        onCD      = onCD,
+                        remaining = onCD and remaining or 0,
+                        startTime = onCD and cd.StartTime or nil,
+                        cooldown  = onCD and cd.Cooldown or nil,
+                        unitName  = cd.UnitName or unit,
+                        class     = cd.Class or nil,
+                    }
+                end
             end
         end
     end
-    table.sort(list, function(a, b) return a.elapsed < b.elapsed end) -- most recently used first
 
-    local maxBars = DB.barMaxBars
-    local count = math.min(#list, maxBars)
-    local barH = DB.barHeight
-    local spacing = DB.barSpacing
+    -- Sort each sub-list: available first, then soonest back
+    local sortFn = function(a, b)
+        if a.onCD ~= b.onCD then return not a.onCD end
+        return a.remaining < b.remaining
+    end
+    for _, sublist in pairs(lists) do table.sort(sublist, sortFn) end
+
+    return lists
+end
+
+-- Flat list for Icon mode: shows ALL abilities regardless of offensive filter
+local function BuildAbilityList()
+    local list      = {}
+    local now       = GetTime()
+    local isPreview = DB.barPreview or DB.iconPreview
+
+    local units, unitsSeen = {}, {}
+    local function AddUnit(u)
+        if not unitsSeen[u] then unitsSeen[u] = true; units[#units+1] = u end
+    end
+    if DB.showPlayer then AddUnit("player") end
+    if IsInRaid() then
+        for i = 1, GetNumGroupMembers() do AddUnit("raid"..i) end
+    else
+        for i = 1, GetNumGroupMembers() do AddUnit("party"..i) end
+    end
+    if isPreview then
+        for previewUnit in pairs(activeCDs) do AddUnit(previewUnit) end
+    end
+
+    for _, unit in ipairs(units) do
+        if UnitExists(unit) then
+            local unitName = UnitName(unit) or unit
+            local _, class = UnitClass(unit)
+            local cds = activeCDs[unit] or {}
+            for u, data in pairs(activeCDs) do
+                if u ~= unit and UnitIsUnit(u, unit) then cds = data; break end
+            end
+            local shownSpells = {}
+            for _, ability in ipairs(GetStaticAbilities(unit)) do
+                local tex = C_Spell.GetSpellTexture(ability.SpellId)
+                if tex then
+                    shownSpells[ability.SpellId] = true
+                    local cd = cds[ability.SpellId]
+                    local onCD, remaining, startTime, cooldown = false, 0, nil, nil
+                    if cd then
+                        remaining = cd.Cooldown - (now - cd.StartTime)
+                        if remaining > 0 then
+                            onCD = true; startTime = cd.StartTime; cooldown = cd.Cooldown
+                        end
+                    end
+                    list[#list+1] = {
+                        unit=unit, spellId=ability.SpellId, tex=tex,
+                        onCD=onCD, remaining=remaining, startTime=startTime,
+                        cooldown=cooldown, unitName=unitName, class=class,
+                    }
+                end
+            end
+            -- Also show CDs from DirectCast spells not covered by static abilities
+            -- (happens when spec is unknown at cast time — e.g. inspect not yet done)
+            for cdKey, cd in pairs(cds) do
+                if type(cdKey) == "number" and not shownSpells[cdKey] then
+                    local remaining = cd.Cooldown - (now - cd.StartTime)
+                    if remaining > 0 then
+                        local tex = C_Spell.GetSpellTexture(cdKey)
+                        if tex then
+                            list[#list+1] = {
+                                unit=unit, spellId=cdKey, tex=tex,
+                                onCD=true, remaining=remaining,
+                                startTime=cd.StartTime, cooldown=cd.Cooldown,
+                                unitName=unitName, class=class,
+                            }
+                        end
+                    end
+                end
+            end
+        elseif isPreview and activeCDs[unit] then
+            for spellId, cd in pairs(activeCDs[unit]) do
+                local tex = C_Spell.GetSpellTexture(spellId)
+                if tex then
+                    local remaining = cd.Cooldown - (now - cd.StartTime)
+                    local onCD = remaining > 0
+                    list[#list+1] = {
+                        unit=unit, spellId=spellId, tex=tex,
+                        onCD=onCD, remaining=onCD and remaining or 0,
+                        startTime=onCD and cd.StartTime or nil,
+                        cooldown=onCD and cd.Cooldown or nil,
+                        unitName=cd.UnitName or unit, class=cd.Class or nil,
+                    }
+                end
+            end
+        end
+    end
+
+    table.sort(list, function(a, b)
+        if a.onCD ~= b.onCD then return not a.onCD end
+        return a.remaining < b.remaining
+    end)
+    return list
+end
+
+local function RebuildBarsForCat(cat, container, list)
+    local active  = barActives[cat]
+    for _, bar in ipairs(active) do ReleaseBar(cat, bar) end
+    barActives[cat] = {}
+    active = barActives[cat]
+
+    local maxBars  = DB.barMaxBars
+    local count    = math.min(#list, maxBars)
+    local barH     = DB.barHeight
+    local spacing  = DB.barSpacing
     local growDown = DB.barGrowDown
-    local totalH = count * barH + math.max(0, count - 1) * spacing
-    barContainer:SetHeight(math.max(totalH, 1))
-    barContainer:SetWidth(DB.barWidth)
+    local totalH   = count * barH + math.max(0, count - 1) * spacing
+    container:SetHeight(math.max(totalH, 1))
+    container:SetWidth(DB.barWidth)
 
     for i = 1, count do
         local entry = list[i]
-        local bar = AcquireBar()
+        local bar   = AcquireBar(cat)
         bar:SetWidth(DB.barWidth)
         bar:SetHeight(barH)
         bar:ClearAllPoints()
         local yOff = (i - 1) * (barH + spacing)
         if growDown then
-            bar:SetPoint("TOPLEFT", barContainer, "TOPLEFT", 0, -yOff)
+            bar:SetPoint("TOPLEFT",    container, "TOPLEFT",    0, -yOff)
         else
-            bar:SetPoint("BOTTOMLEFT", barContainer, "BOTTOMLEFT", 0, yOff)
+            bar:SetPoint("BOTTOMLEFT", container, "BOTTOMLEFT", 0,  yOff)
         end
 
-        local cd = entry.data
-        local pct = entry.remaining / cd.Cooldown
-        bar.fill:SetPoint("RIGHT", bar, "LEFT", DB.barWidth * (1 - pct), 0)
-
         local r, g, b = 0.5, 0.5, 0.5
-        if DB.barUseClassColor and cd.Class then r, g, b = GetClassColor(cd.Class) end
-        bar.fill:SetVertexColor(r, g, b, 1)
+        if DB.barUseClassColor and entry.class then r, g, b = GetClassColor(entry.class) end
 
-        if DB.barShowIcon and cd.SpellIcon then
+        if entry.onCD then
+            local pct = entry.remaining / entry.cooldown
+            bar.fill:SetPoint("RIGHT", bar, "LEFT", DB.barWidth * (1 - pct), 0)
+            bar.fill:SetVertexColor(r, g, b, 1)
+        else
+            bar.fill:SetPoint("RIGHT", bar, "RIGHT", 0, 0)
+            bar.fill:SetVertexColor(r * 0.55, g * 0.55, b * 0.55, 0.6)
+        end
+
+        if DB.barShowIcon then
             bar.icon:Show()
             bar.icon:SetSize(barH - 2, barH - 2)
-            bar.icon.tex:SetTexture(cd.SpellIcon)
+            bar.icon.tex:SetTexture(entry.tex)
         else
             bar.icon:Hide()
         end
 
         local nameStr = ""
-        if DB.barShowName and cd.UnitName then nameStr = cd.UnitName .. " " end
-        if DB.barShowSpell and cd.SpellId then
-            local si = C_Spell.GetSpellInfo and C_Spell.GetSpellInfo(cd.SpellId)
-            if si then nameStr = nameStr .. si.name end
-        end
+        if DB.barShowName and entry.unitName then nameStr = entry.unitName .. " " end
         bar.nameText:SetText(nameStr)
 
         if DB.barShowTimer then
-            bar.timerText:SetText(FormatTime(entry.remaining))
+            if entry.onCD then
+                bar.timerText:SetText(FormatTime(entry.remaining))
+            else
+                bar.timerText:SetText("Ready")
+            end
         else
             bar.timerText:SetText("")
         end
 
-        barActive[#barActive + 1] = bar
+        active[#active + 1] = bar
+    end
+end
+
+local function RebuildBars()
+    local anyContainer = false
+    for _, cat in ipairs(BAR_CATS) do
+        if barContainers[cat] then anyContainer = true; break end
+    end
+    if not anyContainer then return end
+
+    local lists = BuildAbilityLists()
+    for _, cat in ipairs(BAR_CATS) do
+        local container = barContainers[cat]
+        if container then
+            RebuildBarsForCat(cat, container, lists[cat])
+        end
     end
 end
 
@@ -1356,47 +2002,37 @@ local function RebuildIcons()
     for _, ic in ipairs(iconActive) do ReleaseIcon(ic) end
     iconActive = {}
 
-    local list = {}
-    local now = GetTime()
-    for unit, cds in pairs(activeCDs) do
-        for cdKey, cdData in pairs(cds) do
-            local remaining = cdData.Cooldown - (now - cdData.StartTime)
-            if remaining > 0 then
-                list[#list + 1] = { data = cdData, remaining = remaining }
-            end
-        end
-    end
-    table.sort(list, function(a, b) return a.remaining < b.remaining end)
-
-    local sz = DB.iconSize
-    local cols = DB.iconCols
+    local list    = BuildAbilityList()
+    local sz      = DB.iconSize
+    local cols    = DB.iconCols
     local spacing = DB.iconSpacing
-    local rowH = sz + (DB.iconShowName and 12 or 0) + (DB.iconShowTimer and 12 or 0) + spacing
-    local colW = sz + spacing
-    local rows = math.ceil(#list / cols)
+    local rowH    = sz + (DB.iconShowName and 12 or 0) + (DB.iconShowTimer and 12 or 0) + spacing
+    local colW    = sz + spacing
+    local rows    = math.max(1, math.ceil(#list / cols))
     iconContainer:SetSize(cols * colW, rows * rowH)
 
     for i, entry in ipairs(list) do
-        local ic = AcquireIcon()
+        local ic  = AcquireIcon()
         local col = (i - 1) % cols
         local row = math.floor((i - 1) / cols)
         ic:ClearAllPoints()
         ic:SetPoint("TOPLEFT", iconContainer, "TOPLEFT", col * colW, -row * rowH)
-        ic.tex:SetTexture(entry.data.SpellIcon)
-        -- Cooldown swipe
-        if entry.data.Cooldown and entry.data.StartTime then
-            ic.cooldown:SetCooldown(entry.data.StartTime, entry.data.Cooldown)
-        end
-        if DB.iconShowName then
-            ic.nameLabel:SetText(entry.data.UnitName or "")
+        ic.tex:SetTexture(entry.tex)
+
+        if entry.onCD and entry.startTime and entry.cooldown then
+            ic.cooldown:SetCooldown(entry.startTime, entry.cooldown)
         else
-            ic.nameLabel:SetText("")
+            ic.cooldown:SetCooldown(0, 0)   -- no swipe when available
         end
+
+        ic.nameLabel:SetText(DB.iconShowName and entry.unitName or "")
+
         if DB.iconShowTimer then
-            ic.timerLabel:SetText(FormatTime(entry.remaining))
+            ic.timerLabel:SetText(entry.onCD and FormatTime(entry.remaining) or "Ready")
         else
             ic.timerLabel:SetText("")
         end
+
         iconActive[#iconActive + 1] = ic
     end
 end
@@ -1404,110 +2040,200 @@ end
 -- =====================================================================
 -- SECTION 14: Display — Attached Mode
 -- =====================================================================
+-- Architecture mirrors MiniCC exactly: keyed by FRAME OBJECT, not unit string.
+-- This avoids the unreliable unit→frame reverse-lookup entirely.
+-- attachedByFrame[anchorFrame] = { container = Frame, unit = string }
+-- =====================================================================
 
--- attachedContainers[unit] = Frame (anchored to unit's raid frame)
-local attachedContainers = {}
-local attachedIconPools = {}
+local attachedByFrame = {}
 
-local function GetOrCreateAttachedContainer(unit)
-    if attachedContainers[unit] then return attachedContainers[unit] end
-    local f = CreateFrame("Frame", nil, UIParent)
-    f:SetSize(DB.attachIconSize, DB.attachIconSize)
-    f:SetFrameStrata("HIGH")
-    attachedContainers[unit] = f
-    return f
+-- Returns the active CD table for a unit, handling party1↔raid1 equivalence.
+local function GetCDsForUnit(unit)
+    if activeCDs[unit] then return activeCDs[unit] end
+    for u, data in pairs(activeCDs) do
+        if UnitIsUnit(u, unit) then return data end
+    end
+    return {}
 end
 
-local function AnchorAttachedContainer(container, raidFrame)
+-- Creates (or updates) an attached entry for a given anchor frame.
+local function EnsureFrameEntry(anchor, unitHint)
+    if not anchor then return end
+    if anchor.IsForbidden and anchor:IsForbidden() then return end
+
+    local unit = unitHint
+                 or anchor.unit
+                 or SafeGetUnit(anchor)
+    if not unit or unit == "" then return end
+    if UnitCanAttack("player", unit) then return end  -- skip enemy frames
+
+    local existing = attachedByFrame[anchor]
+    if existing then
+        existing.unit = unit   -- unit can change when roster sorts
+        return
+    end
+
+    local container = CreateFrame("Frame", nil, UIParent)
+    container:SetSize(DB.attachIconSize, DB.attachIconSize)
+    container:Hide()
+    container.icons = {}
+    attachedByFrame[anchor] = { container = container, unit = unit }
+end
+
+-- Scans all known frame providers and ensures every visible frame has an entry.
+local function EnsureAllFrameEntries()
+    if InCombatLockdown() then return end
+    for _, f in ipairs(Frames:GetAll()) do
+        EnsureFrameEntry(f)
+    end
+end
+
+local function AnchorAttachedContainer(container, anchor)
     container:ClearAllPoints()
     local side = DB.attachSide or "RIGHT"
+    -- Migrate legacy values saved before the rename
+    if side == "ABOVE" then side = "TOP"  end
+    if side == "BELOW" then side = "DOWN" end
     local ox = DB.attachOffsetX or 2
     local oy = DB.attachOffsetY or 0
     if side == "RIGHT" then
-        container:SetPoint("LEFT", raidFrame, "RIGHT", ox, oy)
+        container:SetPoint("LEFT", anchor, "RIGHT", ox, oy)
     elseif side == "LEFT" then
-        container:SetPoint("RIGHT", raidFrame, "LEFT", -ox, oy)
-    elseif side == "ABOVE" then
-        container:SetPoint("BOTTOM", raidFrame, "TOP", ox, oy)
-    elseif side == "BELOW" then
-        container:SetPoint("TOP", raidFrame, "BOTTOM", ox, -oy)
+        container:SetPoint("RIGHT", anchor, "LEFT", -ox, oy)
+    elseif side == "TOP" then
+        container:SetPoint("BOTTOM", anchor, "TOP", ox, oy)
+    elseif side == "DOWN" then
+        container:SetPoint("TOP", anchor, "BOTTOM", ox, -oy)
     end
+    -- Blizzard party frames clip their children — bump strata so icons render on top.
+    local strata = Frames:IsBlizzardPartyFrame(anchor)
+        and Frames:GetNextStrata(anchor:GetFrameStrata())
+        or anchor:GetFrameStrata()
+    container:SetFrameStrata(strata)
+    container:SetFrameLevel(anchor:GetFrameLevel() + 10)
     container:Show()
 end
 
-local function RebuildAttached()
-    local now = GetTime()
-    local iconSz = DB.attachIconSize
-    local spacing = DB.attachSpacing
-
-    for unit, container in pairs(attachedContainers) do
-        -- Release existing icons
-        for _, ic in ipairs(container.icons or {}) do
-            ic:Hide()
-        end
-        container.icons = {}
-
-        local raidFrame = Frames:GetFrameForUnit(unit)
-        if raidFrame and raidFrame:IsVisible() then
-            AnchorAttachedContainer(container, raidFrame)
-        else
-            container:Hide()
-        end
+-- Renders one icon slot inside a container frame, reusing existing child frames.
+-- row/col are 0-based.
+local function SetAttachedIconSlot(container, i, slot, iconSz, row, col, spacing)
+    local ic = container.icons[i]
+    if not ic then
+        ic = CreateFrame("Frame", nil, container)
+        ic:SetSize(iconSz, iconSz)
+        local texObj = ic:CreateTexture(nil, "ARTWORK")
+        texObj:SetAllPoints()
+        texObj:SetTexCoord(0.07, 0.93, 0.07, 0.93)
+        ic.tex = texObj
+        local cdFrame = CreateFrame("Cooldown", nil, ic, "CooldownFrameTemplate")
+        cdFrame:SetAllPoints()
+        cdFrame:SetDrawEdge(false)
+        ic.cooldown = cdFrame
+        container.icons[i] = ic
     end
+    ic:Show()
+    ic:SetSize(iconSz, iconSz)
+    ic:ClearAllPoints()
+    ic:SetPoint("TOPLEFT", container, "TOPLEFT",
+        col * (iconSz + spacing),
+        -row * (iconSz + spacing))
+    ic.tex:SetTexture(slot.tex)
+    if slot.startTime and slot.cooldown then
+        ic.cooldown:SetCooldown(slot.startTime, slot.cooldown)
+    else
+        ic.cooldown:SetCooldown(0, 0)  -- available — no swipe
+    end
+end
 
-    -- Iterate active CDs per unit
-    for unit, cds in pairs(activeCDs) do
-        local list = {}
-        for cdKey, cdData in pairs(cds) do
-            local remaining = cdData.Cooldown - (now - cdData.StartTime)
-            if remaining > 0 then list[#list + 1] = { data = cdData, remaining = remaining } end
-        end
+local function RebuildAttached()
+    if InCombatLockdown() then return end
+    local now     = GetTime()
+    local iconSz  = DB.attachIconSize
+    local spacing = DB.attachSpacing
+    local side    = DB.attachSide or "RIGHT"
+    local perRow  = math.max(1, DB.attachCols or 5)
 
-        if #list > 0 then
-            local raidFrame = Frames:GetFrameForUnit(unit)
-            if raidFrame and raidFrame:IsVisible() then
-                local container = GetOrCreateAttachedContainer(unit)
-                AnchorAttachedContainer(container, raidFrame)
+    -- Make sure every currently-visible frame has an entry
+    EnsureAllFrameEntries()
 
-                table.sort(list, function(a, b) return a.remaining < b.remaining end)
+    for anchor, entry in pairs(attachedByFrame) do
+        local container = entry.container
 
-                local side = DB.attachSide or "RIGHT"
-                local isVertical = side == "ABOVE" or side == "BELOW"
-                local n = #list
-                if isVertical then
-                    container:SetSize(n * iconSz + math.max(0, n - 1) * spacing, iconSz)
-                else
-                    container:SetSize(iconSz, n * iconSz + math.max(0, n - 1) * spacing)
+        -- Refresh unit in case Blizzard reassigned it (roster sort)
+        local unit = anchor.unit
+                     or SafeGetUnit(anchor)
+                     or entry.unit
+        entry.unit = unit
+
+        -- Hide if the anchor frame itself isn't visible or has no unit
+        if not unit or unit == ""
+        or not UnitExists(unit)
+        or (anchor.IsVisible and not anchor:IsVisible()) then
+            container:Hide()
+        else
+            -- Build slot list: every tracked ability for this unit
+            local staticAbils = GetStaticAbilities(unit)
+            local cds         = GetCDsForUnit(unit)
+            local list        = {}
+
+            local shownSpells = {}
+            for _, ability in ipairs(staticAbils) do
+                if DB.showOffensive or not ability.IsOffensive then
+                    local tex = C_Spell.GetSpellTexture(ability.SpellId)
+                    if tex then
+                        shownSpells[ability.SpellId] = true
+                        local cd   = cds[ability.SpellId]
+                        local onCD = cd and now < (cd.StartTime + cd.Cooldown)
+                        list[#list + 1] = {
+                            tex       = tex,
+                            startTime = onCD and cd.StartTime or nil,
+                            cooldown  = onCD and cd.Cooldown  or nil,
+                        }
+                    end
                 end
+            end
+            -- Also show CDs from DirectCast spells not covered by static abilities
+            for cdKey, cd in pairs(cds) do
+                if type(cdKey) == "number" and not shownSpells[cdKey] then
+                    if DB.showOffensive or not (Rules.OffensiveSpellIds and Rules.OffensiveSpellIds[cdKey]) then
+                        local onCD = now < (cd.StartTime + cd.Cooldown)
+                        if onCD then
+                            local tex = C_Spell.GetSpellTexture(cdKey)
+                            if tex then
+                                list[#list + 1] = {
+                                    tex       = tex,
+                                    startTime = cd.StartTime,
+                                    cooldown  = cd.Cooldown,
+                                }
+                            end
+                        end
+                    end
+                end
+            end
 
-                container.icons = container.icons or {}
-                for i, entry in ipairs(list) do
-                    local ic = container.icons[i]
-                    if not ic then
-                        ic = CreateFrame("Frame", nil, container)
-                        ic:SetSize(iconSz, iconSz)
-                        local tex = ic:CreateTexture(nil, "ARTWORK")
-                        tex:SetAllPoints()
-                        tex:SetTexCoord(0.07, 0.93, 0.07, 0.93)
-                        ic.tex = tex
-                        local cd = CreateFrame("Cooldown", nil, ic, "CooldownFrameTemplate")
-                        cd:SetAllPoints()
-                        cd:SetDrawEdge(false)
-                        ic.cooldown = cd
-                        container.icons[i] = ic
-                    end
-                    ic:Show()
-                    ic:SetSize(iconSz, iconSz)
-                    ic:ClearAllPoints()
-                    if isVertical then
-                        ic:SetPoint("LEFT", container, "LEFT", (i - 1) * (iconSz + spacing), 0)
-                    else
-                        ic:SetPoint("TOP", container, "TOP", 0, -(i - 1) * (iconSz + spacing))
-                    end
-                    ic.tex:SetTexture(entry.data.SpellIcon)
-                    if entry.data.Cooldown and entry.data.StartTime then
-                        ic.cooldown:SetCooldown(entry.data.StartTime, entry.data.Cooldown)
-                    end
+            local n = #list
+            if n == 0 then
+                container:Hide()
+            else
+                AnchorAttachedContainer(container, anchor)
+
+                -- Simple grid: fill left→right, wrap down every `perRow` icons.
+                -- col = (i-1) % perRow
+                -- row = floor((i-1) / perRow)
+                local numCols = math.min(n, perRow)
+                local numRows = math.ceil(n / perRow)
+                local w = numCols * iconSz + math.max(0, numCols - 1) * spacing
+                local h = numRows * iconSz + math.max(0, numRows - 1) * spacing
+                container:SetSize(w, h)
+
+                for i, slot in ipairs(list) do
+                    local idx = i - 1
+                    local row = math.floor(idx / perRow)
+                    local col = idx % perRow
+                    SetAttachedIconSlot(container, i, slot, iconSz, row, col, spacing)
+                end
+                for i = n + 1, #container.icons do
+                    container.icons[i]:Hide()
                 end
             end
         end
@@ -1575,13 +2301,15 @@ end
 local function OnDisplayRefresh()
     -- Update timer texts on existing bars/icons without full rebuild for performance
     local now = GetTime()
-    for _, bar in ipairs(barActive) do
-        if bar.cdData then
-            local remaining = bar.cdData.Cooldown - (now - bar.cdData.StartTime)
-            if remaining < 0 then remaining = 0 end
-            local pct = remaining / bar.cdData.Cooldown
-            bar.fill:SetPoint("RIGHT", bar, "LEFT", DB.barWidth * (1 - pct), 0)
-            if DB.barShowTimer then bar.timerText:SetText(FormatTime(remaining)) end
+    for _, cat in ipairs(BAR_CATS) do
+        for _, bar in ipairs(barActives[cat]) do
+            if bar.cdData then
+                local remaining = bar.cdData.Cooldown - (now - bar.cdData.StartTime)
+                if remaining < 0 then remaining = 0 end
+                local pct = remaining / bar.cdData.Cooldown
+                bar.fill:SetPoint("RIGHT", bar, "LEFT", DB.barWidth * (1 - pct), 0)
+                if DB.barShowTimer then bar.timerText:SetText(FormatTime(remaining)) end
+            end
         end
     end
     for _, ic in ipairs(iconActive) do
@@ -1630,7 +2358,7 @@ eventFrame:SetScript("OnUpdate", function(_, elapsed)
     if updateThrottle < UPDATE_INTERVAL then return end
     updateThrottle = 0
 
-    if DB.barEnabled and barContainer then
+    if DB.barEnabled then
         RebuildBars()
     end
     if DB.iconEnabled and iconContainer then
@@ -1641,33 +2369,62 @@ eventFrame:SetScript("OnUpdate", function(_, elapsed)
     end
 end)
 
+local ApplyAutoMode  -- forward declaration (defined after SetModuleWidget)
+
 eventFrame:RegisterEvent("GROUP_ROSTER_UPDATE")
 eventFrame:RegisterEvent("PLAYER_ENTERING_WORLD")
 eventFrame:RegisterEvent("PLAYER_TALENT_UPDATE")
 eventFrame:RegisterEvent("PLAYER_SPECIALIZATION_CHANGED")
 eventFrame:RegisterEvent("INSPECT_READY")
+eventFrame:RegisterEvent("PLAYER_REGEN_ENABLED")
 
 eventFrame:SetScript("OnEvent", function(_, event, ...)
     if event == "GROUP_ROSTER_UPDATE" or event == "PLAYER_ENTERING_WORLD" then
-        C_Timer.After(0.5, BuildRoster)
+        wipe(staticAbilitiesCache)  -- roster changed → recompute per-unit ability lists
+        C_Timer.After(0.5, function()
+            if ApplyAutoMode then ApplyAutoMode() end
+            BuildRoster()
+            if DB.attachEnabled then EnsureAllFrameEntries() end
+        end)
+    elseif event == "PLAYER_REGEN_ENABLED" then
+        -- Combat ended: rebuild frames that were skipped during lockdown
+        if DB.attachEnabled then
+            EnsureAllFrameEntries()
+            RebuildAttached()
+        end
+        if DB.barEnabled then
+            InitBarContainers()
+        end
     elseif event == "PLAYER_TALENT_UPDATE" or event == "PLAYER_SPECIALIZATION_CHANGED" then
+        staticAbilitiesCache["player"] = nil
         RefreshPlayerTalents()
-        -- Re-watch player entry to refresh spec
         local entry = activeEntries["player"]
-        if entry then
-            Observer:Rewatch(entry)
+        if entry then Observer:Rewatch(entry) end
+    elseif event == "INSPECT_READY" then
+        local guid = ...
+        for unit in pairs(activeEntries) do
+            if UnitGUID(unit) == guid then
+                staticAbilitiesCache[unit] = nil
+                break
+            end
         end
     end
 end)
 
 -- Button handlers wired to settings panel
-InfinityTools:RegisterModuleCallback(INFINITY_MODULE_KEY, "btn_reset_bar", function()
-    if barContainer then
-        barContainer:ClearAllPoints()
-        barContainer:SetPoint("CENTER", UIParent, "CENTER", -400, 0)
-        DB.barPos = { "CENTER", "UIParent", "CENTER", -400, 0 }
-    end
-end)
+for _, cat in ipairs(BAR_CATS) do
+    local btnKey = "btn_reset_bar_" .. cat
+    local defPos = BAR_CAT_DEFPOS[cat]
+    local posKey = BAR_CAT_POSKEY[cat]
+    InfinityTools:RegisterModuleCallback(INFINITY_MODULE_KEY, btnKey, function()
+        local c = barContainers[cat]
+        if c then
+            c:ClearAllPoints()
+            c:SetPoint(defPos[1], _G[defPos[2]] or UIParent, defPos[3], defPos[4], defPos[5])
+            DB[posKey] = { unpack(defPos) }
+        end
+    end)
+end
 
 InfinityTools:RegisterModuleCallback(INFINITY_MODULE_KEY, "btn_reset_icon", function()
     if iconContainer then
@@ -1681,11 +2438,16 @@ end)
 -- SECTION 18: Initialization
 -- =====================================================================
 
+local _hookedCUF = false
 local function Init()
+    -- Migrate legacy attachSide values (ABOVE→TOP, BELOW→DOWN)
+    if DB.attachSide == "ABOVE" then DB.attachSide = "TOP"  end
+    if DB.attachSide == "BELOW" then DB.attachSide = "DOWN" end
+
     RefreshPlayerTalents()
 
     -- Initialize display containers
-    if DB.barEnabled then InitBarContainer() end
+    if DB.barEnabled then InitBarContainers() end
     if DB.iconEnabled then InitIconContainer() end
 
     -- Preview mode
@@ -1693,8 +2455,38 @@ local function Init()
         SetupPreview()
     end
 
-    -- Build roster
+    -- Build roster (bar/icon mode)
     BuildRoster()
+
+    -- Attached mode: scan all frame providers immediately
+    if DB.attachEnabled then
+        EnsureAllFrameEntries()
+    end
+
+    -- Hook Blizzard CUF so we get notified when a frame gets a new unit assigned.
+    -- This fires when the group forms, sorts, or changes — we just update the entry.
+    if not _hookedCUF then
+        _hookedCUF = true
+
+        if CompactUnitFrame_SetUnit then
+            hooksecurefunc("CompactUnitFrame_SetUnit", function(frame, unit)
+                if not Frames:IsFriendlyCuf(frame) then return end
+                if not DB.attachEnabled then return end
+                EnsureFrameEntry(frame, unit)
+            end)
+        end
+
+        if CompactUnitFrame_UpdateVisible then
+            hooksecurefunc("CompactUnitFrame_UpdateVisible", function(frame)
+                if not Frames:IsFriendlyCuf(frame) then return end
+                local entry = attachedByFrame[frame]
+                if not entry then return end
+                if not DB.attachEnabled or not frame:IsShown() then
+                    entry.container:Hide()
+                end
+            end)
+        end
+    end
 
     -- Start the update loop
     eventFrame:Show()
@@ -1709,3 +2501,289 @@ do
         Init()
     end)
 end
+
+-- =====================================================================
+-- SECTION 19: Live settings listener
+-- =====================================================================
+
+-- Updates a checkbox widget in the InfinityGrid UI for this module, if the panel is currently rendered.
+local function SetModuleWidget(widgetKey, value)
+    local grid = _G.InfinityGrid
+    if not grid or not grid.ContainerStates then return end
+    for _, state in pairs(grid.ContainerStates) do
+        if state.moduleKey == INFINITY_MODULE_KEY then
+            local w = state.widgets and state.widgets[widgetKey]
+            if w and w.SetChecked then w:SetChecked(value) end
+        end
+    end
+end
+
+-- =====================================================================
+-- Auto-switch mode on group type transition
+-- =====================================================================
+do
+    local lastGroupType = nil
+
+    local function GetGroupType()
+        if IsInRaid() then return "raid" end
+        if GetNumGroupMembers() > 0 then return "party" end
+        return "none"
+    end
+
+    local function ActivateBarMode()
+        DB.barEnabled   = true
+        DB.iconEnabled  = false
+        DB.attachEnabled = false
+        SetModuleWidget("barEnabled",    true)
+        SetModuleWidget("iconEnabled",   false)
+        SetModuleWidget("attachEnabled", false)
+        if iconContainer then iconContainer:Hide() end
+        for _, entry in pairs(attachedByFrame) do entry.container:Hide() end
+        InitBarContainers()
+        for _, cat in ipairs(BAR_CATS) do
+            if barContainers[cat] then barContainers[cat]:Show() end
+        end
+    end
+
+    local function ActivateAttachMode()
+        DB.attachEnabled = true
+        DB.barEnabled    = false
+        DB.iconEnabled   = false
+        SetModuleWidget("attachEnabled", true)
+        SetModuleWidget("barEnabled",    false)
+        SetModuleWidget("iconEnabled",   false)
+        for _, cat in ipairs(BAR_CATS) do
+            if barContainers[cat] then barContainers[cat]:Hide() end
+        end
+        if iconContainer then iconContainer:Hide() end
+        EnsureAllFrameEntries()
+        RebuildAttached()
+    end
+
+    ApplyAutoMode = function()
+        if not DB.autoSwitchMode then return end
+        local groupType = GetGroupType()
+        if groupType == lastGroupType then return end
+        lastGroupType = groupType
+        if groupType == "raid" then
+            ActivateBarMode()
+        elseif groupType == "party" then
+            ActivateAttachMode()
+        end
+        -- "none" (solo): no auto-switch, keep current mode
+    end
+end
+
+InfinityTools:WatchState(INFINITY_MODULE_KEY .. ".DatabaseChanged", INFINITY_MODULE_KEY, function(info)
+    if not info or not info.key then return end
+    local key = info.key
+
+    if key == "barEnabled" then
+        if DB.barEnabled then
+            -- Disable the other two modes
+            DB.iconEnabled = false
+            DB.attachEnabled = false
+            SetModuleWidget("iconEnabled", false)
+            SetModuleWidget("attachEnabled", false)
+            if iconContainer then iconContainer:Hide() end
+            for _, entry in pairs(attachedByFrame) do entry.container:Hide() end
+            InitBarContainers()
+            for _, cat in ipairs(BAR_CATS) do
+                if barContainers[cat] then barContainers[cat]:Show() end
+            end
+        else
+            for _, cat in ipairs(BAR_CATS) do
+                if barContainers[cat] then barContainers[cat]:Hide() end
+            end
+        end
+
+    elseif key == "barExtEnabled" or key == "barBigEnabled" or key == "barImpEnabled" or key == "barOffEnabled" then
+        local cat = key == "barExtEnabled" and "ext" or key == "barBigEnabled" and "big"
+                 or key == "barImpEnabled" and "imp" or "off"
+        if DB[key] then
+            InitBarContainers()
+            if barContainers[cat] then barContainers[cat]:Show() end
+        else
+            if barContainers[cat] then barContainers[cat]:Hide() end
+        end
+
+    elseif key == "iconEnabled" then
+        if DB.iconEnabled then
+            -- Disable the other two modes
+            DB.barEnabled = false
+            DB.attachEnabled = false
+            SetModuleWidget("barEnabled", false)
+            SetModuleWidget("attachEnabled", false)
+            for _, cat in ipairs(BAR_CATS) do
+                if barContainers[cat] then barContainers[cat]:Hide() end
+            end
+            for _, entry in pairs(attachedByFrame) do entry.container:Hide() end
+            InitIconContainer()
+            if iconContainer then iconContainer:Show() end
+        else
+            if iconContainer then iconContainer:Hide() end
+        end
+
+    elseif key == "barPreview" then
+        if DB.barPreview then
+            InitBarContainers()
+            SetupPreview()
+        else
+            if not DB.iconPreview then ClearPreview() end
+        end
+
+    elseif key == "iconPreview" then
+        if DB.iconPreview then
+            InitIconContainer()
+            SetupPreview()
+        else
+            if not DB.barPreview then ClearPreview() end
+        end
+
+    elseif key == "barWidth" or key == "barHeight" then
+        for _, cat in ipairs(BAR_CATS) do
+            if barContainers[cat] then barContainers[cat]:SetWidth(DB.barWidth) end
+        end
+
+    elseif key == "barExtPos" or key == "barBigPos" or key == "barImpPos" or key == "barOffPos" then
+        local cat = key == "barExtPos" and "ext" or key == "barBigPos" and "big"
+                 or key == "barImpPos" and "imp" or "off"
+        local c = barContainers[cat]
+        if c then
+            local pos = DB[key]
+            c:ClearAllPoints()
+            c:SetPoint(pos[1], _G[pos[2]] or UIParent, pos[3], pos[4], pos[5])
+        end
+
+    elseif key == "iconPos" then
+        if iconContainer then
+            iconContainer:ClearAllPoints()
+            iconContainer:SetPoint(DB.iconPos[1], _G[DB.iconPos[2]] or UIParent, DB.iconPos[3], DB.iconPos[4], DB.iconPos[5])
+        end
+
+    elseif key == "attachEnabled" then
+        if DB.attachEnabled then
+            -- Disable the other two modes
+            DB.barEnabled = false
+            DB.iconEnabled = false
+            SetModuleWidget("barEnabled", false)
+            SetModuleWidget("iconEnabled", false)
+            for _, cat in ipairs(BAR_CATS) do
+                if barContainers[cat] then barContainers[cat]:Hide() end
+            end
+            if iconContainer then iconContainer:Hide() end
+            EnsureAllFrameEntries()
+            RebuildAttached()
+        else
+            for _, entry in pairs(attachedByFrame) do
+                entry.container:Hide()
+            end
+        end
+
+    elseif key == "attachSide" or key == "attachOffsetX" or key == "attachOffsetY"
+    or key == "attachIconSize" or key == "attachSpacing" or key == "attachCols" then
+        if DB.attachEnabled then RebuildAttached() end
+    end
+end)
+
+-- =====================================================================
+-- SECTION 19: Debug slash command /fcd
+-- =====================================================================
+
+InfinityTools:RegisterChatCommand("fcd", function(arg)
+    local p = function(msg) InfinityTools:Print("[FriendlyCD] " .. msg) end
+
+    -- /fcd preview : injects realistic fake CDs for current group
+    if arg == "preview" then
+        wipe(activeCDs)
+        local previewSpells = {
+            { spellId = 64843,  cooldown = 180, label = "Divine Hymn"      },
+            { spellId = 47788,  cooldown = 180, label = "Guardian Spirit"  },
+            { spellId = 200183, cooldown = 120, label = "Apotheosis"       },
+            { spellId = 19236,  cooldown = 90,  label = "Desperate Prayer" },
+        }
+        local now = GetTime()
+        local units = {}
+        if DB.showPlayer then units[#units+1] = "player" end
+        if IsInRaid() then
+            for i = 1, GetNumGroupMembers() do units[#units+1] = "raid"..i end
+        else
+            for i = 1, GetNumGroupMembers() do units[#units+1] = "party"..i end
+        end
+        for i, unit in ipairs(units) do
+            local spell = previewSpells[i]
+            if spell and UnitExists(unit) then
+                activeCDs[unit] = activeCDs[unit] or {}
+                local _, cls = UnitClass(unit)
+                activeCDs[unit][spell.spellId] = {
+                    StartTime = now - math.random(5, 60),
+                    Cooldown  = spell.cooldown,
+                    SpellId   = spell.spellId,
+                    SpellIcon = GetSpellIcon and GetSpellIcon(spell.spellId),
+                    UnitName  = UnitName(unit) or unit,
+                    Class     = cls,
+                    IsOffensive = false,
+                }
+            end
+        end
+        p("Preview injecté pour " .. #units .. " unité(s). Tape /fcd clear pour effacer.")
+        return
+    end
+
+    -- /fcd clear : efface le preview
+    if arg == "clear" then
+        wipe(activeCDs)
+        p("Preview effacé.")
+        return
+    end
+
+    -- /fcd (sans argument) : dump l'état du tracker
+    p("=== État du Friendly CD Tracker ===")
+    p("Mode : bar=" .. tostring(DB.barEnabled) .. "  icon=" .. tostring(DB.iconEnabled) .. "  attach=" .. tostring(DB.attachEnabled))
+
+    -- Containers bar
+    for _, cat in ipairs(BAR_CATS) do
+        local c = barContainers[cat]
+        if c then
+            p("  Container '" .. cat .. "' : " .. (c:IsShown() and "visible" or "caché"))
+        else
+            p("  Container '" .. cat .. "' : non créé")
+        end
+    end
+
+    -- Groupe
+    local numMembers = GetNumGroupMembers()
+    p("Groupe : " .. numMembers .. " membre(s)" .. (IsInRaid() and " [RAID]" or " [PARTY]"))
+
+    local function specName(id)
+        if not id or id == 0 then return "inconnu (inspect en cours?)" end
+        local ok, name = pcall(function() return select(2, GetSpecializationInfoByID(id)) end)
+        return (ok and name) or tostring(id)
+    end
+
+    if DB.showPlayer then
+        local guid = UnitGUID("player")
+        local specId = GetUnitSpec("player")
+        local _, cls = UnitClass("player")
+        p("  [player] " .. (UnitName("player") or "?") .. " — " .. (cls or "?") .. " — spec: " .. specName(specId))
+        local abils = GetStaticAbilities("player")
+        p("    → " .. #abils .. " sort(s) trackés en statique")
+    end
+
+    local tokens = IsInRaid() and "raid" or "party"
+    for i = 1, numMembers do
+        local unit = tokens .. i
+        if UnitExists(unit) then
+            local guid = UnitGUID(unit)
+            local specId = GetUnitSpec(unit)
+            local _, cls = UnitClass(unit)
+            local abils = GetStaticAbilities(unit)
+            local cdCount = 0
+            if activeCDs[unit] then for _ in pairs(activeCDs[unit]) do cdCount = cdCount + 1 end end
+            p("  [" .. unit .. "] " .. (UnitName(unit) or "?") .. " — " .. (cls or "?") .. " — spec: " .. specName(specId))
+            p("    → " .. #abils .. " sort(s) statiques | " .. cdCount .. " CD(s) actif(s)")
+        end
+    end
+
+    p("Tape /fcd preview pour injecter des CDs de test, /fcd clear pour effacer.")
+end)

@@ -110,6 +110,9 @@ InfinityTools.ModuleList = {
     { Key = "RevMplus.InterruptTracker", Name = L["Interrupt Tracker"], Desc = L["Infer and track teammate interrupt cooldowns (supports 12.0)."], Category = 3 },
     { Key = "RevMplus.MythicCast", Name = L["Nearby Cast Monitor"], Desc = L["Shows nearby mob cast bars with separate colors for interruptible and unbreakable casts."], Category = 3 },
     { Key = "RevMplus.FriendlyCD", Name = "Friendly CD Tracker", Desc = "Tracks friendly defensive and offensive cooldowns in M+ and Raid. Bars, icons, and attached-to-frame modes.", Category = 3, new = true },
+    { Key = "RevCC.AlertsModule", Name = "Enemy Spell Alerts", Desc = "Floating bar showing active important/defensive enemy spells (nameplates, target, focus).", Category = 3, new = true },
+    { Key = "RevCC.Nameplates", Name = "Nameplate Spell Icons", Desc = "Attaches CC and important spell icons directly onto enemy and friendly nameplates.", Category = 3, new = true },
+    { Key = "RevCC.FriendlyIndicator", Name = "Friendly Aura Indicators", Desc = "Shows CC, defensive, and important spell icons on Blizzard compact party/raid frames.", Category = 3, new = true },
     ----------------------------------------------------------------------------------------------------------
     --------------------------------------------- Class (General) (4) -----------------------------------------
     ----------------------------------------------------------------------------------------------------------
@@ -665,6 +668,21 @@ function InfinityTools:GetModuleDB(moduleKey, defaults)
 end
 
 function InfinityTools:RegisterModuleOptions() end -- compatibility shim
+
+--- Register a callback for a button widget inside a module's InfinityGrid layout.
+--- The callback fires whenever that button is clicked in the settings panel.
+--- @param moduleKey string  The module key (same as used in RegisterModuleLayout)
+--- @param fieldKey  string  The button's `key` field from the layout table
+--- @param func      function Callback function: func()
+function InfinityTools:RegisterModuleCallback(moduleKey, fieldKey, func)
+    local stateKey = moduleKey .. ".ButtonClicked"
+    local owner    = moduleKey .. "." .. fieldKey
+    self:WatchState(stateKey, owner, function(newValue)
+        if newValue and newValue.key == fieldKey then
+            func()
+        end
+    end)
+end
 
 function InfinityTools:RegisterModuleLayout(moduleKey, layoutData)
     if type(moduleKey) == "string" and type(layoutData) == "table" then

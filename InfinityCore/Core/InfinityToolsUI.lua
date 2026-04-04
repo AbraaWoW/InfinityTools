@@ -377,8 +377,8 @@ local function UpdateSidebarItemBadge(btn, meta)
         local atlas = faction == "Alliance" and "NewCharacter-Alliance" or "NewCharacter-Horde"
         btn.badge:SetAtlas(atlas, false)
         btn.badge:ClearAllPoints()
-        btn.badge:SetPoint("RIGHT", btn.label, "LEFT", 25, 0)
-        btn.label:SetWidth(160)
+        btn.badge:SetPoint("RIGHT", btn, "RIGHT", -6, 0)
+        btn.label:SetWidth(140)
         btn.badge:Show()
     end
 end

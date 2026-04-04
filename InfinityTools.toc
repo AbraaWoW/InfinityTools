@@ -1,6 +1,6 @@
 ## Interface: 120000, 120001
 ## Title: |cFFBB66FFInfinity Tools|r
-## Version: 1.0.3
+## Version: 1.1.0
 ## IconTexture: Interface\AddOns\InfinityTools\Media\logo.png
 ## Author: Abraa
 ## DefaultState: Enable
@@ -187,6 +187,10 @@ Modules\Nicknames\Nicknames.lua
 
 
 # ── RRT Modules - Other
+Modules\RevCC_Core.lua
+Modules\RevCC.AlertsModule.lua
+Modules\RevCC.NameplatesModule.lua
+Modules\RevCC.FriendlyIndicator.lua
 Modules\SetupManager\SetupManager.lua
 Modules\RRTTools\Tools.lua
 Modules\RRTTools\NativeExtras.lua

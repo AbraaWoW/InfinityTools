@@ -101,7 +101,7 @@ local function OnEvent(self, event, ...)
         else
             -- SCENARIO_COMPLETED : vérifie qu'on est bien dans un M+ avant d'envoyer
             if not (C_ChallengeMode and C_ChallengeMode.GetActiveChallengeMapID
-                    and C_ChallengeMode.GetActiveChallengeMapID() > 0) then
+                    and (C_ChallengeMode.GetActiveChallengeMapID() or 0) > 0) then
                 return
             end
         end
